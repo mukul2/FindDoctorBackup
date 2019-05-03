@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mukul.finddoctor">
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".Activity.LoginActivity"
+            android:label="Login"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.SignUpActivity"
+            android:label="SignUp"
+            android:parentActivityName=".Activity.LoginActivity" />
+        <activity
+            android:name=".Activity.PhoneEnterActivityActivity"
+            android:label="SignUp"
+            android:parentActivityName=".Activity.LoginActivity" />
+        <activity
+            android:name=".Activity.CodeVerificationActivity"
+            android:label="Sign Up"
+            android:parentActivityName=".Activity.PhoneEnterActivityActivity" />
+        <activity
+            android:name=".Activity.HomeActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.FindDoctorActivity"
+            android:label="Search Doctor"
+            android:parentActivityName=".Activity.HomeActivity" />
+        <activity
+            android:name=".Activity.DoctorHomeActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.SearchResultActivity"
+            android:label="Search Result"
+            android:parentActivityName=".Activity.FindDoctorActivity" />
+        <activity
+            android:name=".Activity.DrPersonalInfoActivity"
+            android:parentActivityName=".Activity.DoctorHomeActivity" />
+        <activity
+            android:name=".Activity.ChamberDetailActivity"
+            android:label="Book Appointment"
+            android:parentActivityName=".Activity.SearchResultActivity" />
+        <activity
+            android:name=".Activity.SendBookingActivity"
+            android:label="Booking Info"
+            android:parentActivityName=".Activity.ChamberDetailActivity" />
+        <activity
+            android:name=".Activity.RecomendationDetailActivity"
+            android:label="Test Recomendation"
+            android:parentActivityName=".Activity.HomeActivity" />
+        <activity
+            android:name=".Activity.ConfirmedAppointmentDetailActivity"
+            android:label="Appointment detail"
+            android:parentActivityName=".Activity.HomeActivity" />
+        <activity
+            android:name=".Activity.SplashActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Activity.ChamberInfoActivity" />
+        <activity
+            android:name=".Activity.DrChamberListActivity"
+            android:label="My Chambers"
+            android:parentActivityName=".Activity.DoctorHomeActivity" />
+        <activity android:name=".Activity.DrChemberActivity" />
+        <activity
+            android:name=".Activity.AdddChamberActivity"
+            android:label="Add Chamber"
+            android:parentActivityName=".Activity.DoctorHomeActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.BaseActivity" />
+        <activity
+            android:parentActivityName=".Activity.DoctorHomeActivity"
+            android:label="Serve this Patient"
+            android:name=".Activity.VisitActivityDr">
+
+        </activity>
+    </application>
+
+</manifest>

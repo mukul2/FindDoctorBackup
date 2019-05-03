@@ -1,0 +1,119 @@
+package com.mukul.finddoctor.Data;
+
+
+
+import com.mukul.finddoctor.model.AppointmentModel;
+import com.mukul.finddoctor.model.AppointmentModel2;
+import com.mukul.finddoctor.model.Day;
+import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.RecomentationModel;
+import com.mukul.finddoctor.model.SpacialistModel;
+import com.mukul.finddoctor.model.TestList;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * Created by mkl on 2/14/2019.
+ */
+
+public class Data {
+    public static String TYPE_DOCTOR="d";
+    public static String TYPE_PATIENT="p";
+    public static  List<SpacialistModel> spacialist = new ArrayList<>();
+    public static  List<DoctorModel> searchResult = new ArrayList<>();
+    public static  DoctorModel singleDrModel;
+    public static RecomentationModel testList ;
+    public static AppointmentModel appointmentModel ;
+    public static AppointmentModel2 drServingModel ;
+
+    public static  List<Day> days = new ArrayList<>();
+    public static String USER_ID;
+    public static String USER_NAME;
+    public static String TEMP_LINK;
+
+    public static String BaseUrl="";
+    public static String PHOTO_BASE="";
+    public static String FACEBOOK_LINK="";
+
+
+    public  static List<String> getDistricts(){
+        List<String> categories = new ArrayList<String>();
+        categories.add("Select");
+        categories.add("DHAKA");
+        categories.add("FARIDPUR");
+        categories.add("GAZIPUR");
+        categories.add("GOPALGANJ");
+        categories.add("JAMALPUR");
+        categories.add("KISHOREGONJ");
+        categories.add("MADARIPUR");
+        categories.add("MANIKGANJ");
+        categories.add("MUNSHIGANJ");
+        categories.add("MYMENSINGH");
+        categories.add("NARAYANGANJ");
+        categories.add("NARSINGDI");
+        categories.add("NETRAKONA");
+        categories.add("RAJBARI");
+        categories.add("SHARIATPUR");
+        categories.add("SHERPUR");
+        categories.add("TANGAIL");
+        categories.add("BARGUNA");
+        categories.add("BARISAL");
+        categories.add("BHOLA");
+        categories.add("JHALOKATI");
+        categories.add("PATUAKHALI");
+        categories.add("PIROJPUR ");
+        categories.add("BANDARBAN");
+        categories.add("BRAHMANBARIA");
+        categories.add("CHANDPUR");
+        categories.add("CHITTAGONG");
+        categories.add("COMILLA");
+        categories.add("COX'S BAZAR");
+        categories.add("COX'S BAZAR");
+        categories.add("KHAGRACHHARI");
+        categories.add("LAKSHMIPUR");
+        categories.add("NOAKHALI");
+        categories.add("RANGAMATI ");
+        categories.add("BAGERHAT");
+        categories.add("CHUADANGA");
+        categories.add("JESSORE");
+        categories.add("JHENAIDAH");
+        categories.add("KHULNA");
+        categories.add("KUSHTIA");
+        categories.add("MAGURA");
+        categories.add("MEHERPUR");
+        categories.add("NARAIL");
+        categories.add("SATKHIRA");
+        categories.add("BOGRA");
+        categories.add("CHAPAINABABGANJ");
+        categories.add("JOYPURHAT");
+        categories.add("PABNA");
+        categories.add("NAOGAON");
+        categories.add("NATORE");
+        categories.add("RAJSHAHI");
+        categories.add("SIRAJGANJ");
+        categories.add("DINAJPUR");
+        categories.add("GAIBANDHA");
+        categories.add("KURIGRAM");
+        categories.add("LALMONIRHAT");
+        categories.add("NILPHAMARI");
+        categories.add("PANCHAGARH");
+        categories.add("RANGPUR");
+        categories.add("THAKURGAON");
+        categories.add("HABIGANJ");
+        categories.add("MAULVIBAZAR");
+        categories.add("SUNAMGANJ");
+        categories.add("SYLHET");
+        return categories;
+    }
+    public  static List<String>getAllStatusTypes(){
+        List<String>list=new ArrayList<>();
+        list.add("Pending");
+        list.add("Approved");
+        list.add("Test Recommened");
+        list.add("Served");
+        return list;
+    }
+
+
+}
