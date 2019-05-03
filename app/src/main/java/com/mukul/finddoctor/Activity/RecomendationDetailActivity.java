@@ -8,17 +8,24 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.mukul.finddoctor.Data.Data;
 import com.mukul.finddoctor.R;
+import com.mukul.finddoctor.Utils.MyProgressBar;
 import com.mukul.finddoctor.adapter.TestListTypeAdapter;
+import com.mukul.finddoctor.api.Api;
+import com.mukul.finddoctor.api.ApiListener;
+import com.mukul.finddoctor.model.StatusResponse;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.mukul.finddoctor.Data.Data.testList;
 
-public class RecomendationDetailActivity extends AppCompatActivity {
+public class RecomendationDetailActivity extends AppCompatActivity implements ApiListener.appointmentStateChangeListener{
     TestListTypeAdapter mAdapter;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
@@ -53,5 +60,22 @@ public class RecomendationDetailActivity extends AppCompatActivity {
         }
 
         return (super.onOptionsItemSelected(item));
+    }
+
+    public void cancel(View view) {
+        MyProgressBar.with(context);
+        Api.getInstance().changeStatus(testList.getAppointmentId(), ""+ Data.STATUS_CANCEL, this);
+    }
+
+    @Override
+    public void onAppointmentChangeSuccess(StatusResponse list) {
+        onBackPressed();
+    }
+
+    @Override
+    public void onPppointmentChangeFailed(String msg) {
+        onBackPressed();
+
+
     }
 }
