@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.mukul.finddoctor.Data.DataStore;
 import com.mukul.finddoctor.Data.lis;
 import com.mukul.finddoctor.Fragments.AppointmentsListFragment;
 import com.mukul.finddoctor.Fragments.NewAppointListFragment;
@@ -24,6 +25,8 @@ import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.SpacialistModel;
+import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.testSelectedModel;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -64,7 +67,8 @@ import static com.mukul.finddoctor.Data.lis.Pendinglistener;
 
 public class DoctorHomeActivity extends AppCompatActivity implements ApiListener.appoinetmentsDownloadListener,
         ApiListener.basicInfoDownloadListener,
-        SwipeRefreshLayout.OnRefreshListener {
+        SwipeRefreshLayout.OnRefreshListener,
+        ApiListener.testNamesDownloadListener{
     TabLayout tabLayout;
     ViewPager viewPager;
     CustomDrawerButton customDrawerButton;
@@ -199,7 +203,19 @@ public class DoctorHomeActivity extends AppCompatActivity implements ApiListener
 
 
     }
+    @Override
+    public void ontestNamesDownloadSuccess(List<TestModel> data) {
+        DataStore.testModelList.clear();
+        //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
+        for (int i=0;i<data.size();i++){
+            DataStore.testModelList.add(new testSelectedModel(false,data.get(i)));
+        }
+    }
 
+    @Override
+    public void ontestNamesDownloadFailed(String msg) {
+
+    }
     @Override
     public void onBasicInfoDownloadFailed(String msg) {
         count++;
@@ -272,6 +288,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements ApiListener
         count = 0;
         Api.getInstance().getAppointmentsByDoctor(sessionManager.getUserId(), this);
         Api.getInstance().downloadBasicInfo(this);
+        Api.getInstance().downloadTestNames(this);
     }
 
 
