@@ -15,29 +15,36 @@ import android.widget.Toast;
 import com.mukul.finddoctor.Data.Data;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.Utils.MyProgressBar;
+import com.mukul.finddoctor.Utils.SessionManager;
 import com.mukul.finddoctor.adapter.TestListTypeAdapter;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
+import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.StatusResponse;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.mukul.finddoctor.Data.Data.testList;
+import static com.mukul.finddoctor.Data.ListenerPatientsData.PatientALLDataDownloadListener;
+import static com.mukul.finddoctor.Data.ListenerPatientsData.PatientNotificationDataDownloadListener;
 
-public class RecomendationDetailActivity extends AppCompatActivity implements ApiListener.appointmentStateChangeListener{
+public class RecomendationDetailActivity extends AppCompatActivity implements ApiListener.appointmentStateChangeListener,
+        ApiListener.appoinetmentsDownloadListener {
     TestListTypeAdapter mAdapter;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
     @BindView(R.id.tv_name)
     TextView tv_name;
-    Context context=this;
+    Context context = this;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recomendation_detail);
         ButterKnife.bind(this);
+        sessionManager = new SessionManager(this);
 
         mAdapter = new TestListTypeAdapter(testList.getTestList());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -46,9 +53,9 @@ public class RecomendationDetailActivity extends AppCompatActivity implements Ap
         //holder.recycler_view.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
         recycler_view.setAdapter(mAdapter);
 
-        Resources res =context. getResources();
+        Resources res = context.getResources();
         String text = res.getString(R.string.text);
-       tv_name.setText(testList.getDrName()+" "+text);
+        tv_name.setText(testList.getDrName() + " " + text);
     }
 
     @Override
@@ -64,18 +71,32 @@ public class RecomendationDetailActivity extends AppCompatActivity implements Ap
 
     public void cancel(View view) {
         MyProgressBar.with(context);
-        Api.getInstance().changeStatus(testList.getAppointmentId(), ""+ Data.STATUS_CANCEL, this);
+        Api.getInstance().changeStatus(testList.getAppointmentId(), "" + Data.STATUS_CANCEL, this);
     }
 
     @Override
     public void onAppointmentChangeSuccess(StatusResponse list) {
-        onBackPressed();
+        Api.getInstance().getAppointmentsBypatient(sessionManager.getUserId(), this);
+
+
     }
 
     @Override
     public void onPppointmentChangeFailed(String msg) {
         onBackPressed();
 
+
+    }
+
+    @Override
+    public void onAppointmentDownloadSuccess(AppointmentResponse status) {
+        PatientALLDataDownloadListener.onDownloaded(status);
+        PatientNotificationDataDownloadListener.onNotificationDownloaded(status.getNotification());
+    }
+
+    @Override
+    public void onAppointmentDownloadFailed(String msg) {
+        onBackPressed();
 
     }
 }

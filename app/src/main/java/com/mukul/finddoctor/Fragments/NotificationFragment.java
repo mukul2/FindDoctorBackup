@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mukul.finddoctor.Data.ListenerPatientsData;
@@ -30,6 +31,8 @@ public class NotificationFragment extends Fragment implements ApiListener.patien
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
     RecomendedTestAppointmentAdapterPatient mAdapter;
+    @BindView(R.id.tv_no_item)
+    TextView tv_no_item;
     public NotificationFragment() {
         // Required empty public constructor
     }
@@ -58,5 +61,11 @@ public class NotificationFragment extends Fragment implements ApiListener.patien
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         recycler_view.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
         recycler_view.setAdapter(mAdapter);
+        if (status.size()>0){
+            tv_no_item.setVisibility(View.GONE);
+        }else {
+            tv_no_item.setVisibility(View.VISIBLE);
+
+        }
     }
 }

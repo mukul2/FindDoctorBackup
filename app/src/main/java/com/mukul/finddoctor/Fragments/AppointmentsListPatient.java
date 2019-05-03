@@ -46,6 +46,10 @@ public class AppointmentsListPatient extends Fragment implements ApiListener.pat
     int ALL_SHOWING = 1;
     int CONFIRMED = 0;
     int showing = CONFIRMED;
+    @BindView(R.id.tv_no_item)
+    TextView tv_no_item;
+    int pendingCount=0;
+    int ConfirmedCount=0;
 
     public AppointmentsListPatient() {
         // Required empty public constructor
@@ -75,6 +79,12 @@ public class AppointmentsListPatient extends Fragment implements ApiListener.pat
         tv_confirmed.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
         recycler_view_pending.setVisibility(View.VISIBLE);
         recycler_view_confirmed.setVisibility(View.GONE);
+        if (pendingCount>0){
+            tv_no_item.setVisibility(View.GONE);
+        }else {
+            tv_no_item.setVisibility(View.VISIBLE);
+
+        }
 
     }
 
@@ -85,6 +95,12 @@ public class AppointmentsListPatient extends Fragment implements ApiListener.pat
         tv_confirmed.setTextColor(Color.WHITE);
         recycler_view_pending.setVisibility(View.GONE);
         recycler_view_confirmed.setVisibility(View.VISIBLE);
+        if (ConfirmedCount>0){
+            tv_no_item.setVisibility(View.GONE);
+        }else {
+            tv_no_item.setVisibility(View.VISIBLE);
+
+        }
 
 
     }
@@ -92,6 +108,8 @@ public class AppointmentsListPatient extends Fragment implements ApiListener.pat
 
     @Override
     public void onDownloaded(AppointmentResponse status) {
+        pendingCount=status.getNotConfirmed().size();
+        ConfirmedCount=status.getConfirmed().size();
 
         confirmedAdapter = new ConfirmedAppointmentAdapterPatient(status.getConfirmed());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

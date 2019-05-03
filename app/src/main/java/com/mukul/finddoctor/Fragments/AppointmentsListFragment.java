@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mukul.finddoctor.Activity.DoctorHomeActivity;
@@ -33,6 +34,8 @@ public class AppointmentsListFragment extends Fragment implements ApiListener.da
     View v;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
+    @BindView(R.id.tv_no_item)
+    TextView tv_no_item;
     ConfirmedAppointmentAdapterDoctor mAdapter;
     public AppointmentsListFragment() {
         // Required empty public constructor
@@ -57,6 +60,10 @@ public class AppointmentsListFragment extends Fragment implements ApiListener.da
 
     @Override
     public void onDownloaded(List<AppointmentModel> status) {
+        if (status.size()>0){
+            tv_no_item.setVisibility(View.GONE);
+
+        }
         mAdapter = new ConfirmedAppointmentAdapterDoctor(status);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recycler_view.setLayoutManager(mLayoutManager);
@@ -64,5 +71,11 @@ public class AppointmentsListFragment extends Fragment implements ApiListener.da
         //recycler_view.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         recycler_view.setAdapter(mAdapter);
+        if (status.size()>0){
+            tv_no_item.setVisibility(View.GONE);
+        }else {
+            tv_no_item.setVisibility(View.VISIBLE);
+
+        }
     }
 }
