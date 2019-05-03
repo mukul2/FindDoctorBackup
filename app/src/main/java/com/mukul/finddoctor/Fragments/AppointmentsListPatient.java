@@ -110,6 +110,12 @@ public class AppointmentsListPatient extends Fragment implements ApiListener.pat
     public void onDownloaded(AppointmentResponse status) {
         pendingCount=status.getNotConfirmed().size();
         ConfirmedCount=status.getConfirmed().size();
+        if (ConfirmedCount>0){
+            tv_no_item.setVisibility(View.GONE);
+        }else {
+            tv_no_item.setVisibility(View.VISIBLE);
+
+        }
 
         confirmedAdapter = new ConfirmedAppointmentAdapterPatient(status.getConfirmed());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());

@@ -1,17 +1,21 @@
 package com.mukul.finddoctor.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.mukul.finddoctor.Activity.ConfirmedAppointmentDetailActivity;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.model.AppointmentModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mukul.finddoctor.Data.Data.appointmentModel;
 
 /**
  * Created by mukul on 3/10/2019.
@@ -24,7 +28,7 @@ public class PendingAppointmentAdapterPatient extends RecyclerView.Adapter<Pendi
     Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_address, tv_appointmentfor, tv_date;
+        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails;
 
 
         public MyViewHolder(View view) {
@@ -34,6 +38,7 @@ public class PendingAppointmentAdapterPatient extends RecyclerView.Adapter<Pendi
             tv_appointmentfor = (TextView) view.findViewById(R.id.tv_appointmentfor);
             tv_date = (TextView) view.findViewById(R.id.tv_date);
 
+            tv_viewDetails = (TextView) view.findViewById(R.id.tv_viewDetails);
 
         }
     }
@@ -60,7 +65,13 @@ public class PendingAppointmentAdapterPatient extends RecyclerView.Adapter<Pendi
         holder.tv_address.setText(movie.getAddress());
         holder.tv_appointmentfor.setText(movie.getAppointmentFor());
         holder.tv_date.setText(movie.getDate());
-
+        holder.tv_viewDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                appointmentModel=movie;
+                context.startActivity(new Intent(context, ConfirmedAppointmentDetailActivity.class));
+            }
+        });
 
     }
 
