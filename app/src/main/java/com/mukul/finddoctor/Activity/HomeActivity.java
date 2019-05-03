@@ -119,6 +119,11 @@ SwipeRefreshLayout.OnRefreshListener{
 
     }
 
+    public void history(View view) {
+        startActivity(new Intent(this,HistoryActivity.class));
+
+    }
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();

@@ -5,6 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    tools:openDrawer="left"
     tools:context="com.mukul.finddoctor.Activity.HomeActivity"
     >
 <android.support.v4.widget.SwipeRefreshLayout
@@ -151,6 +152,29 @@
 
             </RelativeLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="5dp"
+                android:onClick="history"
+                android:layout_marginLeft="15dp"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/menu_black_round"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="History"
+                    android:padding="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"

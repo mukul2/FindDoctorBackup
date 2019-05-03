@@ -35,6 +35,12 @@ public class Data {
     public static String BaseUrl="";
     public static String PHOTO_BASE="";
     public static String FACEBOOK_LINK="";
+    public static int STATUS_PENDING=0;
+    public static int STATUS_APPROVED=1;
+    public static int STATUS_TEST_RECOMMENED=2;
+    public static int STATUS_SERVED=3;
+    public static int STATUS_CANCEL=4;
+    public static int STATUS_DELETE=5;
 
 
     public  static List<String> getDistricts(){
@@ -112,6 +118,8 @@ public class Data {
         list.add("Approved");
         list.add("Test Recommened");
         list.add("Served");
+        list.add("Cancel");
+        list.add("Delete");
         return list;
     }
 

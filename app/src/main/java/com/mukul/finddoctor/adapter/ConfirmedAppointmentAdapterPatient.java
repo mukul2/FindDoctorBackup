@@ -1,5 +1,6 @@
 package com.mukul.finddoctor.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -9,10 +10,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mukul.finddoctor.Activity.ConfirmedAppointmentDetailActivity;
+import com.mukul.finddoctor.Data.Data;
 import com.mukul.finddoctor.R;
+import com.mukul.finddoctor.Utils.MyDialog;
+import com.mukul.finddoctor.Utils.MyProgressBar;
+import com.mukul.finddoctor.api.Api;
+import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.AppointmentModel;
+import com.mukul.finddoctor.model.StatusResponse;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -20,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.mukul.finddoctor.Data.Data.USER_ID;
 import static com.mukul.finddoctor.Data.Data.appointmentModel;
 
 /**
@@ -27,13 +36,13 @@ import static com.mukul.finddoctor.Data.Data.appointmentModel;
  */
 
 
-public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<ConfirmedAppointmentAdapterPatient.MyViewHolder> {
+public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<ConfirmedAppointmentAdapterPatient.MyViewHolder>  implements ApiListener.appointmentStateChangeListener{
     List<AppointmentModel>list=new ArrayList<>();
 
     Context context;
-
+    int triggeredItem = 0;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails;
+        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails,tv_cancel;
 
 
         public MyViewHolder(View view) {
@@ -43,6 +52,7 @@ public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<Con
             tv_appointmentfor = (TextView) view.findViewById(R.id.tv_appointmentfor);
             tv_date = (TextView) view.findViewById(R.id.tv_date);
             tv_viewDetails = (TextView) view.findViewById(R.id.tv_viewDetails);
+            tv_cancel = (TextView) view.findViewById(R.id.tv_cancel);
 
 
         }
@@ -77,9 +87,66 @@ public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<Con
                 context.startActivity(new Intent(context, ConfirmedAppointmentDetailActivity.class));
             }
         });
+        holder.tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, movie.getAppointment_id(), Toast.LENGTH_SHORT).show();
+                changeState(movie.getAppointment_id(),position);
+            }
+        });
 
 
     }
+    public void changeState(String appointment_id, int pos) {
+        MyProgressBar.with(context);
+        triggeredItem = pos;
+        Api.getInstance().changeStatus(appointment_id, ""+Data.STATUS_CANCEL, this);
+
+    }
+    @Override
+    public void onAppointmentChangeSuccess(StatusResponse status) {
+        MyProgressBar.dismiss();
+        if (status.getStatus()) {
+            MyDialog.getInstance().with((Activity) context)
+                    .message("This appointment has been canceled")
+                    .autoBack(false)
+                    .autoDismiss(false)
+                    .show();
+            // list.remove(triggeredItem);
+            if (removeItem(triggeredItem)) {
+                notifyItemRemoved(triggeredItem);
+                notifyItemRangeChanged(triggeredItem, getItemCount());
+            }
+
+        } else {
+            MyDialog.getInstance().with((Activity) context)
+                    .message("Failed")
+                    .autoBack(false)
+                    .autoDismiss(false)
+                    .show();
+        }
+
+    }
+
+    public boolean removeItem(int position) {
+        if (list.size() >= position + 1) {
+            list.remove(position);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void onPppointmentChangeFailed(String msg) {
+        MyProgressBar.dismiss();
+        MyDialog.getInstance().with((Activity) context)
+                .message("Failed")
+                .autoBack(false)
+                .autoDismiss(false)
+                .showMsgOnly();
+
+    }
+
 
     private String changeDateformate(String time) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

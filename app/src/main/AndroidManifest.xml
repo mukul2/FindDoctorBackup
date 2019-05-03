@@ -84,11 +84,13 @@
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.BaseActivity" />
         <activity
-            android:parentActivityName=".Activity.DoctorHomeActivity"
+            android:name=".Activity.VisitActivityDr"
             android:label="Serve this Patient"
-            android:name=".Activity.VisitActivityDr">
-
-        </activity>
+            android:parentActivityName=".Activity.DoctorHomeActivity"></activity>
+        <activity
+            android:parentActivityName=".Activity.HomeActivity"
+            android:label="History"
+            android:name=".Activity.HistoryActivity"></activity>
     </application>
 
 </manifest>
