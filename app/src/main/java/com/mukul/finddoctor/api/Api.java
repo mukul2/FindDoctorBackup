@@ -14,6 +14,7 @@ import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.UserProfileResponse;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -275,6 +276,25 @@ public class Api {
             @Override
             public void onFailure(@NonNull Call<StatusResponse> call, @NonNull Throwable t) {
                 listener.onPppointmentChangeFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void getThisPfofile(String id,  final ApiListener.profileDownloadListener listener) {
+
+        ApiClient.getApiInterface().getThisProfile(id).enqueue(new Callback<UserProfileResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<UserProfileResponse> call, @NonNull Response<UserProfileResponse> response) {
+                if (response != null) {
+                    listener.onprofileDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<UserProfileResponse> call, @NonNull Throwable t) {
+                listener.onprofileDownloadFailed(t.getLocalizedMessage());
             }
         });
     }

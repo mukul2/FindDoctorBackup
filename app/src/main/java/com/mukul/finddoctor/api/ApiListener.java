@@ -13,6 +13,7 @@ import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.UserProfileResponse;
 
 import java.util.List;
 
@@ -81,6 +82,10 @@ public class ApiListener {
     public interface appointmentStateChangeListener {
         void onAppointmentChangeSuccess(StatusResponse list);
         void onPppointmentChangeFailed(String msg);
+    }
+    public interface profileDownloadListener {
+        void onprofileDownloadSuccess(UserProfileResponse list);
+        void onprofileDownloadFailed(String msg);
     }
 
     public interface testNamesDownloadListener {

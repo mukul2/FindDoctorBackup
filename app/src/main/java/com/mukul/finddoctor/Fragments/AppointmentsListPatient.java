@@ -132,6 +132,7 @@ public class AppointmentsListPatient extends Fragment implements ApiListener.pat
         //recycler_view_pending.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         recycler_view_pending.setAdapter(pendingAdapter);
+        selectConfirmed();
 
     }
 }

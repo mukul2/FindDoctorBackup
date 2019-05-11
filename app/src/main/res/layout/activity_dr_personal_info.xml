@@ -40,7 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Doctor Name"
+                    android:id="@+id/tv_name"
                     android:textSize="18dp"
 
                     />
@@ -49,82 +49,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Doctor Name" />
-
-                <LinearLayout
+                    android:id="@+id/tv_designation"
+                     />
+                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="10dp"
+                    android:id="@+id/tv_currentlyworking"
+                    />
 
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight=".33">
-
-                        <ImageView
-                            android:layout_width="50dp"
-
-                            android:layout_height="50dp"
-                            android:background="@drawable/circle_shadow" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight=".33">
-
-                        <ImageView
-                            android:layout_width="50dp"
-
-                            android:layout_height="50dp"
-                            android:background="@drawable/circle_shadow" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_weight=".33">
-
-                        <ImageView
-                            android:layout_width="50dp"
-
-                            android:layout_height="50dp"
-                            android:background="@drawable/circle_shadow" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="@drawable/shadow"
-            android:layout_height="80dp">
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="@drawable/shadow"
-            android:layout_height="80dp">
 
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:background="@drawable/shadow"
-            android:layout_height="80dp">
-
-        </LinearLayout>
     </LinearLayout>
 </ScrollView>

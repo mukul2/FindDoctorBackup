@@ -12,6 +12,7 @@ import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.UserProfileResponse;
 
 import java.util.List;
 
@@ -44,6 +45,9 @@ public interface ApiInterface {
     Call<List<AppointmentModel2>> searchAppointemntByDoctor(@Field("id") String id,
                                                              @Field("dr_id") String dr_id,
                                                              @Field("appointment_for") String appointment_for);
+    @FormUrlEncoded
+    @POST("getThisProfile.php")
+    Call<UserProfileResponse> getThisProfile(@Field("id") String id);
 
     @FormUrlEncoded
     @POST("getMyAppointmentsDoctor.php")
