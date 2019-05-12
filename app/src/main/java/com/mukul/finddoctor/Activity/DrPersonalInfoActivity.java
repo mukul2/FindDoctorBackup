@@ -3,26 +3,31 @@ package com.mukul.finddoctor.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.Utils.MyProgressBar;
 import com.mukul.finddoctor.Utils.SessionManager;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
+import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.UserProfileResponse;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DrPersonalInfoActivity extends AppCompatActivity implements ApiListener.profileDownloadListener{
+public class DrPersonalInfoActivity extends AppCompatActivity implements ApiListener.profileDownloadListener,
+ApiListener.drprofileUpdateListener{
     SessionManager sessionManager;
     @BindView(R.id.tv_currentlyworking)
-    TextView tv_currentlyworking;
+    EditText tv_currentlyworking;
     @BindView(R.id.tv_name)
-    TextView tv_name;
+    EditText tv_name;
     @BindView(R.id.tv_designation)
-    TextView tv_designation;
+    EditText tv_designation;
     String USER_ID;
 
     @Override
@@ -53,12 +58,39 @@ public class DrPersonalInfoActivity extends AppCompatActivity implements ApiList
         tv_currentlyworking.setText(list.getHospitalName());
         tv_name.setText(list.getDrName());
         tv_designation.setText(list.getLastEducationDegree());
+        Toast.makeText(this, list.getDrName(), Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     public void onprofileDownloadFailed(String msg) {
         MyProgressBar.dismiss();
+
+
+    }
+
+    public void UpdateProfile(View view) {
+        MyProgressBar.with(DrPersonalInfoActivity.this);
+        String hospital=tv_currentlyworking.getText().toString().trim();
+        String degree=tv_designation.getText().toString().trim();
+        String name=tv_name.getText().toString().trim();
+        Api.getInstance().updateDrInfo(USER_ID,hospital,degree,name,this);
+    }
+
+    @Override
+    public void ondrprofileUpdateSuccess(StatusResponse list) {
+        MyProgressBar.dismiss();
+        if (list.getStatus()){
+            Toast.makeText(this, "Successfully updated", Toast.LENGTH_SHORT).show();
+        }else {
+            Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void ondrprofileUpdateFailed(String msg) {
+        MyProgressBar.dismiss();
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 
 
     }

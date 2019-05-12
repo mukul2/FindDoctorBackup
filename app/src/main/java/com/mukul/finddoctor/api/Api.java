@@ -298,6 +298,24 @@ public class Api {
             }
         });
     }
+    public void updateDrInfo(String id,String hospital,String lastDegree,String name,  final ApiListener.drprofileUpdateListener listener) {
+
+        ApiClient.getApiInterface().updateDrBasicInfo(id,hospital,lastDegree,name).enqueue(new Callback<StatusResponse>() {
+            @Override
+            public void onResponse(@NonNull Call<StatusResponse> call, @NonNull Response<StatusResponse> response) {
+                if (response != null) {
+                    listener.ondrprofileUpdateSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<StatusResponse> call, @NonNull Throwable t) {
+                listener.ondrprofileUpdateFailed(t.getLocalizedMessage());
+            }
+        });
+    }
 
     public void downloadTestNames(final ApiListener.testNamesDownloadListener listener) {
         ApiClient.getApiInterface().getTestNames().enqueue(new Callback<List<TestModel>>() {

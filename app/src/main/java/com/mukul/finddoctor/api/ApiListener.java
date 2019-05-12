@@ -87,6 +87,10 @@ public class ApiListener {
         void onprofileDownloadSuccess(UserProfileResponse list);
         void onprofileDownloadFailed(String msg);
     }
+    public interface drprofileUpdateListener {
+        void ondrprofileUpdateSuccess(StatusResponse list);
+        void ondrprofileUpdateFailed(String msg);
+    }
 
     public interface testNamesDownloadListener {
         void ontestNamesDownloadSuccess(List<TestModel> data);

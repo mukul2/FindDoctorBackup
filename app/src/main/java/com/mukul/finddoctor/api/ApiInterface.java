@@ -41,6 +41,13 @@ public interface ApiInterface {
                                           @Field("day") String day);
 
     @FormUrlEncoded
+    @POST("updateProfileDr.php")
+    Call<StatusResponse> updateDrBasicInfo(@Field("id") String id,
+                                          @Field("hospital_name") String hospital_name,
+                                          @Field("last_education_degree") String last_education_degree,
+                                          @Field("dr_name") String dr_name);
+
+    @FormUrlEncoded
     @POST("searchMyAppointmentDoctor.php")
     Call<List<AppointmentModel2>> searchAppointemntByDoctor(@Field("id") String id,
                                                              @Field("dr_id") String dr_id,
