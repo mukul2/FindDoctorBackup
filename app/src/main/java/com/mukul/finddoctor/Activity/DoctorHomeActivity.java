@@ -13,6 +13,7 @@ import com.mukul.finddoctor.Data.lis;
 import com.mukul.finddoctor.Fragments.AppointmentsListFragment;
 import com.mukul.finddoctor.Fragments.NewAppointListFragment;
 import com.mukul.finddoctor.Fragments.NotificationFragment;
+import com.mukul.finddoctor.Fragments.VideoCallFragmenttFragmentDoctor;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.Utils.CustomDrawerButton;
 import com.mukul.finddoctor.Utils.MyDialog;
@@ -151,7 +152,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements ApiListener
                 }
 
                 if ((id.trim().length()+patient_name.trim().length()) > 0 ) {
-                    Toast.makeText(context, ""+(id.trim().length()+patient_name.trim().length()), Toast.LENGTH_SHORT).show();
+                  //  Toast.makeText(context, ""+(id.trim().length()+patient_name.trim().length()), Toast.LENGTH_SHORT).show();
                     Api.getInstance().searchAppointment(id, USER_ID, patient_name, new ApiListener.appointmentSearchListener() {
                         @Override
                         public void onAppointmentSearchSuccess(List<AppointmentModel2> data) {
@@ -171,7 +172,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements ApiListener
                         }
                     });
                 } else {
-                    Toast.makeText(context, "clr list", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(context, "clr list", Toast.LENGTH_SHORT).show();
                     if (mAdapter==null){
 
                     }else {
@@ -229,6 +230,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements ApiListener
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new AppointmentsListFragment(), "Confirmed");
         adapter.addFragment(new NewAppointListFragment(), "Pending");
+        adapter.addFragment(new VideoCallFragmenttFragmentDoctor(), "Video Call");
         viewPager.setAdapter(adapter);
     }
 

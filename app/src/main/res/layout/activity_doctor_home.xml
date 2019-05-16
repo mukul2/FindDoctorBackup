@@ -60,7 +60,7 @@
                                             android:id="@+id/customDrawer"
                                             android:layout_width="50dp"
                                             android:layout_height="50dp"
-                                            android:layout_marginLeft="15dp"
+                                            android:layout_marginLeft="10dp"
                                             android:padding="14dp"
                                             android:src="@drawable/menu" />
 
@@ -68,7 +68,7 @@
                                             android:layout_width="match_parent"
                                             android:layout_height="match_parent"
                                             android:gravity="center_vertical"
-                                            android:paddingLeft="12dp"
+                                            android:paddingLeft="10dp"
                                             android:hint="Search here"
                                             android:lines="1"
                                             android:id="@+id/ed_search"

@@ -38,17 +38,32 @@
                     android:background="@drawable/circle_shadow"
                     app:civ_border_color="@android:color/white"
                     app:civ_border_width="5dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Name"
+                    android:paddingLeft="05dp"
+                    android:paddingBottom="5dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content"
+                    />
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:layout_marginTop="20dp"
                     android:layout_gravity="center_horizontal"
                     android:id="@+id/tv_name"
                     android:background="@drawable/ed_selector"
                     android:padding="8dp"
                     android:textSize="18dp"
 
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Last Education Degree"
+                    android:paddingLeft="05dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="10dp"
+                    android:layout_height="wrap_content"
                     />
 
                 <EditText
@@ -58,9 +73,18 @@
                     android:id="@+id/tv_designation"
                     android:background="@drawable/ed_selector"
                     android:padding="8dp"
-
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Currently working Hospital"
+                    android:paddingLeft="05dp"
+                    android:paddingBottom="5dp"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
 
                     />
+
+
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="45dp"

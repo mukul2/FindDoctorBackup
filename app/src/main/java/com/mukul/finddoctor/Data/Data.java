@@ -9,6 +9,7 @@ import com.mukul.finddoctor.model.DoctorModel;
 import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.SpacialistModel;
 import com.mukul.finddoctor.model.TestList;
+import com.mukul.finddoctor.model.VideoCallModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,7 @@ public class Data {
     public static RecomentationModel testList ;
     public static AppointmentModel appointmentModel ;
     public static AppointmentModel2 drServingModel ;
+    public static VideoCallModel CurentCallDr ;
 
     public static  List<Day> days = new ArrayList<>();
     public static String USER_ID;

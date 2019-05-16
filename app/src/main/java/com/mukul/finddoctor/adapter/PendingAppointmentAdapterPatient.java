@@ -28,7 +28,7 @@ public class PendingAppointmentAdapterPatient extends RecyclerView.Adapter<Pendi
     Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails;
+        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails,tv_serial;
 
 
         public MyViewHolder(View view) {
@@ -52,7 +52,7 @@ public class PendingAppointmentAdapterPatient extends RecyclerView.Adapter<Pendi
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.patient_confirmed_item, parent, false);
+                .inflate(R.layout.patient_pending_item, parent, false);
 
         return new MyViewHolder(itemView);
     }

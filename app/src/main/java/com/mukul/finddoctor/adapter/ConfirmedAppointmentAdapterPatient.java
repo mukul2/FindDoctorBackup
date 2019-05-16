@@ -42,7 +42,7 @@ public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<Con
     Context context;
     int triggeredItem = 0;
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails,tv_cancel;
+        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails,tv_cancel,tv_serial;
 
 
         public MyViewHolder(View view) {
@@ -53,6 +53,7 @@ public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<Con
             tv_date = (TextView) view.findViewById(R.id.tv_date);
             tv_viewDetails = (TextView) view.findViewById(R.id.tv_viewDetails);
             tv_cancel = (TextView) view.findViewById(R.id.tv_cancel);
+            tv_serial = (TextView) view.findViewById(R.id.tv_serial);
 
 
         }
@@ -76,6 +77,7 @@ public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<Con
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final AppointmentModel movie = list.get(position);
         context = holder.tv_name.getContext();
+        holder.tv_serial.setText(""+movie.getAppointment_id()   );
         holder.tv_name.setText(movie.getDrName());
         holder.tv_address.setText(movie.getAddress());
         holder.tv_appointmentfor.setText(movie.getAppointmentFor());

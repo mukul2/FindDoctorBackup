@@ -106,7 +106,7 @@ public class AdddChamberActivity extends AppCompatActivity implements ApiListene
             }
         }
         Gson gson=new Gson();
-        Toast.makeText(this, gson.toJson(list), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, gson.toJson(list), Toast.LENGTH_LONG).show();
         Api.getInstance().setDrSchedule(sessionManager.getUserId(),gson.toJson(list),address,fees,city,specialist,"","",this);
 
     }

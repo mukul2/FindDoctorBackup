@@ -34,6 +34,8 @@ public class RecomendationDetailActivity extends AppCompatActivity implements Ap
     TestListTypeAdapter mAdapter;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
+    @BindView(R.id.tv_serial)
+    TextView tv_serial;
     @BindView(R.id.tv_name)
     TextView tv_name;
     Context context = this;
@@ -56,6 +58,7 @@ public class RecomendationDetailActivity extends AppCompatActivity implements Ap
         Resources res = context.getResources();
         String text = res.getString(R.string.text);
         tv_name.setText(testList.getDrName() + " " + text);
+        tv_serial.setText("Serial No : "+testList.getAppointmentId());
     }
 
     @Override

@@ -2,6 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mukul.finddoctor">
 
+    <uses-feature
+        android:name="android.hardware.microphone"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -13,6 +23,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity
+            android:parentActivityName=".Activity.HomeActivity"
+            android:name=".Activity.CallLogHistoryActivity"></activity>
+        <activity
+            android:name=".Activity.CallReceiveActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.DialingActivity"
+            android:theme="@style/NoTitleBar" />
         <activity
             android:name=".Activity.LoginActivity"
             android:label="Login"
@@ -38,14 +57,16 @@
             android:parentActivityName=".Activity.HomeActivity" />
         <activity
             android:name=".Activity.DoctorHomeActivity"
-            android:theme="@style/NoTitleBar" />
+            android:theme="@style/NoTitleBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.SearchResultActivity"
             android:label="Search Result"
             android:parentActivityName=".Activity.FindDoctorActivity" />
         <activity
             android:name=".Activity.DrPersonalInfoActivity"
-            android:parentActivityName=".Activity.DoctorHomeActivity" />
+            android:parentActivityName=".Activity.DoctorHomeActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.ChamberDetailActivity"
             android:label="Book Appointment"
@@ -86,11 +107,11 @@
         <activity
             android:name=".Activity.VisitActivityDr"
             android:label="Serve this Patient"
-            android:parentActivityName=".Activity.DoctorHomeActivity"></activity>
+            android:parentActivityName=".Activity.DoctorHomeActivity" />
         <activity
-            android:parentActivityName=".Activity.HomeActivity"
+            android:name=".Activity.HistoryActivity"
             android:label="History"
-            android:name=".Activity.HistoryActivity"></activity>
+            android:parentActivityName=".Activity.HomeActivity" />
     </application>
 
 </manifest>

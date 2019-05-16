@@ -4,6 +4,7 @@ package com.mukul.finddoctor.api;
 import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
+import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
 import com.mukul.finddoctor.model.DoctorModel;
 import com.mukul.finddoctor.model.LoginResponse;
@@ -11,8 +12,10 @@ import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
+import com.mukul.finddoctor.model.TestList;
 import com.mukul.finddoctor.model.TestModel;
 import com.mukul.finddoctor.model.UserProfileResponse;
+import com.mukul.finddoctor.model.VideoCallModel;
 
 import java.util.List;
 
@@ -40,18 +43,46 @@ public interface ApiInterface {
                                           @Field("city") String city,
                                           @Field("day") String day);
 
+    @GET("getOnlineDoctors.php")
+    Call<List<VideoCallModel>> getOnlineDoctors();
+
     @FormUrlEncoded
     @POST("updateProfileDr.php")
     Call<StatusResponse> updateDrBasicInfo(@Field("id") String id,
-                                          @Field("hospital_name") String hospital_name,
-                                          @Field("last_education_degree") String last_education_degree,
-                                          @Field("dr_name") String dr_name);
+                                           @Field("hospital_name") String hospital_name,
+                                           @Field("last_education_degree") String last_education_degree,
+                                           @Field("dr_name") String dr_name);
+
+    @FormUrlEncoded
+    @POST("changeOnlineStatus.php")
+    Call<StatusMessage> changeOnlineStatus(@Field("id") String id,
+                                           @Field("isOnLine") String isOnLine);
+
+    @FormUrlEncoded
+    @POST("push_call_history.php")
+    Call<StatusMessage> pushCallResponse(@Field("patient_id") String patient_id,
+                                         @Field("dr_id") String dr_id,
+                                         @Field("call_time") String call_time,
+                                         @Field("duration") String duration);
 
     @FormUrlEncoded
     @POST("searchMyAppointmentDoctor.php")
     Call<List<AppointmentModel2>> searchAppointemntByDoctor(@Field("id") String id,
-                                                             @Field("dr_id") String dr_id,
-                                                             @Field("appointment_for") String appointment_for);
+                                                            @Field("dr_id") String dr_id,
+                                                            @Field("appointment_for") String appointment_for);
+
+    @FormUrlEncoded
+    @POST("getMyCallLog.php")
+    Call<List<CallHistoryPatient>> getCallListBypatient(@Field("patient_id") String patient_id);
+
+    @FormUrlEncoded
+    @POST("getMyCallLogDoctor.php")
+    Call<List<CallHistoryPatient>> getCallListByDoctor(@Field("dr_id") String dr_id);
+
+    @FormUrlEncoded
+    @POST("getRecomendationList.php")
+    Call<List<TestList>> getTestList(@Field("appointment_id") String appointment_id);
+
     @FormUrlEncoded
     @POST("getThisProfile.php")
     Call<UserProfileResponse> getThisProfile(@Field("id") String id);

@@ -7,14 +7,18 @@ import android.util.Log;
 import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
+import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
 import com.mukul.finddoctor.model.DoctorModel;
 import com.mukul.finddoctor.model.LoginResponse;
+import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
+import com.mukul.finddoctor.model.TestList;
 import com.mukul.finddoctor.model.TestModel;
 import com.mukul.finddoctor.model.UserProfileResponse;
+import com.mukul.finddoctor.model.VideoCallModel;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,6 +62,120 @@ public class Api {
             @Override
             public void onFailure(@NonNull Call<LoginResponse> call, @NonNull Throwable t) {
                 loginUserListener.onUserLoginFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void downlaodRecomendedLits(String id, final ApiListener.TestDownloadListener listener) {
+
+        ApiClient.getApiInterface().getTestList(id).enqueue(new Callback<List<TestList>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<TestList>> call, @NonNull Response<List<TestList>> response) {
+                if (response != null) {
+                    listener.onTestDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<TestList>> call, @NonNull Throwable t) {
+                listener.onTestDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void downloadCallLog(String patient_id, final ApiListener.patientCallLogListener listener) {
+
+        ApiClient.getApiInterface().getCallListBypatient(patient_id).enqueue(new Callback<List<CallHistoryPatient>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<CallHistoryPatient>> call, @NonNull Response<List<CallHistoryPatient>> response) {
+                if (response != null) {
+                    listener.onPatientCallLogSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<CallHistoryPatient>> call, @NonNull Throwable t) {
+                listener.onPatientCallLogFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void downloadCallLogDoctor(String doctor_id, final ApiListener.doctorCallLogListener listener) {
+
+        ApiClient.getApiInterface().getCallListByDoctor(doctor_id).enqueue(new Callback<List<CallHistoryPatient>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<CallHistoryPatient>> call, @NonNull Response<List<CallHistoryPatient>> response) {
+                if (response != null) {
+                    listener.onDoctorCallLogSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<CallHistoryPatient>> call, @NonNull Throwable t) {
+                listener.onDoctorCallLogFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void downloadOnlineDoctors(final ApiListener.onlineDoctorListener listener) {
+
+        ApiClient.getApiInterface().getOnlineDoctors().enqueue(new Callback<List<VideoCallModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<VideoCallModel>> call, @NonNull Response<List<VideoCallModel>> response) {
+                if (response != null) {
+                    listener.onOnlineDoctorSearchSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<VideoCallModel>> call, @NonNull Throwable t) {
+                listener.onOnlineDoctorSearchFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void changeDrOnlineStatus(String drID, String isOnline, final ApiListener.doctorOnlineStatusChangeListener listener) {
+
+        ApiClient.getApiInterface().changeOnlineStatus(drID, isOnline).enqueue(new Callback<StatusMessage>() {
+            @Override
+            public void onResponse(@NonNull Call<StatusMessage> call, @NonNull Response<StatusMessage> response) {
+                if (response != null) {
+                    listener.ondoctorOnlineStatusChangeSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<StatusMessage> call, @NonNull Throwable t) {
+                listener.ondoctorOnlineStatusChangeFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void CallLogPostStatus(String patient_id, String dr_id, String call_time, String duration, final ApiListener.PushCallLogListener listener) {
+
+        ApiClient.getApiInterface().pushCallResponse(patient_id, dr_id, call_time, duration).enqueue(new Callback<StatusMessage>() {
+            @Override
+            public void onResponse(@NonNull Call<StatusMessage> call, @NonNull Response<StatusMessage> response) {
+                if (response != null) {
+                    listener.onPushCallLogSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<StatusMessage> call, @NonNull Throwable t) {
+                listener.onPushCallLogFailed(t.getLocalizedMessage());
             }
         });
     }
@@ -280,7 +398,7 @@ public class Api {
         });
     }
 
-    public void getThisPfofile(String id,  final ApiListener.profileDownloadListener listener) {
+    public void getThisPfofile(String id, final ApiListener.profileDownloadListener listener) {
 
         ApiClient.getApiInterface().getThisProfile(id).enqueue(new Callback<UserProfileResponse>() {
             @Override
@@ -298,9 +416,10 @@ public class Api {
             }
         });
     }
-    public void updateDrInfo(String id,String hospital,String lastDegree,String name,  final ApiListener.drprofileUpdateListener listener) {
 
-        ApiClient.getApiInterface().updateDrBasicInfo(id,hospital,lastDegree,name).enqueue(new Callback<StatusResponse>() {
+    public void updateDrInfo(String id, String hospital, String lastDegree, String name, final ApiListener.drprofileUpdateListener listener) {
+
+        ApiClient.getApiInterface().updateDrBasicInfo(id, hospital, lastDegree, name).enqueue(new Callback<StatusResponse>() {
             @Override
             public void onResponse(@NonNull Call<StatusResponse> call, @NonNull Response<StatusResponse> response) {
                 if (response != null) {

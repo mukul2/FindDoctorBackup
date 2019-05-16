@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class DrPersonalInfoActivity extends AppCompatActivity implements ApiListener.profileDownloadListener,
-ApiListener.drprofileUpdateListener{
+        ApiListener.drprofileUpdateListener {
     SessionManager sessionManager;
     @BindView(R.id.tv_currentlyworking)
     EditText tv_currentlyworking;
@@ -35,21 +35,22 @@ ApiListener.drprofileUpdateListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dr_personal_info);
         ButterKnife.bind(this);
-        sessionManager=new SessionManager(this);
+        sessionManager = new SessionManager(this);
         setTitle(sessionManager.getUserName());
-        USER_ID=sessionManager.getUserId();
+        USER_ID = sessionManager.getUserId();
         MyProgressBar.with(DrPersonalInfoActivity.this);
-        Api.getInstance().getThisPfofile(USER_ID,this);
+        Api.getInstance().getThisPfofile(USER_ID, this);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
-                return(true);
+                return (true);
         }
 
-        return(super.onOptionsItemSelected(item));
+        return (super.onOptionsItemSelected(item));
     }
 
     @Override
@@ -58,7 +59,8 @@ ApiListener.drprofileUpdateListener{
         tv_currentlyworking.setText(list.getHospitalName());
         tv_name.setText(list.getDrName());
         tv_designation.setText(list.getLastEducationDegree());
-        Toast.makeText(this, list.getDrName(), Toast.LENGTH_LONG).show();
+        sessionManager.setuserName(list.getDrName());
+
 
     }
 
@@ -71,18 +73,21 @@ ApiListener.drprofileUpdateListener{
 
     public void UpdateProfile(View view) {
         MyProgressBar.with(DrPersonalInfoActivity.this);
-        String hospital=tv_currentlyworking.getText().toString().trim();
-        String degree=tv_designation.getText().toString().trim();
-        String name=tv_name.getText().toString().trim();
-        Api.getInstance().updateDrInfo(USER_ID,hospital,degree,name,this);
+        String hospital = tv_currentlyworking.getText().toString().trim();
+        String degree = tv_designation.getText().toString().trim();
+        String name = tv_name.getText().toString().trim();
+        Api.getInstance().updateDrInfo(USER_ID, hospital, degree, name, this);
     }
 
     @Override
     public void ondrprofileUpdateSuccess(StatusResponse list) {
         MyProgressBar.dismiss();
-        if (list.getStatus()){
+        if (list.getStatus()) {
+            String name = tv_name.getText().toString().trim();
+
             Toast.makeText(this, "Successfully updated", Toast.LENGTH_SHORT).show();
-        }else {
+            sessionManager.setuserName(name);
+        } else {
             Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show();
         }
     }

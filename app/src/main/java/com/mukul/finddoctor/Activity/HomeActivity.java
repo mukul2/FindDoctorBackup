@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.mukul.finddoctor.Fragments.AppointmentsListFragment;
 import com.mukul.finddoctor.Fragments.AppointmentsListPatient;
 import com.mukul.finddoctor.Fragments.NotificationFragment;
+import com.mukul.finddoctor.Fragments.VideoCallFragmenttFragment;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.Utils.CustomDrawerButton;
 import com.mukul.finddoctor.Utils.MyDialog;
@@ -85,7 +86,8 @@ SwipeRefreshLayout.OnRefreshListener{
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new AppointmentsListPatient(), "Appointments");
-        adapter.addFragment(new NotificationFragment(), "Recomendation");
+        adapter.addFragment(new NotificationFragment(), "Recom.");
+        adapter.addFragment(new VideoCallFragmenttFragment(), "Video Call");
         viewPager.setAdapter(adapter);
     }
 

@@ -32,6 +32,10 @@ import static com.mukul.finddoctor.Data.Data.singleDrModel;
 public class SendBookingActivity extends AppCompatActivity implements ApiListener.appoinetmentPOstListener {
     @BindView(R.id.ed_problems)
     EditText ed_problems;
+    @BindView(R.id.tv_startTime)
+    TextView tv_startTime;
+    @BindView(R.id.tv_year)
+    TextView tv_year;
     @BindView(R.id.tv_date)
     TextView tv_date;
     @BindView(R.id.tv_month)
@@ -43,6 +47,7 @@ public class SendBookingActivity extends AppCompatActivity implements ApiListene
     String problem, name, phone;
     SessionManager sessionManager;
     List<Integer> weekDays = new ArrayList<>();
+    List<String> times = new ArrayList<>();
     Calendar calendar;
 
     @BindView(R.id.tv_datePlus)
@@ -54,6 +59,7 @@ public class SendBookingActivity extends AppCompatActivity implements ApiListene
     int date, month;
     String appointmentDate;
     Calendar todayCalender;
+    String selectedTime="";
 
 
     @Override
@@ -70,6 +76,7 @@ public class SendBookingActivity extends AppCompatActivity implements ApiListene
         for (int i = 0; i < singleDrModel.getDays().size(); i++) {
             List<Day> d = singleDrModel.getDays();
             weekDays.add(Integer.parseInt(d.get(i).getDay()));
+            times.add(d.get(i).getTime());
 
         }
         tv_weekDay.setText(DataStore.convertToWeekDay(String.valueOf(calendar.getTime().getDay())));
@@ -82,8 +89,9 @@ public class SendBookingActivity extends AppCompatActivity implements ApiListene
     }
 
     private void previousDate() {
+        calendar.add(Calendar.DAY_OF_MONTH, -1);
         if (calendar.after(todayCalender)) {
-            calendar.add(Calendar.DAY_OF_MONTH, -1);
+
             MinusCheck();
         }else {
             Toast.makeText(this, "Cannot appoint for previousday", Toast.LENGTH_SHORT).show();
@@ -104,15 +112,19 @@ public class SendBookingActivity extends AppCompatActivity implements ApiListene
         month = calendar.getTime().getMonth();
         calendar.setTime(new Date(calendar.getTime().getYear(), month, date));
         tv_weekDay.setText(DataStore.convertToWeekDay(String.valueOf(calendar.getTime().getDay())));
+
         tv_date.setText("" + calendar.getTime().getDate());
         tv_month.setText(DataStore.convertToMonth(calendar.getTime().getMonth()));
 
 
         boolean isAvailable = getIsDrChamberOpen(calendar);
+        tv_startTime.setText(selectedTime);
+
         if (isAvailable) {
             //  Toast.makeText(this, "Dr is available today", Toast.LENGTH_SHORT).show();
-            appointmentDate=""+2019+"-"+String.valueOf(calendar.getTime().getMonth()+1)+"-"+calendar.getTime().getDate()+" "+"00:00:00";
+            appointmentDate=""+calendar.get(Calendar.YEAR)+"-"+String.valueOf(calendar.getTime().getMonth()+1)+"-"+calendar.getTime().getDate()+" "+"00:00:00";
             //Toast.makeText(this, appointmentDate, Toast.LENGTH_LONG).show();
+            tv_year.setText(""+calendar.get(Calendar.YEAR));
 
         } else {
             calendar.add(Calendar.DAY_OF_MONTH, 1);
@@ -134,9 +146,12 @@ public class SendBookingActivity extends AppCompatActivity implements ApiListene
 
 
         boolean isAvailable = getIsDrChamberOpen(calendar);
+        tv_startTime.setText(selectedTime);
+
         if (isAvailable) {
             //  Toast.makeText(this, "Dr is available today", Toast.LENGTH_SHORT).show();
-            appointmentDate=""+2019+"-"+String.valueOf(calendar.getTime().getMonth()+1)+"-"+calendar.getTime().getDate()+" "+"00:00:00";
+            appointmentDate=""+calendar.get(Calendar.YEAR)+"-"+String.valueOf(calendar.getTime().getMonth()+1)+"-"+calendar.getTime().getDate()+" "+"00:00:00";
+            tv_year.setText(""+calendar.get(Calendar.YEAR));
 
         } else {
             calendar.add(Calendar.DAY_OF_MONTH, -1);
@@ -151,6 +166,7 @@ public class SendBookingActivity extends AppCompatActivity implements ApiListene
         for (int d = 0; d < weekDays.size(); d++) {
             if (calendar.getTime().getDay() == weekDays.get(d)) {
                 status = true;
+                selectedTime=times.get(d);
                 break;
             } else {
                 status = false;

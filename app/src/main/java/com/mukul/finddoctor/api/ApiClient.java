@@ -14,7 +14,7 @@ public class ApiClient {
     private static Retrofit retrofit = null;
 
     private static Retrofit getClient() {
-        if (retrofit==null) {
+        if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -24,7 +24,7 @@ public class ApiClient {
         return retrofit;
     }
 
-    public static ApiInterface getApiInterface(){
+    public static ApiInterface getApiInterface() {
         return getClient().create(ApiInterface.class);
     }
 }
