@@ -398,6 +398,34 @@ public class Api {
         });
     }
 
+    public void servePost(String appointment_id,
+                          String dr_id,
+                          String p_id,
+                          String dr_name,
+                          String p_name,
+                          String comment,
+                          String attachment,
+                          String fees,
+                          String chamber_id,
+                          final ApiListener.servePostListener listener) {
+
+        ApiClient.getApiInterface().postServeInfo(appointment_id, dr_id, p_id, dr_name, p_name, comment, attachment, fees, chamber_id).enqueue(new Callback<StatusMessage>() {
+            @Override
+            public void onResponse(@NonNull Call<StatusMessage> call, @NonNull Response<StatusMessage> response) {
+                if (response != null) {
+                    listener.onServePostSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<StatusMessage> call, @NonNull Throwable t) {
+                listener.onServePostFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
     public void getThisPfofile(String id, final ApiListener.profileDownloadListener listener) {
 
         ApiClient.getApiInterface().getThisProfile(id).enqueue(new Callback<UserProfileResponse>() {

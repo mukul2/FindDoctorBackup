@@ -130,5 +130,36 @@
             android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Comment"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:background="@drawable/ed_selector"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="45dp"
+            android:id="@+id/ed_commment"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Recieved fees"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:background="@drawable/ed_selector"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
+            android:inputType="number"
+            android:id="@+id/ed_fees"
+            android:layout_height="45dp"
+            />
     </LinearLayout>
 </ScrollView>

@@ -55,6 +55,18 @@ public class DataStore {
         SimpleDateFormat targetFormat = new SimpleDateFormat("MMM dd");
         return targetFormat.format(sourceDate);
     }
+    public static String tweentyfourtotwelve(String time) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        Date sourceDate = null;
+        try {
+            sourceDate = dateFormat.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        SimpleDateFormat targetFormat = new SimpleDateFormat("hh:mm a");
+        return targetFormat.format(sourceDate);
+    }
 
     public static List<String> sevenDays() {
         List<String> days = new ArrayList<>();

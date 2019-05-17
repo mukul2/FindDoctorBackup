@@ -17,6 +17,7 @@ import com.mukul.finddoctor.Fragments.VideoCallFragmenttFragmentDoctor;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.Utils.CustomDrawerButton;
 import com.mukul.finddoctor.Utils.MyDialog;
+import com.mukul.finddoctor.Utils.MyProgressBar;
 import com.mukul.finddoctor.Utils.SessionManager;
 import com.mukul.finddoctor.adapter.ConfirmedAppointmentAdapterDoctor;
 import com.mukul.finddoctor.adapter.SearchAdapterDoctor;
@@ -26,6 +27,7 @@ import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.SpacialistModel;
+import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.TestModel;
 import com.mukul.finddoctor.model.testSelectedModel;
 
@@ -321,5 +323,25 @@ public class DoctorHomeActivity extends AppCompatActivity implements ApiListener
         public CharSequence getPageTitle(int position) {
             return mFragmentTitleList.get(position);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        MyProgressBar.with(DoctorHomeActivity.this);
+        Api.getInstance().changeDrOnlineStatus(USER_ID, "0", new ApiListener.doctorOnlineStatusChangeListener() {
+            @Override
+            public void ondoctorOnlineStatusChangeSuccess(StatusMessage statusMessage) {
+                MyProgressBar.dismiss();
+                finish();
+            }
+
+            @Override
+            public void ondoctorOnlineStatusChangeFailed(String msg) {
+                MyProgressBar.dismiss();
+                finish();
+
+            }
+        });
+
     }
 }

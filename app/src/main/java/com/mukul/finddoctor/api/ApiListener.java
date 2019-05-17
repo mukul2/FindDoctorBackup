@@ -27,6 +27,10 @@ public class ApiListener {
         void onSearchSuccess(List<DoctorModel> list);
         void onSuccessFailed(String msg);
     }
+    public interface servePostListener {
+        void onServePostSuccess(StatusMessage response);
+        void onServePostFailed(String msg);
+    }
     public interface patientCallLogListener {
         void onPatientCallLogSuccess(List<CallHistoryPatient> list);
         void onPatientCallLogFailed(String msg);

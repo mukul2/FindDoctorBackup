@@ -42,6 +42,17 @@ public interface ApiInterface {
                                           @Field("specialist") String specialist,
                                           @Field("city") String city,
                                           @Field("day") String day);
+    @FormUrlEncoded
+    @POST("searchDoctor.php")
+    Call<StatusMessage> postServeInfo(@Field("appointment_id") String appointment_id,
+                                          @Field("dr_id") String dr_id,
+                                          @Field("p_id") String p_id,
+                                          @Field("dr_name") String dr_name,
+                                          @Field("p_name") String p_name,
+                                          @Field("comment") String comment,
+                                          @Field("attachment") String attachment,
+                                          @Field("fees") String fees,
+                                          @Field("chamber_id") String chamber_id);
 
     @GET("getOnlineDoctors.php")
     Call<List<VideoCallModel>> getOnlineDoctors();
