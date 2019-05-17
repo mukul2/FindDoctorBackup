@@ -404,12 +404,11 @@ public class Api {
                           String dr_name,
                           String p_name,
                           String comment,
-                          String attachment,
                           String fees,
                           String chamber_id,
                           final ApiListener.servePostListener listener) {
 
-        ApiClient.getApiInterface().postServeInfo(appointment_id, dr_id, p_id, dr_name, p_name, comment, attachment, fees, chamber_id).enqueue(new Callback<StatusMessage>() {
+        ApiClient.getApiInterface().postServeInfo(appointment_id, dr_id, p_id, dr_name, p_name, comment, fees, chamber_id).enqueue(new Callback<StatusMessage>() {
             @Override
             public void onResponse(@NonNull Call<StatusMessage> call, @NonNull Response<StatusMessage> response) {
                 if (response != null) {

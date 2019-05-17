@@ -1,12 +1,16 @@
 package com.mukul.finddoctor.Activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -14,12 +18,15 @@ import android.widget.Toast;
 import com.mukul.finddoctor.Data.Data;
 import com.mukul.finddoctor.Data.DataStore;
 import com.mukul.finddoctor.R;
+import com.mukul.finddoctor.Utils.MyProgressBar;
+import com.mukul.finddoctor.Utils.SessionManager;
 import com.mukul.finddoctor.adapter.TestListTypeAdapter;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.RecomentationModel;
+import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.TestList;
 
 import java.util.List;
@@ -29,9 +36,14 @@ import butterknife.ButterKnife;
 
 import static com.mukul.finddoctor.Data.Data.testList;
 
-public class VisitActivityDr extends AppCompatActivity implements ApiListener.TestDownloadListener {
+public class VisitActivityDr extends AppCompatActivity implements ApiListener.TestDownloadListener,
+        ApiListener.servePostListener {
     @BindView(R.id.tv_name)
     TextView tv_name;
+    @BindView(R.id.ed_commment)
+    EditText ed_commment;
+    @BindView(R.id.ed_fees)
+    EditText ed_fees;
     @BindView(R.id.tv_problems)
     TextView tv_problems;
     @BindView(R.id.tv_time)
@@ -40,13 +52,23 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
     Spinner spinnerStatus;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
+    String APPOINTMENT_ID,DR_ID,P_ID,DR_NAME,PATIENT_NAME,COMMENT,FEES,CHAMBER_ID;
+    SessionManager sessionManager;
+    Context context=this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visit_dr);
         ButterKnife.bind(this);
+        sessionManager=new SessionManager(this);
         AppointmentModel2 model = Data.drServingModel;
+        APPOINTMENT_ID=model.getId();
+        DR_ID=sessionManager.getUserId();
+        P_ID=model.getPatientId();
+        DR_NAME=model.getDrName();
+        PATIENT_NAME=model.getAppointmentFor();
+        CHAMBER_ID=model.getChamberId();
         setTitle("" + model.getId());
         tv_name.setText(model.getAppointmentFor());
         tv_problems.setText(model.getProblems());
@@ -82,7 +104,6 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
 
     @Override
     public void onTestDownloadSuccess(List<TestList> list) {
-        Toast.makeText(this, "" + list.size(), Toast.LENGTH_SHORT).show();
 
         TestListTypeAdapter mAdapter = new TestListTypeAdapter(list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
@@ -96,6 +117,29 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
     @Override
     public void onTestDownloadFailed(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+
+    }
+
+    public void submit(View view) {
+        FEES=ed_fees.getText().toString().trim();
+        COMMENT=ed_commment.getText().toString().trim();
+        MyProgressBar.with(VisitActivityDr.this);
+        Api.getInstance().servePost(APPOINTMENT_ID,DR_ID,P_ID,DR_NAME,PATIENT_NAME,COMMENT,FEES,CHAMBER_ID,this);
+
+    }
+
+    @Override
+    public void onServePostSuccess(StatusMessage response) {
+        MyProgressBar.dismiss();
+        Toast.makeText(context, response.getMessage(), Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this,DoctorHomeActivity.class));
+        finishAffinity();
+    }
+
+    @Override
+    public void onServePostFailed(String msg) {
+        MyProgressBar.dismiss();
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
     }
 }
