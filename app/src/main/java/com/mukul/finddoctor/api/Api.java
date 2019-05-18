@@ -17,6 +17,7 @@ import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestList;
 import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.TreatmentHistoryModel;
 import com.mukul.finddoctor.model.UserProfileResponse;
 import com.mukul.finddoctor.model.VideoCallModel;
 
@@ -394,6 +395,25 @@ public class Api {
             @Override
             public void onFailure(@NonNull Call<StatusResponse> call, @NonNull Throwable t) {
                 listener.onPppointmentChangeFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void patientTreatmentHistory(String patientid, final ApiListener.patientTreatmentHistoryListener listener) {
+
+        ApiClient.getApiInterface().treatmentHistoryByPatient(patientid).enqueue(new Callback<List<TreatmentHistoryModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<TreatmentHistoryModel>> call, @NonNull Response<List<TreatmentHistoryModel>> response) {
+                if (response != null) {
+                    listener.onpatientTreatmentHistorySearchSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<TreatmentHistoryModel>> call, @NonNull Throwable t) {
+                listener.onpatientTreatmentHistorySuccessFailed(t.getLocalizedMessage());
             }
         });
     }

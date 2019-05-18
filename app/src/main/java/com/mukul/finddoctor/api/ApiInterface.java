@@ -14,6 +14,7 @@ import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestList;
 import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.TreatmentHistoryModel;
 import com.mukul.finddoctor.model.UserProfileResponse;
 import com.mukul.finddoctor.model.VideoCallModel;
 
@@ -62,6 +63,10 @@ public interface ApiInterface {
                                            @Field("hospital_name") String hospital_name,
                                            @Field("last_education_degree") String last_education_degree,
                                            @Field("dr_name") String dr_name);
+    @FormUrlEncoded
+    @POST("getPatientTreatmentHistory.php")
+    Call<List<TreatmentHistoryModel>> treatmentHistoryByPatient(@Field("patient_id") String patient_id);
+
 
     @FormUrlEncoded
     @POST("changeOnlineStatus.php")

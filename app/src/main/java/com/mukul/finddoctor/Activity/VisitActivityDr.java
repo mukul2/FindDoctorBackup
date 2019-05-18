@@ -52,23 +52,23 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
     Spinner spinnerStatus;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
-    String APPOINTMENT_ID,DR_ID,P_ID,DR_NAME,PATIENT_NAME,COMMENT,FEES,CHAMBER_ID;
+    public static String APPOINTMENT_ID, DR_ID, P_ID, DR_NAME, PATIENT_NAME, COMMENT, FEES, CHAMBER_ID;
     SessionManager sessionManager;
-    Context context=this;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visit_dr);
         ButterKnife.bind(this);
-        sessionManager=new SessionManager(this);
+        sessionManager = new SessionManager(this);
         AppointmentModel2 model = Data.drServingModel;
-        APPOINTMENT_ID=model.getId();
-        DR_ID=sessionManager.getUserId();
-        P_ID=model.getPatientId();
-        DR_NAME=model.getDrName();
-        PATIENT_NAME=model.getAppointmentFor();
-        CHAMBER_ID=model.getChamberId();
+        APPOINTMENT_ID = model.getId();
+        DR_ID = sessionManager.getUserId();
+        P_ID = model.getPatientId();
+        DR_NAME = model.getDrName();
+        PATIENT_NAME = model.getAppointmentFor();
+        CHAMBER_ID = model.getChamberId();
         setTitle("" + model.getId());
         tv_name.setText(model.getAppointmentFor());
         tv_problems.setText(model.getProblems());
@@ -121,10 +121,10 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
     }
 
     public void submit(View view) {
-        FEES=ed_fees.getText().toString().trim();
-        COMMENT=ed_commment.getText().toString().trim();
+        FEES = ed_fees.getText().toString().trim();
+        COMMENT = ed_commment.getText().toString().trim();
         MyProgressBar.with(VisitActivityDr.this);
-        Api.getInstance().servePost(APPOINTMENT_ID,DR_ID,P_ID,DR_NAME,PATIENT_NAME,COMMENT,FEES,CHAMBER_ID,this);
+        Api.getInstance().servePost(APPOINTMENT_ID, DR_ID, P_ID, DR_NAME, PATIENT_NAME, COMMENT, FEES, CHAMBER_ID, this);
 
     }
 
@@ -132,7 +132,7 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
     public void onServePostSuccess(StatusMessage response) {
         MyProgressBar.dismiss();
         Toast.makeText(context, response.getMessage(), Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this,DoctorHomeActivity.class));
+        startActivity(new Intent(this, DoctorHomeActivity.class));
         finishAffinity();
     }
 
@@ -141,5 +141,9 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
         MyProgressBar.dismiss();
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
+    }
+
+    public void openHistoryActicivity(View view) {
+        startActivity(new Intent(this,HistoryActivity.class));
     }
 }

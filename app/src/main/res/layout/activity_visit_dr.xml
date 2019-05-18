@@ -11,6 +11,18 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
 >
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="View Treatment History"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:onClick="openHistoryActicivity"
+            android:layout_height="wrap_content"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@android:color/darker_gray"/>
 
         <LinearLayout
             android:layout_width="match_parent"

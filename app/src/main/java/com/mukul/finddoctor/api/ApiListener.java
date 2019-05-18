@@ -15,6 +15,7 @@ import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestList;
 import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.TreatmentHistoryModel;
 import com.mukul.finddoctor.model.UserProfileResponse;
 import com.mukul.finddoctor.model.VideoCallModel;
 
@@ -26,6 +27,10 @@ public class ApiListener {
     public interface doctorSearchListener {
         void onSearchSuccess(List<DoctorModel> list);
         void onSuccessFailed(String msg);
+    }
+    public interface patientTreatmentHistoryListener {
+        void onpatientTreatmentHistorySearchSuccess(List<TreatmentHistoryModel> list);
+        void onpatientTreatmentHistorySuccessFailed(String msg);
     }
     public interface servePostListener {
         void onServePostSuccess(StatusMessage response);
