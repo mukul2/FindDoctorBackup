@@ -142,7 +142,9 @@
         <activity
             android:name=".Activity.DrConfirmedActivity"
             android:theme="@style/NoTitleBar" />
-        <activity android:name=".Activity.VideoCallActivityDr"></activity>
+        <activity
+            android:theme="@style/NoTitleBar"
+            android:name=".Activity.VideoCallActivityDr"></activity>
     </application>
 
 </manifest>
