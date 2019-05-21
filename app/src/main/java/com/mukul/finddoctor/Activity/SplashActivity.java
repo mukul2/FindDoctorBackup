@@ -48,10 +48,10 @@ public class SplashActivity extends Activity {
 
                     {
                         if (sessionManager.getUserType().equals(TYPE_DOCTOR)){
-                            startActivity(new Intent(SplashActivity.this, DoctorHomeActivity.class));
+                            startActivity(new Intent(SplashActivity.this, DrNewHomeActivity.class));
                             finish();
                         }else   if (sessionManager.getUserType().equals(TYPE_PATIENT)){
-                            startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+                            startActivity(new Intent(SplashActivity.this, PatientNewHome.class));
                             finish();
                         }else {
                             startActivity(new Intent(SplashActivity.this, LoginActivity.class));

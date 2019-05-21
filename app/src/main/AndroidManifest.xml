@@ -24,8 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:parentActivityName=".Activity.HomeActivity"
-            android:name=".Activity.CallLogHistoryActivity"></activity>
+            android:name=".Activity.CallLogHistoryActivity"
+            android:parentActivityName=".Activity.HomeActivity" />
         <activity
             android:name=".Activity.CallReceiveActivity"
             android:theme="@style/NoTitleBar" />
@@ -112,6 +112,37 @@
             android:name=".Activity.HistoryActivity"
             android:label="History"
             android:parentActivityName=".Activity.HomeActivity" />
+        <activity
+            android:name=".Activity.PatientNewHome"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.AppointmentsActivityPatient"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.PatientPendingActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.PatientConfirmedActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.PatientTestRecomActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.VideoCallPatientActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.DrNewHomeActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.DrAllAppointmentsActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.DrPendingActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.DrConfirmedActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity android:name=".Activity.VideoCallActivityDr"></activity>
     </application>
 
 </manifest>

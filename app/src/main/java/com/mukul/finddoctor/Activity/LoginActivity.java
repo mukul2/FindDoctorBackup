@@ -73,10 +73,10 @@ public class LoginActivity extends AppCompatActivity implements ApiListener.Logi
           //  Toast.makeText(this, status.getId(), Toast.LENGTH_SHORT).show();
             if (status.getType().equals(DOCTOR)) {
                 startDownloadTestNames();
-                startActivity(new Intent(LoginActivity.this, DoctorHomeActivity.class));
+                startActivity(new Intent(LoginActivity.this, DrNewHomeActivity.class));
                 finishAffinity();
             }else {
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                startActivity(new Intent(LoginActivity.this, PatientNewHome.class));
                 finishAffinity();
 
             }

@@ -37,7 +37,8 @@ import static com.mukul.finddoctor.Data.lis.Pendinglistener;
  */
 
 
-public class PendingAppointmentAdapterDoctor extends RecyclerView.Adapter<PendingAppointmentAdapterDoctor.MyViewHolder> implements ApiListener.appointmentStateChangeListener,
+public class PendingAppointmentAdapterDoctor extends RecyclerView.Adapter<PendingAppointmentAdapterDoctor.MyViewHolder>
+        implements ApiListener.appointmentStateChangeListener,
         ApiListener.appoinetmentsDownloadListener {
     List<AppointmentModel> list = new ArrayList<>();
 
@@ -178,7 +179,7 @@ public class PendingAppointmentAdapterDoctor extends RecyclerView.Adapter<Pendin
                 notifyItemRemoved(triggeredItem);
                 notifyItemRangeChanged(triggeredItem, getItemCount());
             }
-            Api.getInstance().getAppointmentsByDoctor(USER_ID, this);
+           // Api.getInstance().getAppointmentsByDoctor(USER_ID, this);
 
         } else {
             MyDialog.getInstance().with((Activity) context)

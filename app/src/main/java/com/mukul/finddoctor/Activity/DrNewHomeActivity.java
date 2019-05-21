@@ -1,0 +1,178 @@
+package com.mukul.finddoctor.Activity;
+
+import android.content.Context;
+import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.mukul.finddoctor.Data.DataStore;
+import com.mukul.finddoctor.R;
+import com.mukul.finddoctor.Utils.SessionManager;
+import com.mukul.finddoctor.adapter.SearchAdapterDoctor;
+import com.mukul.finddoctor.api.Api;
+import com.mukul.finddoctor.api.ApiListener;
+import com.mukul.finddoctor.model.AppointmentModel2;
+import com.mukul.finddoctor.model.BasicInfoModel;
+import com.mukul.finddoctor.model.SpacialistModel;
+import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.testSelectedModel;
+
+import java.util.List;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static com.mukul.finddoctor.Data.Data.USER_ID;
+import static com.mukul.finddoctor.Data.Data.spacialist;
+
+public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener.basicInfoDownloadListener,
+        ApiListener.testNamesDownloadListener{
+    @BindView(R.id.ed_search)
+    EditText ed_search;
+    @BindView(R.id.searchDr_recycler)
+    RecyclerView searchDr_recycler;
+    SessionManager sessionManager;
+    Context context=this;
+    SearchAdapterDoctor mAdapter;
+    int count = 0;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_dr_new_home);
+        sessionManager = new SessionManager(this);
+        ButterKnife.bind(this);
+        USER_ID = sessionManager.getUserId();
+        init_search();
+        Api.getInstance().downloadBasicInfo(this);
+        Api.getInstance().downloadTestNames(this);
+    }
+    public static boolean isNumeric(String strNum) {
+        try {
+            double d = Double.parseDouble(strNum);
+        } catch (NumberFormatException | NullPointerException nfe) {
+            return false;
+        }
+        return true;
+    }
+    private void init_search() {
+        ed_search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                String id = "";
+                String key=ed_search.getText().toString().trim();
+                String patient_name="";
+                if (isNumeric(key)){
+                    id=key;
+                    patient_name="";
+
+                }else {
+                    id="";
+                    patient_name=key;
+
+                }
+
+                if ((id.trim().length()+patient_name.trim().length()) > 0 ) {
+                    //  Toast.makeText(context, ""+(id.trim().length()+patient_name.trim().length()), Toast.LENGTH_SHORT).show();
+                    Api.getInstance().searchAppointment(id, USER_ID, patient_name, new ApiListener.appointmentSearchListener() {
+                        @Override
+                        public void onAppointmentSearchSuccess(List<AppointmentModel2> data) {
+                            mAdapter = new SearchAdapterDoctor(data);
+                            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+                            searchDr_recycler.setLayoutManager(mLayoutManager);
+                            searchDr_recycler.setItemAnimator(new DefaultItemAnimator());
+                            //searchDr_recycler.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+
+                            searchDr_recycler.setAdapter(mAdapter);
+                        }
+
+                        @Override
+                        public void onAppointmentSearchFailed(String msg) {
+                            Toast.makeText(DrNewHomeActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
+                } else {
+                    // Toast.makeText(context, "clr list", Toast.LENGTH_SHORT).show();
+                    if (mAdapter==null){
+
+                    }else {
+                        mAdapter.clearAdapter();
+
+                    }
+                }
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+    }
+    @Override
+    public void onBasicInfoDownloadSuccess(BasicInfoModel data) {
+        count++;
+
+
+        spacialist.clear();
+        for (int i = 0; i < data.getSpacialist().size(); i++) {
+            spacialist.add(new SpacialistModel(data.getSpacialist().get(i), false));
+        }
+
+
+    }
+    @Override
+    public void ontestNamesDownloadSuccess(List<TestModel> data) {
+        DataStore.testModelList.clear();
+        //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
+        for (int i=0;i<data.size();i++){
+            DataStore.testModelList.add(new testSelectedModel(false,data.get(i)));
+        }
+    }
+
+    @Override
+    public void ontestNamesDownloadFailed(String msg) {
+
+    }
+    @Override
+    public void onBasicInfoDownloadFailed(String msg) {
+        count++;
+
+
+    }
+    public void appointmentsDr(View view) {
+        startActivity(new Intent(this,DrAllAppointmentsActivity.class));
+
+    }
+
+    public void editInfo(View view) {
+        startActivity(new Intent(this, DrPersonalInfoActivity.class));
+
+    }
+
+    public void chamber(View view) {
+        startActivity(new Intent(this, DrChamberListActivity.class));
+
+    }
+
+    public void openVideoCallDr(View view) {
+        startActivity(new Intent(this, VideoCallActivityDr.class));
+
+    }
+}

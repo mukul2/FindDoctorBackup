@@ -62,10 +62,11 @@ public class TreatmentHistoryAdapterDoctor extends RecyclerView.Adapter<Treatmen
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final TreatmentHistoryModel movie = list.get(position);
         context = holder.tv_dr_name.getContext();
-        holder.tv_dr_name.setText(movie.getDrName());
-        holder.tv_pa_name.setText(movie.getPatientName());
-        holder.tv_comment.setText(movie.getComment());
-        holder.tv_date.setText(DataStore.changeDateformate(movie.getPosted()));
+        holder.tv_dr_name.setText("Treatment By : "+movie.getDrName());
+       // holder.tv_pa_name.setText(movie.getPatientName());
+        holder.tv_pa_name.setVisibility(View.GONE);
+        holder.tv_comment.setText("Comment : "+movie.getComment());
+        holder.tv_date.setText("Treatment Date : "+DataStore.changeDateformate(movie.getPosted()));
 //        String time = "";
 //        for (int i = 0; i < movie.getDays().size(); i++) {
 //            time += movie.getDays().get(i).getDay() + "  " + movie.getDays().get(i).getTime() + "\n";
