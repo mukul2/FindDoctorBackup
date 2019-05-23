@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 
+import com.mukul.finddoctor.model.AppointmentModel;
 import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
@@ -82,6 +83,96 @@ public class Api {
             @Override
             public void onFailure(@NonNull Call<List<TestList>> call, @NonNull Throwable t) {
                 listener.onTestDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void downlaodDrPending(String id, final ApiListener.CommonappointmentDownloadListener listener) {
+
+        ApiClient.getApiInterface().dr_pending(id).enqueue(new Callback<List<AppointmentModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<AppointmentModel>> call, @NonNull Response<List<AppointmentModel>> response) {
+                if (response != null) {
+                    listener.onAppointmentDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<AppointmentModel>> call, @NonNull Throwable t) {
+                listener.onAppointmentDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void downlaodDrConfirmed(String id, final ApiListener.CommonappointmentDownloadListener listener) {
+
+        ApiClient.getApiInterface().dr_confirmed(id).enqueue(new Callback<List<AppointmentModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<AppointmentModel>> call, @NonNull Response<List<AppointmentModel>> response) {
+                if (response != null) {
+                    listener.onAppointmentDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<AppointmentModel>> call, @NonNull Throwable t) {
+                listener.onAppointmentDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void downlaodPaConfirmed(String id, final ApiListener.CommonappointmentDownloadListener listener) {
+
+        ApiClient.getApiInterface().getPatientAllConfirmed(id).enqueue(new Callback<List<AppointmentModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<AppointmentModel>> call, @NonNull Response<List<AppointmentModel>> response) {
+                if (response != null) {
+                    listener.onAppointmentDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<AppointmentModel>> call, @NonNull Throwable t) {
+                listener.onAppointmentDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void downlaodPaPending(String id, final ApiListener.CommonappointmentDownloadListener listener) {
+
+        ApiClient.getApiInterface().getPatientAllPending(id).enqueue(new Callback<List<AppointmentModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<AppointmentModel>> call, @NonNull Response<List<AppointmentModel>> response) {
+                if (response != null) {
+                    listener.onAppointmentDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<AppointmentModel>> call, @NonNull Throwable t) {
+                listener.onAppointmentDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+ public void downlaodPaRecomendation(String id, final ApiListener.DrRecomentationDownloadListener listener) {
+
+        ApiClient.getApiInterface().getpatientRecomentation(id).enqueue(new Callback<List<RecomentationModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<RecomentationModel>> call, @NonNull Response<List<RecomentationModel>> response) {
+                if (response != null) {
+                    listener.onRecomendationDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<RecomentationModel>> call, @NonNull Throwable t) {
+                listener.onRecomendationFailed(t.getLocalizedMessage());
             }
         });
     }

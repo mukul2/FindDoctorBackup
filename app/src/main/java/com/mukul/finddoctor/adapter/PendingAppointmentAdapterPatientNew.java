@@ -28,7 +28,7 @@ public class PendingAppointmentAdapterPatientNew extends RecyclerView.Adapter<Pe
     Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails,tv_serial;
+        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails,tv_serial,tv_ref;
 
 
         public MyViewHolder(View view) {
@@ -39,6 +39,7 @@ public class PendingAppointmentAdapterPatientNew extends RecyclerView.Adapter<Pe
             tv_date = (TextView) view.findViewById(R.id.tv_date);
 
             tv_viewDetails = (TextView) view.findViewById(R.id.tv_viewDetails);
+            tv_ref = (TextView) view.findViewById(R.id.tv_ref);
 
         }
     }
@@ -62,6 +63,7 @@ public class PendingAppointmentAdapterPatientNew extends RecyclerView.Adapter<Pe
         final AppointmentModel movie = list.get(position);
         context = holder.tv_name.getContext();
         holder.tv_name.setText(movie.getDrName());
+        holder.tv_ref.setText(movie.getAppointment_id());
         holder.tv_address.setText(movie.getAddress());
         holder.tv_appointmentfor.setText(movie.getAppointmentFor());
         holder.tv_date.setText(movie.getDate());

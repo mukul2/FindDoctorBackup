@@ -226,4 +226,8 @@ public class SendBookingActivity extends AppCompatActivity implements ApiListene
                 .showMsgOnly();
 
     }
+
+    public void back(View view) {
+        onBackPressed();
+    }
 }

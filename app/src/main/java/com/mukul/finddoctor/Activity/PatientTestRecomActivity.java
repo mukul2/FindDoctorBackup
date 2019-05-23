@@ -11,11 +11,18 @@ import android.view.View;
 
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.adapter.RecomendedTestAppointmentAdapterPatient;
+import com.mukul.finddoctor.api.Api;
+import com.mukul.finddoctor.api.ApiListener;
+import com.mukul.finddoctor.model.RecomentationModel;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PatientTestRecomActivity extends AppCompatActivity {
+import static com.mukul.finddoctor.Data.DataStore.USER_ID;
+
+public class PatientTestRecomActivity extends AppCompatActivity implements ApiListener.DrRecomentationDownloadListener{
 
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
@@ -28,15 +35,27 @@ public class PatientTestRecomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_test_recom);
         ButterKnife.bind(this);
-        RecomendedTestAppointmentAdapterPatient mAdapter = new RecomendedTestAppointmentAdapterPatient(AppointmentsActivityPatient.RECOMENDED_LIST);
+        Api.getInstance().downlaodPaRecomendation(USER_ID,this);
+
+    }
+
+    public void Back(View view) {
+        onBackPressed();
+    }
+
+    @Override
+    public void onRecomendationDownloadSuccess(List<RecomentationModel> list) {
+        RecomendedTestAppointmentAdapterPatient mAdapter = new RecomendedTestAppointmentAdapterPatient(list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         recycler_view.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
         recycler_view.setAdapter(mAdapter);
+
     }
 
-    public void Back(View view) {
-        onBackPressed();
+    @Override
+    public void onRecomendationFailed(String msg) {
+
     }
 }

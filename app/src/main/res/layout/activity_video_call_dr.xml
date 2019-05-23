@@ -43,6 +43,14 @@
                 />
 
         </LinearLayout>
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignParentRight="true"
+            android:id="@+id/switch_online"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:layout_height="wrap_content" />
 
 
     </RelativeLayout>
@@ -55,32 +63,7 @@
         android:orientation="vertical"
         android:paddingTop="10dp"
         android:layout_height="wrap_content">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_marginBottom="5dp"
-            android:layout_height="40dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="Available for Video call"
-                android:textStyle="bold"
-                android:layout_centerVertical="true"
-                android:paddingLeft="20dp"
-                android:layout_height="wrap_content"
-                />
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_gravity="center"
-                android:layout_alignParentRight="true"
-                android:id="@+id/switch_online"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="20dp"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:layout_marginBottom="5dp"
-            android:background="#858585"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"

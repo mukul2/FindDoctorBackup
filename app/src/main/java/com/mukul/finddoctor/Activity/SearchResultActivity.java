@@ -7,6 +7,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.adapter.SearchResultAdapter;
@@ -39,5 +40,9 @@ public class SearchResultActivity extends AppCompatActivity {
         }
 
         return(super.onOptionsItemSelected(item));
+    }
+
+    public void back(View view) {
+        onBackPressed();
     }
 }

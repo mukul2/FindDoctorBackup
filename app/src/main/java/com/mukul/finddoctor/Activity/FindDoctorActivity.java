@@ -222,4 +222,8 @@ public class FindDoctorActivity extends AppCompatActivity implements ApiListener
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
     }
+
+    public void back(View view) {
+        onBackPressed();
+    }
 }

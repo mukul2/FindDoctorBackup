@@ -60,7 +60,6 @@ public class AdddChamberActivity extends AppCompatActivity implements ApiListene
         progressDialog=new ProgressDialog(this);
         init_specialist_autoComplete();
         init_days_();
-        Toast.makeText(this, "okok", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -132,5 +131,9 @@ public class AdddChamberActivity extends AppCompatActivity implements ApiListene
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+    }
+
+    public void back(View view) {
+        onBackPressed();
     }
 }

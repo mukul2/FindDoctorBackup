@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,14 +26,15 @@ import java.util.List;
 
 
 public class SearchAdapterDoctor extends RecyclerView.Adapter<SearchAdapterDoctor.MyViewHolder> {
-    List<AppointmentModel2>list=new ArrayList<>();
+    List<AppointmentModel2> list = new ArrayList<>();
 
     Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, tv_hospitalName, tv_time, tv_lastDegree, tv_epacialist,tv_address,tv_serial;
+        public TextView title, tv_hospitalName, tv_time, tv_lastDegree, tv_epacialist, tv_address, tv_serial;
         ImageView circleImageView;
         RelativeLayout relative_container;
+        LinearLayout lin1, lin2, lin3;
 
 
         public MyViewHolder(View view) {
@@ -40,10 +42,15 @@ public class SearchAdapterDoctor extends RecyclerView.Adapter<SearchAdapterDocto
             title = (TextView) view.findViewById(R.id.tv_name);
             tv_serial = (TextView) view.findViewById(R.id.tv_serial);
 
+            lin1 = (LinearLayout) view.findViewById(R.id.lin1);
+            lin2 = (LinearLayout) view.findViewById(R.id.lin2);
+            lin3 = (LinearLayout) view.findViewById(R.id.lin3);
+
 
         }
     }
-    public  void clearAdapter(){
+
+    public void clearAdapter() {
         list.clear();
         notifyDataSetChanged();
 
@@ -51,8 +58,8 @@ public class SearchAdapterDoctor extends RecyclerView.Adapter<SearchAdapterDocto
     }
 
 
-    public SearchAdapterDoctor(List<AppointmentModel2> lists ) {
-        this.list=lists;
+    public SearchAdapterDoctor(List<AppointmentModel2> lists) {
+        this.list = lists;
 
     }
 
@@ -68,16 +75,26 @@ public class SearchAdapterDoctor extends RecyclerView.Adapter<SearchAdapterDocto
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final AppointmentModel2 movie = list.get(position);
         context = holder.title.getContext();
-        holder.title.setText("Name : "+movie.getAppointmentFor());
-        holder.tv_serial.setText("Serial  : "+movie.getId());
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Data.drServingModel=movie;
-                context.startActivity(new Intent(context, VisitActivityDr.class));
+        if (!movie.getId().equals("0")) {
+            holder.lin1.setVisibility(View.VISIBLE);
+            holder.lin2.setVisibility(View.VISIBLE);
+            holder.lin3.setVisibility(View.GONE);
+            holder.title.setText(movie.getAppointmentFor());
+            holder.tv_serial.setText(movie.getId());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Data.drServingModel = movie;
+                    context.startActivity(new Intent(context, VisitActivityDr.class));
 
-            }
-        });
+                }
+            });
+        } else {
+            holder.lin1.setVisibility(View.GONE);
+            holder.lin2.setVisibility(View.GONE);
+            holder.lin3.setVisibility(View.VISIBLE);
+
+        }
 
 //        String time = "";
 //        for (int i = 0; i < movie.getDays().size(); i++) {
@@ -86,7 +103,6 @@ public class SearchAdapterDoctor extends RecyclerView.Adapter<SearchAdapterDocto
 //        holder.tv_time.setText(time);
 
     }
-
 
 
     @Override

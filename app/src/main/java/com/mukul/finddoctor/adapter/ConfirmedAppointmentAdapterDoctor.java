@@ -27,7 +27,7 @@ public class ConfirmedAppointmentAdapterDoctor extends RecyclerView.Adapter<Conf
     Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_problem, tv_date;
+        public TextView tv_name, tv_problem, tv_date,tv_serial;
         ImageView circleImageView;
         RelativeLayout relative_container;
 
@@ -37,6 +37,7 @@ public class ConfirmedAppointmentAdapterDoctor extends RecyclerView.Adapter<Conf
             tv_name = (TextView) view.findViewById(R.id.tv_name);
             tv_problem = (TextView) view.findViewById(R.id.tv_problem);
             tv_date = (TextView) view.findViewById(R.id.tv_date);
+            tv_serial = (TextView) view.findViewById(R.id.tv_serial);
 
 
 
@@ -62,6 +63,7 @@ public class ConfirmedAppointmentAdapterDoctor extends RecyclerView.Adapter<Conf
         final AppointmentModel movie = list.get(position);
         context = holder.tv_name.getContext();
         holder.tv_name.setText(movie.getAppointmentFor());
+        holder.tv_serial.setText(movie.getAppointment_id());
         holder.tv_problem.setText(movie.getProblems());
         holder.tv_date.setText(DataStore.changeDateformate(movie.getDate()));
 

@@ -27,6 +27,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mukul.finddoctor.Data.DataStore.USER_ID;
+
 public class PatientNewHome extends AppCompatActivity {
 
     @BindView(R.id.tv_name)
@@ -43,6 +45,7 @@ public class PatientNewHome extends AppCompatActivity {
         ButterKnife.bind(this);
         sessionManager = new SessionManager(this);
         tv_name.setText(sessionManager.getUserName());
+        USER_ID=sessionManager.getUserId();
 
     }
 

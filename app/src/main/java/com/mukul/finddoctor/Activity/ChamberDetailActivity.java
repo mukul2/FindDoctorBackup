@@ -63,4 +63,8 @@ public class ChamberDetailActivity extends AppCompatActivity {
     public void openBookingActivity(View view) {
         startActivity(new Intent(this,SendBookingActivity.class));
     }
+
+    public void back(View view) {
+        onBackPressed();
+    }
 }

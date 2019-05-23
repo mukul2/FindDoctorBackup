@@ -132,8 +132,8 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
     public void onServePostSuccess(StatusMessage response) {
         MyProgressBar.dismiss();
         Toast.makeText(context, response.getMessage(), Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, DoctorHomeActivity.class));
-        finishAffinity();
+        onBackPressed();
+
     }
 
     @Override
@@ -145,5 +145,9 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
 
     public void openHistoryActicivity(View view) {
         startActivity(new Intent(this,HistoryActivity.class));
+    }
+
+    public void back(View view) {
+        onBackPressed();
     }
 }

@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import static com.mukul.finddoctor.Data.Data.USER_ID;
 import static com.mukul.finddoctor.Data.Data.appointmentModel;
 
 /**

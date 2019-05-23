@@ -10,11 +10,18 @@ import android.view.View;
 
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.adapter.ConfirmedAppointmentAdapterPatientNew;
+import com.mukul.finddoctor.api.Api;
+import com.mukul.finddoctor.api.ApiListener;
+import com.mukul.finddoctor.model.AppointmentModel;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PatientConfirmedActivity extends AppCompatActivity {
+import static com.mukul.finddoctor.Data.DataStore.USER_ID;
+
+public class PatientConfirmedActivity extends AppCompatActivity implements ApiListener.CommonappointmentDownloadListener{
     Context context=this;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
@@ -24,15 +31,28 @@ public class PatientConfirmedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_confirmed);
         ButterKnife.bind(this);
-        ConfirmedAppointmentAdapterPatientNew mAdapter = new ConfirmedAppointmentAdapterPatientNew(AppointmentsActivityPatient.CONFIRMED_LIST);
+        Api.getInstance().downlaodPaConfirmed(USER_ID,this);
+
+
+    }
+
+    public void Back(View view) {
+        onBackPressed();
+    }
+
+    @Override
+    public void onAppointmentDownloadSuccess(List<AppointmentModel> list) {
+        ConfirmedAppointmentAdapterPatientNew mAdapter = new ConfirmedAppointmentAdapterPatientNew(list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         recycler_view.setAdapter(mAdapter);
+
     }
 
-    public void Back(View view) {
-        onBackPressed();
+    @Override
+    public void onAppointmentDownloadFailed(String msg) {
+
     }
 }

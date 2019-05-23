@@ -102,4 +102,8 @@ public class RecomendationDetailActivity extends AppCompatActivity implements Ap
         onBackPressed();
 
     }
+
+    public void back(View view) {
+        onBackPressed();
+    }
 }

@@ -99,4 +99,8 @@ public class DrPersonalInfoActivity extends AppCompatActivity implements ApiList
 
 
     }
+
+    public void back(View view) {
+        onBackPressed();
+    }
 }

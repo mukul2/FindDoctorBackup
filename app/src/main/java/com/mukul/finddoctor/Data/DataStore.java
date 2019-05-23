@@ -18,6 +18,8 @@ import java.util.Map;
  */
 
 public class DataStore {
+    public static String USER_ID;
+
     public static String convertToWeekDay(String day) {
         Map<String, String> days = new HashMap<>();
         days.put("6", "Sat");

@@ -1,6 +1,7 @@
 package com.mukul.finddoctor.api;
 
 
+import com.mukul.finddoctor.model.AppointmentModel;
 import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
@@ -43,6 +44,16 @@ public interface ApiInterface {
                                           @Field("specialist") String specialist,
                                           @Field("city") String city,
                                           @Field("day") String day);
+
+    @FormUrlEncoded
+    @POST("patient_all_confirmed.php")
+    Call<List<AppointmentModel>> getPatientAllConfirmed(@Field("patient_id") String patient_id);
+    @FormUrlEncoded
+    @POST("patient_all_pending.php")
+    Call<List<AppointmentModel>> getPatientAllPending(@Field("patient_id") String patient_id);
+    @FormUrlEncoded
+    @POST("patient_recomendation_list.php")
+    Call<List<RecomentationModel>> getpatientRecomentation(@Field("patient_id") String patient_id);
     @FormUrlEncoded
     @POST("post_serve.php")
     Call<StatusMessage> postServeInfo(@Field("appointment_id") String appointment_id,
@@ -105,6 +116,13 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("getMyAppointmentsDoctor.php")
     Call<AppointmentResponse> myAppointmentsbyDoctor(@Field("dr_id") String dr_id);
+    @FormUrlEncoded
+    @POST("dr_all_pending.php")
+    Call<List<AppointmentModel>> dr_pending(@Field("dr_id") String dr_id);
+
+    @FormUrlEncoded
+    @POST("dr_all_confirmed.php")
+    Call<List<AppointmentModel>> dr_confirmed(@Field("dr_id") String dr_id);
 
     @FormUrlEncoded
     @POST("getMyAppointments.php")

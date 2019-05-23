@@ -57,4 +57,8 @@ public class DrChamberListActivity extends AppCompatActivity implements ApiListe
     public void addNewChamber(View view) {
         startActivity(new Intent(this,AdddChamberActivity.class));
     }
+
+    public void back(View view) {
+        onBackPressed();
+    }
 }

@@ -63,8 +63,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mukul.finddoctor.Data.Data.USER_ID;
 import static com.mukul.finddoctor.Data.Data.spacialist;
+import static com.mukul.finddoctor.Data.DataStore.USER_ID;
 import static com.mukul.finddoctor.Data.lis.Confirmedlistener;
 import static com.mukul.finddoctor.Data.lis.Pendinglistener;
 

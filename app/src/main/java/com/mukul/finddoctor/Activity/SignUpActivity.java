@@ -183,10 +183,10 @@ ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener{
 
             if (type.equals(DOCTOR_)) {
                 startDownloadTestNames();
-                startActivity(new Intent(SignUpActivity.this, DoctorHomeActivity.class));
+                startActivity(new Intent(SignUpActivity.this, DrNewHomeActivity.class));
                 finishAffinity();
             }else {
-                startActivity(new Intent(SignUpActivity.this, HomeActivity.class));
+                startActivity(new Intent(SignUpActivity.this, PatientNewHome.class));
                 finishAffinity();
 
             }
@@ -247,5 +247,9 @@ ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener{
     @Override
     public void ontestNamesDownloadFailed(String msg) {
 
+    }
+
+    public void back(View view) {
+        onBackPressed();
     }
 }

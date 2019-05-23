@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.adapter.ConfirmedAppointmentAdapterDoctor;
@@ -47,5 +48,9 @@ public class HistoryActivity extends AppCompatActivity implements ApiListener.pa
     @Override
     public void onpatientTreatmentHistorySuccessFailed(String msg) {
 
+    }
+
+    public void back(View view) {
+        onBackPressed();
     }
 }

@@ -32,8 +32,8 @@ public class DrAllAppointmentsActivity extends AppCompatActivity implements ApiL
         progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Please wait");
         progressDialog.setCancelable(false);
-        progressDialog.show();
-        Api.getInstance().getAppointmentsByDoctor(sessionManager.getUserId(), this);
+       // progressDialog.show();
+        //Api.getInstance().getAppointmentsByDoctor(sessionManager.getUserId(), this);
 
     }
 

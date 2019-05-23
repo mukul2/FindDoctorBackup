@@ -10,11 +10,18 @@ import android.view.View;
 
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.adapter.PendingAppointmentAdapterPatientNew;
+import com.mukul.finddoctor.api.Api;
+import com.mukul.finddoctor.api.ApiListener;
+import com.mukul.finddoctor.model.AppointmentModel;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PatientPendingActivity extends AppCompatActivity {
+import static com.mukul.finddoctor.Data.DataStore.USER_ID;
+
+public class PatientPendingActivity extends AppCompatActivity implements ApiListener.CommonappointmentDownloadListener{
     Context context=this;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
@@ -24,15 +31,27 @@ public class PatientPendingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_pending);
         ButterKnife.bind(this);
-        PendingAppointmentAdapterPatientNew mAdapter = new PendingAppointmentAdapterPatientNew(AppointmentsActivityPatient.PENDING_LIST);
+        Api.getInstance().downlaodPaPending(USER_ID,this);
+
+    }
+
+    public void Back(View view) {
+        onBackPressed();
+    }
+
+    @Override
+    public void onAppointmentDownloadSuccess(List<AppointmentModel> list) {
+        PendingAppointmentAdapterPatientNew mAdapter = new PendingAppointmentAdapterPatientNew(list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         recycler_view.setAdapter(mAdapter);
+
     }
 
-    public void Back(View view) {
-        onBackPressed();
+    @Override
+    public void onAppointmentDownloadFailed(String msg) {
+
     }
 }

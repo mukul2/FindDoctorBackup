@@ -27,7 +27,6 @@ import com.mukul.finddoctor.widgets.MyDialogList;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.mukul.finddoctor.Data.Data.USER_ID;
 import static com.mukul.finddoctor.Data.DataStore.testModelList;
 import static com.mukul.finddoctor.Data.lis.Confirmedlistener;
 import static com.mukul.finddoctor.Data.lis.Pendinglistener;
@@ -63,7 +62,7 @@ public class PendingAppointmentAdapterDoctor extends RecyclerView.Adapter<Pendin
         public TextView tv_name, tv_problem, tv_date;
         ImageView circleImageView;
         RelativeLayout relative_container;
-        TextView cardPrescribeTest;
+        TextView cardPrescribeTest,tv_serial;
 
 
         public MyViewHolder(View view) {
@@ -72,6 +71,7 @@ public class PendingAppointmentAdapterDoctor extends RecyclerView.Adapter<Pendin
             tv_problem = (TextView) view.findViewById(R.id.tv_problem);
             tv_date = (TextView) view.findViewById(R.id.tv_date);
             cardPrescribeTest = (TextView) view.findViewById(R.id.cardPrescribeTest);
+            tv_serial = (TextView) view.findViewById(R.id.tv_serial);
 
 
         }
@@ -96,6 +96,7 @@ public class PendingAppointmentAdapterDoctor extends RecyclerView.Adapter<Pendin
         final AppointmentModel movie = list.get(position);
         context = holder.tv_name.getContext();
         holder.tv_name.setText(movie.getAppointmentFor());
+        holder.tv_serial.setText(movie.getAppointment_id());
         holder.tv_problem.setText(movie.getProblems());
         holder.tv_date.setText(movie.getDate());
 

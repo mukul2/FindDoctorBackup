@@ -28,6 +28,14 @@ public class ApiListener {
         void onSearchSuccess(List<DoctorModel> list);
         void onSuccessFailed(String msg);
     }
+    public interface CommonappointmentDownloadListener {
+        void onAppointmentDownloadSuccess(List<AppointmentModel> list);
+        void onAppointmentDownloadFailed(String msg);
+    }
+    public interface DrRecomentationDownloadListener {
+        void onRecomendationDownloadSuccess(List<RecomentationModel> list);
+        void onRecomendationFailed(String msg);
+    }
     public interface patientTreatmentHistoryListener {
         void onpatientTreatmentHistorySearchSuccess(List<TreatmentHistoryModel> list);
         void onpatientTreatmentHistorySuccessFailed(String msg);

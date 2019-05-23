@@ -35,8 +35,8 @@ public class AppointmentsActivityPatient extends AppCompatActivity implements Ap
         progressDialog=new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Please wait");
-        progressDialog.show();
-        Api.getInstance().getAppointmentsBypatient(sessionManager.getUserId(), this);
+       // progressDialog.show();
+        //Api.getInstance().getAppointmentsBypatient(sessionManager.getUserId(), this);
 
     }
 

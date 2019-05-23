@@ -3,6 +3,7 @@ package com.mukul.finddoctor.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.mukul.finddoctor.R;
@@ -45,5 +46,9 @@ public class ConfirmedAppointmentDetailActivity extends AppCompatActivity {
         }
 
         return (super.onOptionsItemSelected(item));
+    }
+
+    public void back(View view) {
+        onBackPressed();
     }
 }

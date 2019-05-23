@@ -26,24 +26,28 @@ import com.mukul.finddoctor.model.SpacialistModel;
 import com.mukul.finddoctor.model.TestModel;
 import com.mukul.finddoctor.model.testSelectedModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mukul.finddoctor.Data.Data.USER_ID;
 import static com.mukul.finddoctor.Data.Data.spacialist;
+import static com.mukul.finddoctor.Data.DataStore.USER_ID;
 
-public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener.basicInfoDownloadListener,
-        ApiListener.testNamesDownloadListener{
+public class DrNewHomeActivity extends AppCompatActivity implements ApiListener.basicInfoDownloadListener,
+        ApiListener.testNamesDownloadListener {
     @BindView(R.id.ed_search)
     EditText ed_search;
+    @BindView(R.id.divider)
+    View divider;
     @BindView(R.id.searchDr_recycler)
     RecyclerView searchDr_recycler;
     SessionManager sessionManager;
-    Context context=this;
+    Context context = this;
     SearchAdapterDoctor mAdapter;
     int count = 0;
+    List<AppointmentModel2> datalist=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +56,22 @@ public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener
         sessionManager = new SessionManager(this);
         ButterKnife.bind(this);
         USER_ID = sessionManager.getUserId();
+        initAdapter();
         init_search();
         Api.getInstance().downloadBasicInfo(this);
         Api.getInstance().downloadTestNames(this);
     }
+
+    private void initAdapter() {
+        mAdapter = new SearchAdapterDoctor(datalist);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+        searchDr_recycler.setLayoutManager(mLayoutManager);
+        searchDr_recycler.setItemAnimator(new DefaultItemAnimator());
+        //searchDr_recycler.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+
+        searchDr_recycler.setAdapter(mAdapter);
+    }
+
     public static boolean isNumeric(String strNum) {
         try {
             double d = Double.parseDouble(strNum);
@@ -64,6 +80,7 @@ public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener
         }
         return true;
     }
+
     private void init_search() {
         ed_search.addTextChangedListener(new TextWatcher() {
             @Override
@@ -74,30 +91,41 @@ public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 String id = "";
-                String key=ed_search.getText().toString().trim();
-                String patient_name="";
-                if (isNumeric(key)){
-                    id=key;
-                    patient_name="";
+                String key = ed_search.getText().toString().trim();
+                String patient_name = "";
+                if (isNumeric(key)) {
+                    id = key;
+                    patient_name = "";
 
-                }else {
-                    id="";
-                    patient_name=key;
+                } else {
+                    id = "";
+                    patient_name = key;
 
                 }
 
-                if ((id.trim().length()+patient_name.trim().length()) > 0 ) {
+                if ((id.trim().length() + patient_name.trim().length()) > 0) {
+                    searchDr_recycler.setVisibility(View.VISIBLE);
+                    divider.setVisibility(View.VISIBLE);
+
+
                     //  Toast.makeText(context, ""+(id.trim().length()+patient_name.trim().length()), Toast.LENGTH_SHORT).show();
                     Api.getInstance().searchAppointment(id, USER_ID, patient_name, new ApiListener.appointmentSearchListener() {
                         @Override
                         public void onAppointmentSearchSuccess(List<AppointmentModel2> data) {
-                            mAdapter = new SearchAdapterDoctor(data);
-                            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
-                            searchDr_recycler.setLayoutManager(mLayoutManager);
-                            searchDr_recycler.setItemAnimator(new DefaultItemAnimator());
-                            //searchDr_recycler.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+                            datalist.clear();
+                            if (data!=null && data.size()>0){
+                                datalist.addAll(data);
+                                mAdapter.notifyDataSetChanged();
+                            }else {
+                                AppointmentModel2 model2=new AppointmentModel2();
+                                model2.setId("0");
+                                datalist.add(model2);
+                                mAdapter.notifyDataSetChanged();
 
-                            searchDr_recycler.setAdapter(mAdapter);
+
+                            }
+
+
                         }
 
                         @Override
@@ -107,10 +135,13 @@ public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener
                         }
                     });
                 } else {
-                    // Toast.makeText(context, "clr list", Toast.LENGTH_SHORT).show();
-                    if (mAdapter==null){
+                    searchDr_recycler.setVisibility(View.GONE);
+                    divider.setVisibility(View.GONE);
 
-                    }else {
+                    // Toast.makeText(context, "clr list", Toast.LENGTH_SHORT).show();
+                    if (mAdapter == null) {
+
+                    } else {
                         mAdapter.clearAdapter();
 
                     }
@@ -125,6 +156,7 @@ public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener
             }
         });
     }
+
     @Override
     public void onBasicInfoDownloadSuccess(BasicInfoModel data) {
         count++;
@@ -137,12 +169,13 @@ public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener
 
 
     }
+
     @Override
     public void ontestNamesDownloadSuccess(List<TestModel> data) {
         DataStore.testModelList.clear();
         //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
-        for (int i=0;i<data.size();i++){
-            DataStore.testModelList.add(new testSelectedModel(false,data.get(i)));
+        for (int i = 0; i < data.size(); i++) {
+            DataStore.testModelList.add(new testSelectedModel(false, data.get(i)));
         }
     }
 
@@ -150,14 +183,16 @@ public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener
     public void ontestNamesDownloadFailed(String msg) {
 
     }
+
     @Override
     public void onBasicInfoDownloadFailed(String msg) {
         count++;
 
 
     }
+
     public void appointmentsDr(View view) {
-        startActivity(new Intent(this,DrAllAppointmentsActivity.class));
+        startActivity(new Intent(this, DrAllAppointmentsActivity.class));
 
     }
 
@@ -174,5 +209,11 @@ public class DrNewHomeActivity extends AppCompatActivity implements  ApiListener
     public void openVideoCallDr(View view) {
         startActivity(new Intent(this, VideoCallActivityDr.class));
 
+    }
+
+    public void logout(View view) {
+        sessionManager.setLoggedIn(false);
+        startActivity(new Intent(this, LoginActivity.class));
+        finishAffinity();
     }
 }
