@@ -14,6 +14,7 @@ import com.mukul.finddoctor.Utils.MyDialog;
 import com.mukul.finddoctor.Utils.SessionManager;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
+import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.LoginResponse;
 import com.mukul.finddoctor.model.TestModel;
 import com.mukul.finddoctor.model.testSelectedModel;
@@ -107,11 +108,11 @@ public class LoginActivity extends AppCompatActivity implements ApiListener.Logi
     }
 
     @Override
-    public void ontestNamesDownloadSuccess(List<TestModel> data) {
+    public void ontestNamesDownloadSuccess(BasicByDrResponse data) {
         DataStore.testModelList.clear();
      //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
-        for (int i=0;i<data.size();i++){
-            DataStore.testModelList.add(new testSelectedModel(false,data.get(i)));
+        for (int i=0;i<data.getTestNames().size();i++){
+            DataStore.testModelList.add(new testSelectedModel(false,data.getTestNames().get(i)));
         }
     }
 

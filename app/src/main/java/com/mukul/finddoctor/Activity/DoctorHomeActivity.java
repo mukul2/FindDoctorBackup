@@ -70,8 +70,7 @@ import static com.mukul.finddoctor.Data.lis.Pendinglistener;
 
 public class DoctorHomeActivity extends AppCompatActivity implements ApiListener.appoinetmentsDownloadListener,
         ApiListener.basicInfoDownloadListener,
-        SwipeRefreshLayout.OnRefreshListener,
-        ApiListener.testNamesDownloadListener{
+        SwipeRefreshLayout.OnRefreshListener{
     TabLayout tabLayout;
     ViewPager viewPager;
     CustomDrawerButton customDrawerButton;
@@ -206,19 +205,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements ApiListener
 
 
     }
-    @Override
-    public void ontestNamesDownloadSuccess(List<TestModel> data) {
-        DataStore.testModelList.clear();
-        //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
-        for (int i=0;i<data.size();i++){
-            DataStore.testModelList.add(new testSelectedModel(false,data.get(i)));
-        }
-    }
 
-    @Override
-    public void ontestNamesDownloadFailed(String msg) {
-
-    }
     @Override
     public void onBasicInfoDownloadFailed(String msg) {
         count++;
@@ -292,7 +279,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements ApiListener
         count = 0;
         Api.getInstance().getAppointmentsByDoctor(sessionManager.getUserId(), this);
         Api.getInstance().downloadBasicInfo(this);
-        Api.getInstance().downloadTestNames(this);
+       // Api.getInstance().downloadTestNames(this);
     }
 
 

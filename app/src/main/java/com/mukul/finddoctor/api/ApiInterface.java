@@ -4,6 +4,7 @@ package com.mukul.finddoctor.api;
 import com.mukul.finddoctor.model.AppointmentModel;
 import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
+import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
@@ -48,6 +49,19 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("patient_all_confirmed.php")
     Call<List<AppointmentModel>> getPatientAllConfirmed(@Field("patient_id") String patient_id);
+
+    @FormUrlEncoded
+    @POST("delete_service_by_dr.php")
+    Call<StatusMessage> delete_service_by_dr(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("get_dr_services.php")
+    Call<StatusMessage> get_my_services_by_dr(@Field("dr_id") String dr_id);
+
+    @FormUrlEncoded
+    @POST("post_dr_service_list.php")
+    Call<StatusMessage> post_dr_service_list(@Field("dr_id") String dr_id,@Field("service_list_string") String service_list_string);
+
     @FormUrlEncoded
     @POST("patient_all_pending.php")
     Call<List<AppointmentModel>> getPatientAllPending(@Field("patient_id") String patient_id);
@@ -137,7 +151,7 @@ public interface ApiInterface {
     Call<BasicInfoModel> getBasicInfo();
 
     @GET("getAllTestNames.php")
-    Call<List<TestModel>> getTestNames();
+    Call<BasicByDrResponse> getTestNames();
 
 
     @FormUrlEncoded

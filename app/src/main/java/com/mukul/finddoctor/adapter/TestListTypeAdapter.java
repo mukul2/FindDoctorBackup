@@ -12,6 +12,7 @@ import com.mukul.finddoctor.Data.DataStore;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.model.Day;
 import com.mukul.finddoctor.model.TestList;
+import com.mukul.finddoctor.model.TestName;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +27,7 @@ import static com.mukul.finddoctor.Data.Data.singleDrModel;
 public class TestListTypeAdapter extends RecyclerView.Adapter<TestListTypeAdapter.MyViewHolder> {
 
     Context context;
-    List<TestList>testLists=new ArrayList<>();
+    List<TestName>testLists=new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_day, tv_time,tv_sl;
@@ -42,7 +43,7 @@ public class TestListTypeAdapter extends RecyclerView.Adapter<TestListTypeAdapte
     }
 
 
-    public TestListTypeAdapter(List<TestList> testLists_ ) {
+    public TestListTypeAdapter(List<TestName> testLists_ ) {
         this.testLists=testLists_;
 
 
@@ -60,11 +61,11 @@ public class TestListTypeAdapter extends RecyclerView.Adapter<TestListTypeAdapte
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
 
-        final TestList movie = testLists.get(position);
+        final TestName movie = testLists.get(position);
 
-        holder.tv_day.setText(movie.getTestName());
+        holder.tv_day.setText(movie.getName());
         holder.tv_sl.setText(""+(position+1)+".");
-        holder.tv_time.setText(movie.getTestType());
+        holder.tv_time.setText(movie.getType());
 
 
     }

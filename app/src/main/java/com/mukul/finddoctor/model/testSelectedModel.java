@@ -6,12 +6,12 @@ package com.mukul.finddoctor.model;
 
 public class testSelectedModel {
     boolean isSelected;
-    TestModel testModel;
+    TestName testModel;
 
     public testSelectedModel() {
     }
 
-    public testSelectedModel(boolean isSelected, TestModel testModel) {
+    public testSelectedModel(boolean isSelected, TestName testModel) {
         this.isSelected = isSelected;
         this.testModel = testModel;
     }
@@ -24,11 +24,11 @@ public class testSelectedModel {
         isSelected = selected;
     }
 
-    public TestModel getTestModel() {
+    public TestName getTestModel() {
         return testModel;
     }
 
-    public void setTestModel(TestModel testModel) {
+    public void setTestModel(TestName testModel) {
         this.testModel = testModel;
     }
 }

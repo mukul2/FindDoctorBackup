@@ -4,6 +4,7 @@ package com.mukul.finddoctor.api;
 import com.mukul.finddoctor.model.AppointmentModel;
 import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
+import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
@@ -159,7 +160,7 @@ public class ApiListener {
     }
 
     public interface testNamesDownloadListener {
-        void ontestNamesDownloadSuccess(List<TestModel> data);
+        void ontestNamesDownloadSuccess(BasicByDrResponse data);
 
         void ontestNamesDownloadFailed(String msg);
     }

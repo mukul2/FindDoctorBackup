@@ -28,7 +28,9 @@ import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.TestList;
+import com.mukul.finddoctor.model.TestName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -105,7 +107,14 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
     @Override
     public void onTestDownloadSuccess(List<TestList> list) {
 
-        TestListTypeAdapter mAdapter = new TestListTypeAdapter(list);
+        List<TestName> listNew = new ArrayList<>();
+        for (int i = 0; i < list.size(); i++) {
+            TestName testName = new TestName();
+            testName.setName(list.get(i).getTestName());
+            testName.setType(list.get(i).getTestType());
+            listNew.add(testName);
+        }
+        TestListTypeAdapter mAdapter = new TestListTypeAdapter(listNew);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
@@ -144,7 +153,7 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
     }
 
     public void openHistoryActicivity(View view) {
-        startActivity(new Intent(this,HistoryActivity.class));
+        startActivity(new Intent(this, HistoryActivity.class));
     }
 
     public void back(View view) {

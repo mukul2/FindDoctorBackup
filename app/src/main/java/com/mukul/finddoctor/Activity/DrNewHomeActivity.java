@@ -21,6 +21,7 @@ import com.mukul.finddoctor.adapter.SearchAdapterDoctor;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.AppointmentModel2;
+import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.SpacialistModel;
 import com.mukul.finddoctor.model.TestModel;
@@ -171,11 +172,11 @@ public class DrNewHomeActivity extends AppCompatActivity implements ApiListener.
     }
 
     @Override
-    public void ontestNamesDownloadSuccess(List<TestModel> data) {
+    public void ontestNamesDownloadSuccess(BasicByDrResponse data) {
         DataStore.testModelList.clear();
         //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
-        for (int i = 0; i < data.size(); i++) {
-            DataStore.testModelList.add(new testSelectedModel(false, data.get(i)));
+        for (int i = 0; i < data.getTestNames().size(); i++) {
+            DataStore.testModelList.add(new testSelectedModel(false, data.getTestNames().get(i)));
         }
     }
 

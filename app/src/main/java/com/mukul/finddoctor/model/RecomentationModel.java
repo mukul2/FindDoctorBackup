@@ -26,7 +26,7 @@ private String date;
 private String appointmentFor;
 @SerializedName("testList")
 @Expose
-private List<TestList> testList = null;
+private List<TestName> testList = null;
 
 public String getAppointmentId() {
 return appointmentId;
@@ -76,11 +76,11 @@ public void setAppointmentFor(String appointmentFor) {
 this.appointmentFor = appointmentFor;
 }
 
-public List<TestList> getTestList() {
+public List<TestName> getTestList() {
 return testList;
 }
 
-public void setTestList(List<TestList> testList) {
+public void setTestList(List<TestName> testList) {
 this.testList = testList;
 }
 

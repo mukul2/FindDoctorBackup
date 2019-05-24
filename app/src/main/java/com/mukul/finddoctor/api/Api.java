@@ -7,6 +7,7 @@ import android.util.Log;
 import com.mukul.finddoctor.model.AppointmentModel;
 import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.AppointmentResponse;
+import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
@@ -575,15 +576,15 @@ public class Api {
     }
 
     public void downloadTestNames(final ApiListener.testNamesDownloadListener listener) {
-        ApiClient.getApiInterface().getTestNames().enqueue(new Callback<List<TestModel>>() {
+        ApiClient.getApiInterface().getTestNames().enqueue(new Callback<BasicByDrResponse>() {
             @Override
-            public void onResponse(Call<List<TestModel>> call, Response<List<TestModel>> response) {
+            public void onResponse(Call<BasicByDrResponse> call, Response<BasicByDrResponse> response) {
                 listener.ontestNamesDownloadSuccess(response.body());
 
             }
 
             @Override
-            public void onFailure(Call<List<TestModel>> call, Throwable t) {
+            public void onFailure(Call<BasicByDrResponse > call, Throwable t) {
                 listener.ontestNamesDownloadFailed(t.getLocalizedMessage());
 
             }
