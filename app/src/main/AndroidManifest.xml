@@ -35,8 +35,8 @@
         <activity
             android:name=".Activity.LoginActivity"
             android:label="Login"
-            android:windowSoftInputMode="stateHidden"
-            android:theme="@style/NoTitleBar" />
+            android:theme="@style/NoTitleBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.SignUpActivity"
             android:label="SignUp"
@@ -134,8 +134,7 @@
         <activity
             android:name=".Activity.DrNewHomeActivity"
             android:theme="@style/NoTitleBar"
-            android:windowSoftInputMode="stateHidden"
-            />
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".Activity.DrAllAppointmentsActivity"
             android:theme="@style/NoTitleBar" />
@@ -146,8 +145,10 @@
             android:name=".Activity.DrConfirmedActivity"
             android:theme="@style/NoTitleBar" />
         <activity
-            android:theme="@style/NoTitleBar"
-            android:name=".Activity.VideoCallActivityDr"></activity>
+            android:name=".Activity.VideoCallActivityDr"
+            android:theme="@style/NoTitleBar" />
+        <activity android:name=".Activity.DepartmentsActivity" />
+        <activity android:name=".Activity.DrListActivity"></activity>
     </application>
 
 </manifest>

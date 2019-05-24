@@ -1,6 +1,7 @@
 package com.mukul.finddoctor.Data;
 
 import com.mukul.finddoctor.R;
+import com.mukul.finddoctor.model.DoctorModel;
 import com.mukul.finddoctor.model.SpacialistModel;
 import com.mukul.finddoctor.model.TestModel;
 import com.mukul.finddoctor.model.testSelectedModel;
@@ -19,6 +20,8 @@ import java.util.Map;
 
 public class DataStore {
     public static String USER_ID;
+    public static String CLICKED_TITLE;
+    public static List<DoctorModel> downloadedDoctors;
 
     public static String convertToWeekDay(String day) {
         Map<String, String> days = new HashMap<>();

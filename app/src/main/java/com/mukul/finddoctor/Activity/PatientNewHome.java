@@ -90,4 +90,9 @@ public class PatientNewHome extends AppCompatActivity {
         startActivity(new Intent(this,LoginActivity.class));
         finishAffinity();
     }
+
+    public void openExplore(View view) {
+        startActivity(new Intent(this,DepartmentsActivity.class));
+
+    }
 }
