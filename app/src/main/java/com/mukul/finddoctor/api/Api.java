@@ -12,6 +12,7 @@ import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
 import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.DrServiceModel;
 import com.mukul.finddoctor.model.LoginResponse;
 import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.StatusId;
@@ -552,6 +553,24 @@ public class Api {
             @Override
             public void onFailure(@NonNull Call<UserProfileResponse> call, @NonNull Throwable t) {
                 listener.onprofileDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void downloadDrServiceList(String id, final ApiListener.DrServiceDownloadListener listener) {
+
+        ApiClient.getApiInterface().get_my_services_by_dr(id).enqueue(new Callback<List<DrServiceModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<DrServiceModel>> call, @NonNull Response<List<DrServiceModel>> response) {
+                if (response != null) {
+                    listener.onDrServiceDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<DrServiceModel>> call, @NonNull Throwable t) {
+                listener.onDrServiceDownloadFailed(t.getLocalizedMessage());
             }
         });
     }

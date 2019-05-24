@@ -9,6 +9,7 @@ import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
 import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.DrServiceModel;
 import com.mukul.finddoctor.model.LoginResponse;
 import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.StatusId;
@@ -56,7 +57,7 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("get_dr_services.php")
-    Call<StatusMessage> get_my_services_by_dr(@Field("dr_id") String dr_id);
+    Call<List<DrServiceModel>> get_my_services_by_dr(@Field("dr_id") String dr_id);
 
     @FormUrlEncoded
     @POST("post_dr_service_list.php")

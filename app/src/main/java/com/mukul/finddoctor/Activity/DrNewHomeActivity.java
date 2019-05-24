@@ -35,6 +35,7 @@ import butterknife.ButterKnife;
 
 import static com.mukul.finddoctor.Data.Data.spacialist;
 import static com.mukul.finddoctor.Data.DataStore.USER_ID;
+import static com.mukul.finddoctor.Data.DataStore.serviceNameList;
 
 public class DrNewHomeActivity extends AppCompatActivity implements ApiListener.basicInfoDownloadListener,
         ApiListener.testNamesDownloadListener {
@@ -178,6 +179,7 @@ public class DrNewHomeActivity extends AppCompatActivity implements ApiListener.
         for (int i = 0; i < data.getTestNames().size(); i++) {
             DataStore.testModelList.add(new testSelectedModel(false, data.getTestNames().get(i)));
         }
+        serviceNameList=data.getServiceNames();
     }
 
     @Override
@@ -216,5 +218,10 @@ public class DrNewHomeActivity extends AppCompatActivity implements ApiListener.
         sessionManager.setLoggedIn(false);
         startActivity(new Intent(this, LoginActivity.class));
         finishAffinity();
+    }
+
+    public void openMyServices(View view) {
+        startActivity(new Intent(this, ServicesActivityDr.class));
+
     }
 }

@@ -2,6 +2,7 @@ package com.mukul.finddoctor.Data;
 
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.ServiceName;
 import com.mukul.finddoctor.model.SpacialistModel;
 import com.mukul.finddoctor.model.TestModel;
 import com.mukul.finddoctor.model.testSelectedModel;
@@ -105,6 +106,7 @@ public class DataStore {
     }
 
     public static List<testSelectedModel> testModelList = new ArrayList<>();
+    public static List<ServiceName> serviceNameList = new ArrayList<>();
     public static List<String> selectedTestIds = new ArrayList<>();
 
 

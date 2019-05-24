@@ -148,7 +148,8 @@
             android:name=".Activity.VideoCallActivityDr"
             android:theme="@style/NoTitleBar" />
         <activity android:name=".Activity.DepartmentsActivity" />
-        <activity android:name=".Activity.DrListActivity"></activity>
+        <activity android:name=".Activity.DrListActivity" />
+        <activity android:name=".Activity.ServicesActivityDr"></activity>
     </application>
 
 </manifest>

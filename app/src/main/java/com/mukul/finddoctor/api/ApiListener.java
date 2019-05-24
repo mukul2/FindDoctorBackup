@@ -9,6 +9,7 @@ import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
 import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.DrServiceModel;
 import com.mukul.finddoctor.model.LoginResponse;
 import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.StatusId;
@@ -71,8 +72,11 @@ public class ApiListener {
 
     public interface TestDownloadListener {
         void onTestDownloadSuccess(List<TestList> list);
-
         void onTestDownloadFailed(String msg);
+    }
+    public interface DrServiceDownloadListener {
+        void onDrServiceDownloadSuccess(List<DrServiceModel> list);
+        void onDrServiceDownloadFailed(String msg);
     }
 
     public interface appointmentSearchListener {

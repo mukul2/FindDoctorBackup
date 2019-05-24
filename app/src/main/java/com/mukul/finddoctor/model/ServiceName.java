@@ -28,4 +28,8 @@ public void setName(String name) {
 this.name = name;
 }
 
+    public ServiceName(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }
