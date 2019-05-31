@@ -18,9 +18,9 @@
         android:layout_height="match_parent">
         <TextView
             android:layout_width="wrap_content"
-            android:text="App Name"
+            android:text="Appointment BD"
             android:layout_gravity="center_horizontal"
-            android:textSize="40dp"
+            android:textSize="30dp"
             android:paddingBottom="30dp"
             android:layout_height="wrap_content"
             />

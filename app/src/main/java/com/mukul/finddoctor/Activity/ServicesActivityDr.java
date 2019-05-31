@@ -75,5 +75,14 @@ public class ServicesActivityDr extends AppCompatActivity implements ApiListener
     }
 
     public void update(View view) {
+        int counter =0;
+        for (int i=0;i<SERVICES_LIST.size();i++){
+            if (SERVICES_LIST.get(i).isSelected()){
+                counter++;
+
+            }
+
+        }
+        Toast.makeText(this, "total selected "+counter, Toast.LENGTH_SHORT).show();
     }
 }
