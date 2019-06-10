@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +21,7 @@ import com.mukul.finddoctor.Utils.SessionManager;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.BasicByDrResponse;
+import com.mukul.finddoctor.model.DepartmentModel;
 import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestModel;
@@ -31,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class SignUpActivity extends AppCompatActivity implements ApiListener.drBasicInfoPostListener,
-ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener{
+ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener,ApiListener.departmentsDownloadListener{
     @BindView(R.id.ed_name)
     EditText ed_name;
     @BindView(R.id.ed_currentlyworking)
@@ -60,6 +62,11 @@ ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener{
     TextView tv_patient;
     @BindView(R.id.tv_doctor)
     TextView tv_doctor;
+    @BindView(R.id.spinnerDepartment)
+    Spinner spinnerDepartment;
+
+    @BindView(R.id.linearDepartment)
+    LinearLayout linearDepartment;
 
 
     int DOCTOR=0;
@@ -82,6 +89,7 @@ ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener{
         updateTypeUI();
         linearDoctor.setOnClickListener((View v)->moveToDoctor());
         linearPaitent.setOnClickListener((View v)->moveToPatient());
+        Api.getInstance().downlaodDepartmentsList(this);
     }
 
     private void moveToPatient() {
@@ -113,6 +121,7 @@ ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener{
     }
 
     private void setPatientUI() {
+        linearDepartment.setVisibility(View.GONE);
 
 
         tv_patient.setTextColor(context.getResources().getColor(R.color.colorPrimary));
@@ -135,6 +144,7 @@ ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener{
     }
 
     private void setDoctorUI() {
+        linearDepartment.setVisibility(View.VISIBLE);
 
         img_doctor.setImageResource(R.drawable.doctor_color);
         img_patient.setImageResource(R.drawable.patient_grey);
@@ -252,5 +262,18 @@ ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener{
 
     public void back(View view) {
         onBackPressed();
+    }
+
+    @Override
+    public void onDepartmentsListDownloadSuccess(List<DepartmentModel> list) {
+        if (list!=null){
+            Toast.makeText(context, ""+list.size(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void onDepartmentsListDownloadFailed(String msg) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
     }
 }

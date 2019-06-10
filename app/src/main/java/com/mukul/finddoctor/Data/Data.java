@@ -2,6 +2,13 @@ package com.mukul.finddoctor.Data;
 
 
 
+import android.app.Activity;
+import android.graphics.Color;
+import android.os.Build;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+
 import com.mukul.finddoctor.model.AppointmentModel;
 import com.mukul.finddoctor.model.AppointmentModel2;
 import com.mukul.finddoctor.model.Day;
@@ -19,6 +26,7 @@ import java.util.List;
  */
 
 public class Data {
+
     public static String TYPE_DOCTOR="d";
     public static String TYPE_PATIENT="p";
     public static  List<SpacialistModel> spacialist = new ArrayList<>();
@@ -42,7 +50,21 @@ public class Data {
     public static int STATUS_SERVED=3;
     public static int STATUS_CANCEL=4;
     public static int STATUS_DELETE=5;
-
+    public  static String getColorCode(int pos){
+        List<String>colors=new ArrayList<>();
+       /* colors.add("#DC7633");
+        colors.add("#2E4053");
+        colors.add("#2ECC71");
+        colors.add("#27AE60");
+        colors.add("#48C9B0");
+        colors.add("#2980B9");
+        colors.add("#8E44AD");*/
+       // colors.add("#E74C3C");
+        colors.add("#3498DB");
+        colors.add("#45B39D");
+        colors.add("#1F618D");
+        return colors.get( pos%colors.size());
+    }
 
     public  static List<String> getDistricts(){
         List<String> categories = new ArrayList<String>();

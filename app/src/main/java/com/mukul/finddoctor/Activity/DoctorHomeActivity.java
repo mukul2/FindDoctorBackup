@@ -200,7 +200,7 @@ public class DoctorHomeActivity extends AppCompatActivity implements ApiListener
 
         spacialist.clear();
         for (int i = 0; i < data.getSpacialist().size(); i++) {
-            spacialist.add(new SpacialistModel(data.getSpacialist().get(i), false));
+           // spacialist.add(new SpacialistModel(data.getSpacialist().get(i), false));
         }
 
 

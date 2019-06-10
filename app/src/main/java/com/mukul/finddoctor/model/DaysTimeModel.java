@@ -5,7 +5,6 @@ package com.mukul.finddoctor.model;
  */
 
 public class DaysTimeModel {
-    boolean isSelected=false;
     String dayName;
     String startTime;
     String endTime;
@@ -13,20 +12,13 @@ public class DaysTimeModel {
     public DaysTimeModel() {
     }
 
-    public DaysTimeModel(boolean isSelected, String dayName, String startTime, String endTime) {
-        this.isSelected = isSelected;
+    public DaysTimeModel(String dayName, String startTime, String endTime) {
         this.dayName = dayName;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public boolean isSelected() {
-        return isSelected;
-    }
 
-    public void setSelected(boolean selected) {
-        isSelected = selected;
-    }
 
     public String getDayName() {
         return dayName;

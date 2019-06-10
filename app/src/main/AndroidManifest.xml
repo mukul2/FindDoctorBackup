@@ -149,7 +149,22 @@
             android:theme="@style/NoTitleBar" />
         <activity android:name=".Activity.DepartmentsActivity" />
         <activity android:name=".Activity.DrListActivity" />
-        <activity android:name=".Activity.ServicesActivityDr"></activity>
+        <activity android:name=".Activity.ServicesActivityDr" />
+        <activity android:name=".Activity.DoctorsSwipeActivity" />
+        <activity
+            android:name=".Activity.PatientHomeActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.SpecialistActivity" />
+        <activity android:name=".Activity.OnlineDoctorsActivity" />
+        <activity android:name=".Activity.OnlinDoctorsSwipeActivity" />
+        <activity android:name=".Activity.HomeActivityDrActivity" />
+        <activity
+            android:name=".Activity.AddNewChamberActivity"
+            android:theme="@style/NoTitleBar" />
+        <activity
+            android:name=".Activity.BookingActivityNew"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.BookingConfirmActivity"></activity>
     </application>
 
 </manifest>

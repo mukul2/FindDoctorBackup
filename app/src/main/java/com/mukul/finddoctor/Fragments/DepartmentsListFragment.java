@@ -53,11 +53,11 @@ public class DepartmentsListFragment extends Fragment {
         return v;
     }
     private void initRecyclerView() {
-        DepartmentsAdapter mAdapter = new DepartmentsAdapter(DepartmentsActivity.SPECIALIST);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
-        recycler_view.setLayoutManager(mLayoutManager);
-        recycler_view.setItemAnimator(new DefaultItemAnimator());
-        recycler_view.setAdapter(mAdapter);
+//        DepartmentsAdapter mAdapter = new DepartmentsAdapter(DepartmentsActivity.SPECIALIST);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+//        recycler_view.setLayoutManager(mLayoutManager);
+//        recycler_view.setItemAnimator(new DefaultItemAnimator());
+//        recycler_view.setAdapter(mAdapter);
     }
 
 

@@ -67,7 +67,7 @@ public class AdddChamberActivity extends AppCompatActivity implements ApiListene
         Dayslist.clear();
 
         for (int i=0;i<DataStore.sevenDays().size();i++){
-            Dayslist.add(new DaysTimeModel(false,DataStore.sevenDays().get(i),"",""));
+            Dayslist.add(new DaysTimeModel(DataStore.sevenDays().get(i),"",""));
         }
         mAdapter = new DaysTimesAdapterDoctor();
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(AdddChamberActivity.this);
@@ -100,13 +100,13 @@ public class AdddChamberActivity extends AppCompatActivity implements ApiListene
 
         List<Day>list=new ArrayList<>();
         for (DaysTimeModel daysTimeModel:Dayslist){
-            if (daysTimeModel.isSelected()){
+            if (true){
                 list.add(new Day(DataStore.convertDayToNmber(daysTimeModel.getDayName()),(daysTimeModel.getStartTime()+" to "+daysTimeModel.getEndTime())));
             }
         }
         Gson gson=new Gson();
         //Toast.makeText(this, gson.toJson(list), Toast.LENGTH_LONG).show();
-        Api.getInstance().setDrSchedule(sessionManager.getUserId(),gson.toJson(list),address,fees,city,specialist,"","",this);
+      //  Api.getInstance().setDrSchedule(sessionManager.getUserId(),gson.toJson(list),address,fees,city,specialist,"","",this);
 
     }
 

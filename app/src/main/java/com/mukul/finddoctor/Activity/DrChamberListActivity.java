@@ -17,6 +17,7 @@ import com.mukul.finddoctor.adapter.ConfirmedAppointmentAdapterDoctor;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.Chamber;
+import com.mukul.finddoctor.model.DrChamberResponse;
 
 import java.util.List;
 
@@ -39,13 +40,13 @@ public class DrChamberListActivity extends AppCompatActivity implements ApiListe
     }
 
     @Override
-    public void onChamberListDownloadSuccess(List<Chamber> list) {
-        mAdapter = new ChambersListAdapterDr(list);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(DrChamberListActivity.this);
-        recycler_view.setLayoutManager(mLayoutManager);
-        recycler_view.setItemAnimator(new DefaultItemAnimator());
-        recycler_view.addItemDecoration(new DividerItemDecoration(DrChamberListActivity.this, LinearLayoutManager.VERTICAL));
-        recycler_view.setAdapter(mAdapter);
+    public void onChamberListDownloadSuccess(List<DrChamberResponse> list) {
+//        mAdapter = new ChambersListAdapterDr(list);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(DrChamberListActivity.this);
+//        recycler_view.setLayoutManager(mLayoutManager);
+//        recycler_view.setItemAnimator(new DefaultItemAnimator());
+//        recycler_view.addItemDecoration(new DividerItemDecoration(DrChamberListActivity.this, LinearLayoutManager.VERTICAL));
+//        recycler_view.setAdapter(mAdapter);
     }
 
     @Override

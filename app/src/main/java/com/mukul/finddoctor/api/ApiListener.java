@@ -8,9 +8,13 @@ import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
+import com.mukul.finddoctor.model.DepartmentModel;
 import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.DrChamberResponse;
 import com.mukul.finddoctor.model.DrServiceModel;
+import com.mukul.finddoctor.model.EducationSkillModel;
 import com.mukul.finddoctor.model.LoginResponse;
+import com.mukul.finddoctor.model.OnlineDoctorModel;
 import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
@@ -30,6 +34,10 @@ public class ApiListener {
         void onSearchSuccess(List<DoctorModel> list);
         void onSuccessFailed(String msg);
     }
+    public interface doctorEduSkillDownloadListener {
+        void ondoctorEduSkillDownloadSuccess(EducationSkillModel list);
+        void ondoctorEduSkillDownloadSuccessFailed(String msg);
+    }
     public interface CommonappointmentDownloadListener {
         void onAppointmentDownloadSuccess(List<AppointmentModel> list);
         void onAppointmentDownloadFailed(String msg);
@@ -45,6 +53,10 @@ public class ApiListener {
     public interface servePostListener {
         void onServePostSuccess(StatusMessage response);
         void onServePostFailed(String msg);
+    }
+    public interface drServicePostListener {
+        void ondrServicePostSuccess(StatusMessage response);
+        void ondrServicePostFailed(String msg);
     }
     public interface patientCallLogListener {
         void onPatientCallLogSuccess(List<CallHistoryPatient> list);
@@ -74,6 +86,10 @@ public class ApiListener {
         void onTestDownloadSuccess(List<TestList> list);
         void onTestDownloadFailed(String msg);
     }
+    public interface OnlineDoctorsDownloadListener {
+        void onOnlineDoctorsDownloadSuccess(List<OnlineDoctorModel> list);
+        void onOnlineDoctorsDownloadFailed(String msg);
+    }
     public interface DrServiceDownloadListener {
         void onDrServiceDownloadSuccess(List<DrServiceModel> list);
         void onDrServiceDownloadFailed(String msg);
@@ -86,9 +102,12 @@ public class ApiListener {
     }
 
     public interface chamberListDownloadListener {
-        void onChamberListDownloadSuccess(List<Chamber> list);
-
+        void onChamberListDownloadSuccess(List<DrChamberResponse> list);
         void onChamberListDownloadFailed(String msg);
+    }
+    public interface departmentsDownloadListener {
+        void onDepartmentsListDownloadSuccess(List<DepartmentModel> list);
+        void onDepartmentsListDownloadFailed(String msg);
     }
 
     public interface basicInfoDownloadListener {

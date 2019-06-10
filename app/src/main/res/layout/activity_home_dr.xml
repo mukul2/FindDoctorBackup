@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".Activity.HomeActivityDrActivity">
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true">
+
+    </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="50dp"
+        android:background="@android:color/darker_gray"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.33"
+            android:orientation="vertical"
+            android:id="@+id/linerhomebutton"
+            android:gravity="center"
+
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="23dp"
+                android:src="@drawable/home_primary"
+                android:layout_gravity="center"
+                android:layout_height="23dp"
+                android:id="@+id/img_two"
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Home"
+                android:textColor="@color/colorPrimary"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:textSize="10dp"
+                android:id="@+id/tv_two"
+                />
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.33"
+            android:orientation="vertical"
+            android:id="@+id/linerShopButton"
+
+            android:gravity="center"
+
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="20dp"
+                android:src="@drawable/medicine_gray"
+
+                android:id="@+id/img_one"
+                android:layout_gravity="center"
+                android:layout_height="20dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Profile"
+                android:paddingTop="0dp"
+                android:textSize="10dp"
+                android:id="@+id/tv_one"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+
+                />
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="0.33"
+            android:orientation="vertical"
+            android:id="@+id/linerAppointmentButton"
+
+            android:gravity="center"
+
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="20dp"
+                android:src="@drawable/setting_gray"
+                android:layout_gravity="center"
+                android:layout_height="20dp"
+                android:id="@+id/img_three"
+
+
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Setting"
+                android:id="@+id/tv_three"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:paddingTop="0dp"
+                android:textSize="10dp"
+
+                />
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

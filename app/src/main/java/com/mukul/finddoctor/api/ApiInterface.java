@@ -8,9 +8,13 @@ import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
+import com.mukul.finddoctor.model.DepartmentModel;
 import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.DrChamberResponse;
 import com.mukul.finddoctor.model.DrServiceModel;
+import com.mukul.finddoctor.model.EducationSkillModel;
 import com.mukul.finddoctor.model.LoginResponse;
+import com.mukul.finddoctor.model.OnlineDoctorModel;
 import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
@@ -83,6 +87,9 @@ public interface ApiInterface {
     @GET("getOnlineDoctors.php")
     Call<List<VideoCallModel>> getOnlineDoctors();
 
+    @GET("get_all_departments.php")
+    Call<List<DepartmentModel>> getAllDepartments();
+
     @FormUrlEncoded
     @POST("updateProfileDr.php")
     Call<StatusResponse> updateDrBasicInfo(@Field("id") String id,
@@ -151,13 +158,20 @@ public interface ApiInterface {
     @GET("getBasicInfo.php")
     Call<BasicInfoModel> getBasicInfo();
 
+    @GET("get_online_doctors_new.php")
+    Call<List<OnlineDoctorModel>> getOnlineServiceDoctors();
+
     @GET("getAllTestNames.php")
     Call<BasicByDrResponse> getTestNames();
 
 
     @FormUrlEncoded
     @POST("getMyChambers.php")
-    Call<List<Chamber>> getMyChambers(@Field("id") String id);
+    Call<List<DrChamberResponse>> getMyChambers(@Field("id") String id);
+
+    @FormUrlEncoded
+    @POST("get_dr_personal_info.php")
+    Call<EducationSkillModel> getMyEducationSkill(@Field("dr_id") String dr_id);
 
     @FormUrlEncoded
     @POST("GeneralEntry.php")
@@ -172,13 +186,10 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("addSchedule.php")
     Call<StatusMessage> setDrSchedule(@Field("id") String id,
-                                      @Field("days") String days,
                                       @Field("address") String address,
                                       @Field("visit_fee") String visit_fee,
                                       @Field("city") String city,
-                                      @Field("specialist") String specialist,
-                                      @Field("last_education_degree") String last_education_degree,
-                                      @Field("hospital_name") String hospital_name);
+                                      @Field("data") String data);
 
     @FormUrlEncoded
     @POST("update_profile.php")

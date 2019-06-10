@@ -11,9 +11,13 @@ import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
+import com.mukul.finddoctor.model.DepartmentModel;
 import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.DrChamberResponse;
 import com.mukul.finddoctor.model.DrServiceModel;
+import com.mukul.finddoctor.model.EducationSkillModel;
 import com.mukul.finddoctor.model.LoginResponse;
+import com.mukul.finddoctor.model.OnlineDoctorModel;
 import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
@@ -88,6 +92,43 @@ public class Api {
             }
         });
     }
+    public void doctorEduSkillDownload(String id, final ApiListener.doctorEduSkillDownloadListener listener) {
+
+        ApiClient.getApiInterface().getMyEducationSkill(id).enqueue(new Callback<EducationSkillModel>() {
+            @Override
+            public void onResponse(@NonNull Call<EducationSkillModel> call, @NonNull Response<EducationSkillModel> response) {
+                if (response != null) {
+                    listener.ondoctorEduSkillDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<EducationSkillModel> call, @NonNull Throwable t) {
+                listener.ondoctorEduSkillDownloadSuccessFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void downlaodOnlineDoctorsLits( final ApiListener.OnlineDoctorsDownloadListener listener) {
+
+        ApiClient.getApiInterface().getOnlineServiceDoctors().enqueue(new Callback<List<OnlineDoctorModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<OnlineDoctorModel>> call, @NonNull Response<List<OnlineDoctorModel>> response) {
+                if (response != null) {
+                    listener.onOnlineDoctorsDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<OnlineDoctorModel>> call, @NonNull Throwable t) {
+                listener.onOnlineDoctorsDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
     public void downlaodDrPending(String id, final ApiListener.CommonappointmentDownloadListener listener) {
 
         ApiClient.getApiInterface().dr_pending(id).enqueue(new Callback<List<AppointmentModel>>() {
@@ -106,6 +147,25 @@ public class Api {
             }
         });
     }
+    public void downlaodDepartmentsList(final ApiListener.departmentsDownloadListener listener) {
+
+        ApiClient.getApiInterface().getAllDepartments().enqueue(new Callback<List<DepartmentModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<DepartmentModel>> call, @NonNull Response<List<DepartmentModel>> response) {
+                if (response != null) {
+                    listener.onDepartmentsListDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<DepartmentModel>> call, @NonNull Throwable t) {
+                listener.onDepartmentsListDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
     public void downlaodDrConfirmed(String id, final ApiListener.CommonappointmentDownloadListener listener) {
 
         ApiClient.getApiInterface().dr_confirmed(id).enqueue(new Callback<List<AppointmentModel>>() {
@@ -124,6 +184,7 @@ public class Api {
             }
         });
     }
+
     public void downlaodPaConfirmed(String id, final ApiListener.CommonappointmentDownloadListener listener) {
 
         ApiClient.getApiInterface().getPatientAllConfirmed(id).enqueue(new Callback<List<AppointmentModel>>() {
@@ -142,6 +203,7 @@ public class Api {
             }
         });
     }
+
     public void downlaodPaPending(String id, final ApiListener.CommonappointmentDownloadListener listener) {
 
         ApiClient.getApiInterface().getPatientAllPending(id).enqueue(new Callback<List<AppointmentModel>>() {
@@ -160,7 +222,8 @@ public class Api {
             }
         });
     }
- public void downlaodPaRecomendation(String id, final ApiListener.DrRecomentationDownloadListener listener) {
+
+    public void downlaodPaRecomendation(String id, final ApiListener.DrRecomentationDownloadListener listener) {
 
         ApiClient.getApiInterface().getpatientRecomentation(id).enqueue(new Callback<List<RecomentationModel>>() {
             @Override
@@ -308,8 +371,8 @@ public class Api {
 
     }
 
-    public void setDrSchedule(String id, String days, String address, String visit_fee, String city, String specialist, String degree, String hospital, final ApiListener.drSchedulePostListener listener) {
-        ApiClient.getApiInterface().setDrSchedule(id, days, address, visit_fee, city, specialist, degree, hospital).enqueue(new Callback<StatusMessage>() {
+    public void setDrSchedule(String id,  String address, String visit_fee, String city, String data,  final ApiListener.drSchedulePostListener listener) {
+        ApiClient.getApiInterface().setDrSchedule(id,  address, visit_fee, city, data).enqueue(new Callback<StatusMessage>() {
             @Override
             public void onResponse(Call<StatusMessage> call, Response<StatusMessage> response) {
                 listener.ondrSchedulePostSuccess(response.body());
@@ -343,15 +406,15 @@ public class Api {
     }
 
     public void getMyChambersList(String id, final ApiListener.chamberListDownloadListener listener) {
-        ApiClient.getApiInterface().getMyChambers(id).enqueue(new Callback<List<Chamber>>() {
+        ApiClient.getApiInterface().getMyChambers(id).enqueue(new Callback<List<DrChamberResponse >>() {
             @Override
-            public void onResponse(Call<List<Chamber>> call, Response<List<Chamber>> response) {
+            public void onResponse(Call<List<DrChamberResponse >> call, Response<List<DrChamberResponse>> response) {
                 listener.onChamberListDownloadSuccess(response.body());
 
             }
 
             @Override
-            public void onFailure(Call<List<Chamber>> call, Throwable t) {
+            public void onFailure(Call<List<DrChamberResponse >> call, Throwable t) {
                 listener.onChamberListDownloadFailed(t.getLocalizedMessage());
 
             }
@@ -556,6 +619,7 @@ public class Api {
             }
         });
     }
+
     public void downloadDrServiceList(String id, final ApiListener.DrServiceDownloadListener listener) {
 
         ApiClient.getApiInterface().get_my_services_by_dr(id).enqueue(new Callback<List<DrServiceModel>>() {
@@ -571,6 +635,25 @@ public class Api {
             @Override
             public void onFailure(@NonNull Call<List<DrServiceModel>> call, @NonNull Throwable t) {
                 listener.onDrServiceDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void postDrServices(String dr_id, String service_detail, final ApiListener.drServicePostListener listener) {
+
+        ApiClient.getApiInterface().post_dr_service_list(dr_id, service_detail).enqueue(new Callback<StatusMessage>() {
+            @Override
+            public void onResponse(@NonNull Call<StatusMessage> call, @NonNull Response<StatusMessage> response) {
+                if (response != null) {
+                    listener.ondrServicePostSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<StatusMessage> call, @NonNull Throwable t) {
+                listener.ondrServicePostFailed(t.getLocalizedMessage());
             }
         });
     }
@@ -603,7 +686,7 @@ public class Api {
             }
 
             @Override
-            public void onFailure(Call<BasicByDrResponse > call, Throwable t) {
+            public void onFailure(Call<BasicByDrResponse> call, Throwable t) {
                 listener.ontestNamesDownloadFailed(t.getLocalizedMessage());
 
             }

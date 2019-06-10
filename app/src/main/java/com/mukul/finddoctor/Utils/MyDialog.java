@@ -51,6 +51,10 @@ public class MyDialog {
         this.activity = activity;
         return this;
     }
+    public MyDialog with(Context context) {
+        this.activity = (Activity) context;
+        return this;
+    }
 
     public MyDialog message(String message) {
         this.message = message;

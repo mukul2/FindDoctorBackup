@@ -167,8 +167,8 @@ public class FindDoctorActivity extends AppCompatActivity implements ApiListener
         spacialist.clear();
         hospitalList.add("All Hospitals");
         for (int i = 0; i < data.getSpacialist().size(); i++) {
-            spacialist.add(new SpacialistModel(data.getSpacialist().get(i), false));
-            specialist.add(data.getSpacialist().get(i));
+            spacialist.add(new SpacialistModel(data.getSpacialist().get(i).getName(), false));
+           specialist.add(data.getSpacialist().get(i).getName());
         }
 
         mAdapter.notifyDataSetChanged();

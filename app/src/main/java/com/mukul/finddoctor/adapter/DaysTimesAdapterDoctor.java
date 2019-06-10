@@ -69,7 +69,7 @@ public class DaysTimesAdapterDoctor extends RecyclerView.Adapter<DaysTimesAdapte
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         final DaysTimeModel movie = AdddChamberActivity.Dayslist.get(position);
         context = holder.tv_startDay.getContext();
-        if (movie.isSelected()) {
+        if (true) {
             holder.checkBox.setChecked(true);
         } else {
             holder.checkBox.setChecked(false);
@@ -80,9 +80,9 @@ public class DaysTimesAdapterDoctor extends RecyclerView.Adapter<DaysTimesAdapte
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
-                    AdddChamberActivity.Dayslist.get(position).setSelected(true);
+                   // AdddChamberActivity.Dayslist.get(position).setSelected(true);
                 } else {
-                    AdddChamberActivity.Dayslist.get(position).setSelected(false);
+                   // AdddChamberActivity.Dayslist.get(position).setSelected(false);
 
                 }
             }

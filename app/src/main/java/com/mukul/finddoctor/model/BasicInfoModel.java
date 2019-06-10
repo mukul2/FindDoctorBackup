@@ -11,7 +11,7 @@ public class BasicInfoModel {
 private List<String> hospitalList = null;
 @SerializedName("spacialist")
 @Expose
-private List<String> spacialist = null;
+private List<SpecialistNameCount> spacialist = null;
 
 public List<String> getHospitalList() {
 return hospitalList;
@@ -21,11 +21,11 @@ public void setHospitalList(List<String> hospitalList) {
 this.hospitalList = hospitalList;
 }
 
-public List<String> getSpacialist() {
+public List<SpecialistNameCount> getSpacialist() {
 return spacialist;
 }
 
-public void setSpacialist(List<String> spacialist) {
+public void setSpacialist(List<SpecialistNameCount> spacialist) {
 this.spacialist = spacialist;
 }
 

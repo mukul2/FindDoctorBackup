@@ -52,7 +52,7 @@ public class RecomendationDetailActivity extends AppCompatActivity implements Ap
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
-        //holder.recycler_view.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+        //holder.recycler_view.addItemDecoration(new_ DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
         recycler_view.setAdapter(mAdapter);
 
         Resources res = context.getResources();

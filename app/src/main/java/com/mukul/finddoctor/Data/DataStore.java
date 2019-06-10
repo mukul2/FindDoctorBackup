@@ -2,6 +2,7 @@ package com.mukul.finddoctor.Data;
 
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.EducationSkillModel;
 import com.mukul.finddoctor.model.ServiceName;
 import com.mukul.finddoctor.model.SpacialistModel;
 import com.mukul.finddoctor.model.TestModel;
@@ -20,6 +21,7 @@ import java.util.Map;
  */
 
 public class DataStore {
+    public static EducationSkillModel EDUCATIONSKILLMODEL;
     public static String USER_ID;
     public static String CLICKED_TITLE;
     public static List<DoctorModel> downloadedDoctors;
@@ -29,22 +31,46 @@ public class DataStore {
         days.put("6", "Sat");
         days.put("0", "Sun");
         days.put("1", "Mon");
-        days.put("2", "Tues");
-        days.put("3", "Wednes");
-        days.put("4", "Thurs");
+        days.put("2", "Tue");
+        days.put("3", "Wed");
+        days.put("4", "Thu");
         days.put("5", "Fri");
 
         return days.get(day);
     }
+    public static List<String> sevenDays() {
+        List<String> days = new ArrayList<>();
+        days.add("Sat");
+        days.add("Sun");
+        days.add("Mon");
+        days.add("Tue");
+        days.add("Wed");
+        days.add("Thu");
+        days.add("Fri");
 
+        return days;
+    }
+
+    public static List<String> getWeekDays() {
+        List<String> days = new ArrayList<>();
+        days.add("Sat");
+        days.add("Sun");
+        days.add("Mon");
+        days.add("Tue");
+        days.add("Wed");
+        days.add("Thu");
+        days.add("Fri");
+
+        return days;
+    }
     public static String convertDayToNmber(String day) {
         Map<String, String> days = new HashMap<>();
         days.put("Sat", "6");
         days.put("Sun", "0");
         days.put("Mon", "1");
-        days.put("Tues", "2");
-        days.put("Wednes", "3");
-        days.put("Thurs", "4");
+        days.put("Tue", "2");
+        days.put("Wed", "3");
+        days.put("Thu", "4");
         days.put("Fri", "5");
 
         return days.get(day);
@@ -74,18 +100,7 @@ public class DataStore {
         return targetFormat.format(sourceDate);
     }
 
-    public static List<String> sevenDays() {
-        List<String> days = new ArrayList<>();
-        days.add("Sat");
-        days.add("Sun");
-        days.add("Mon");
-        days.add("Tues");
-        days.add("Wednes");
-        days.add("Thurs");
-        days.add("Fri");
 
-        return days;
-    }
 
     public static String convertToMonth(int day) {
         Map<Integer, String> days = new HashMap<>();

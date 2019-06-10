@@ -8,14 +8,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.adapter.DrServicesListAdapter;
 import com.mukul.finddoctor.adapter.SearchResultAdapter;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.DrServiceModel;
+import com.mukul.finddoctor.model.ServiceIdPrice;
 import com.mukul.finddoctor.model.ServiceName;
 import com.mukul.finddoctor.model.ServiceWithBoolean;
+import com.mukul.finddoctor.model.StatusMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +29,7 @@ import butterknife.ButterKnife;
 import static com.mukul.finddoctor.Data.DataStore.USER_ID;
 import static com.mukul.finddoctor.Data.DataStore.serviceNameList;
 
-public class ServicesActivityDr extends AppCompatActivity implements ApiListener.DrServiceDownloadListener{
+public class ServicesActivityDr extends AppCompatActivity implements ApiListener.DrServiceDownloadListener,ApiListener.drServicePostListener{
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     public static List<ServiceWithBoolean> SERVICES_LIST=new ArrayList<>();
@@ -37,6 +40,7 @@ public class ServicesActivityDr extends AppCompatActivity implements ApiListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_services_dr);
         ButterKnife.bind(this);
+        SERVICES_LIST.clear();
         Api.getInstance().downloadDrServiceList(USER_ID,this);
     }
 
@@ -63,7 +67,7 @@ public class ServicesActivityDr extends AppCompatActivity implements ApiListener
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        //recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        //recyclerView.addItemDecoration(new_ DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
 
         recyclerView.setAdapter(mAdapter);
 
@@ -75,14 +79,30 @@ public class ServicesActivityDr extends AppCompatActivity implements ApiListener
     }
 
     public void update(View view) {
+        List<ServiceIdPrice>list=new ArrayList<>();
         int counter =0;
         for (int i=0;i<SERVICES_LIST.size();i++){
             if (SERVICES_LIST.get(i).isSelected()){
-                counter++;
+                list.add(new ServiceIdPrice(SERVICES_LIST.get(i).getServiceName().getId(),"500"));
 
             }
 
         }
-        Toast.makeText(this, "total selected "+counter, Toast.LENGTH_SHORT).show();
+        Gson gson=new Gson();
+        Toast.makeText(this, gson.toJson(list), Toast.LENGTH_SHORT).show();
+        Api.getInstance().postDrServices(USER_ID,gson.toJson(list),this);
+    }
+
+    @Override
+    public void ondrServicePostSuccess(StatusMessage response) {
+        if (response!=null){
+            Toast.makeText(this, response.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void ondrServicePostFailed(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+
     }
 }

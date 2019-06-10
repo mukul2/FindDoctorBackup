@@ -12,6 +12,7 @@ import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.BasicInfoModel;
+import com.mukul.finddoctor.model.SpecialistNameCount;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +36,7 @@ public class DepartmentsActivity extends AppCompatActivity implements ApiListene
     @BindView(R.id.tabs)
     TabLayout tabs;
     public static List<String> HOSPITALS = new ArrayList<>();
-    public static List<String> SPECIALIST = new ArrayList<>();
+    public static List<SpecialistNameCount> SPECIALIST = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

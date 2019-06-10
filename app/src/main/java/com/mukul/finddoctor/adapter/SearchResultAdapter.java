@@ -11,11 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mukul.finddoctor.Activity.ChamberDetailActivity;
+import com.mukul.finddoctor.Activity.DoctorsSwipeActivity;
 import com.mukul.finddoctor.Data.Data;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.model.Day;
@@ -40,6 +42,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         public TextView title, tv_hospitalName, tv_time, tv_lastDegree, tv_epacialist,tv_address;
         ImageView circleImageView;
         RelativeLayout relative_container;
+        LinearLayout linerBody;
 
 
         public MyViewHolder(View view) {
@@ -50,6 +53,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             tv_lastDegree = (TextView) view.findViewById(R.id.tv_lastDegree);
             tv_epacialist = (TextView) view.findViewById(R.id.tv_epacialist);
             tv_address = (TextView) view.findViewById(R.id.tv_address);
+            linerBody = (LinearLayout) view.findViewById(R.id.linerBody);
 
 
         }
@@ -82,15 +86,19 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 //        }
 //        holder.tv_time.setText(time);
         holder.tv_lastDegree.setText(movie.getLastDegree());
-        holder.itemView.setOnClickListener((View v) -> detailView(movie.getDays(),movie));
+        holder.linerBody.setOnClickListener((View v) -> detailView(position,movie.getDays(),movie));
+
 
     }
 
-    private void detailView(List<Day> days, DoctorModel movie) {
+    private void detailView(int position, List<Day> days, DoctorModel movie) {
         singleDrModel= movie;
        // Data.days.clear();
       //  Data.days.addAll(days);
-        context.startActivity(new Intent(context, ChamberDetailActivity.class));
+        Intent i=new Intent(context, DoctorsSwipeActivity.class);
+        i.putExtra("currentIndex",""+position);
+        //context.startActivity(new Intent(context, ChamberDetailActivity.class));
+        context.startActivity(i);
     }
 
     @Override

@@ -69,7 +69,7 @@ public class DrNewHomeActivity extends AppCompatActivity implements ApiListener.
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         searchDr_recycler.setLayoutManager(mLayoutManager);
         searchDr_recycler.setItemAnimator(new DefaultItemAnimator());
-        //searchDr_recycler.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+        //searchDr_recycler.addItemDecoration(new_ DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
 
         searchDr_recycler.setAdapter(mAdapter);
     }
@@ -166,7 +166,7 @@ public class DrNewHomeActivity extends AppCompatActivity implements ApiListener.
 
         spacialist.clear();
         for (int i = 0; i < data.getSpacialist().size(); i++) {
-            spacialist.add(new SpacialistModel(data.getSpacialist().get(i), false));
+          //  spacialist.add(new_ SpacialistModel(data.getSpacialist().get(i), false));
         }
 
 
@@ -174,6 +174,7 @@ public class DrNewHomeActivity extends AppCompatActivity implements ApiListener.
 
     @Override
     public void ontestNamesDownloadSuccess(BasicByDrResponse data) {
+        serviceNameList.clear();
         DataStore.testModelList.clear();
         //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
         for (int i = 0; i < data.getTestNames().size(); i++) {
