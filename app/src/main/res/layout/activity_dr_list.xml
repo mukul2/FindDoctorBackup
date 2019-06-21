@@ -48,27 +48,34 @@
 
         </LinearLayout>
     </android.support.design.widget.AppBarLayout>
-    <View
+
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="@android:color/transparent"/>
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
 
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@android:color/transparent"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shadow_low"
         android:orientation="vertical"
-        android:onClick="book"
         android:paddingLeft="15dp"
         android:paddingTop="5dp">
 
 
         <LinearLayout
-            android:id="@+id/linerBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:onClick="viewProfile"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -97,14 +104,12 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dr Saidur Rahman"
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/tv_epacialist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Eye Spacialist" />
@@ -125,6 +130,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:orientation="horizontal"
+            android:onClick="book"
+
             android:padding="8dp">
 
             <TextView
@@ -136,21 +143,21 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shadow_low"
         android:orientation="vertical"
-        android:onClick="book"
         android:paddingLeft="15dp"
         android:paddingTop="5dp">
 
 
         <LinearLayout
-            android:id="@+id/linerBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:onClick="viewProfile"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -179,14 +186,12 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dr Saidur Rahman"
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/tv_epacialist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Eye Spacialist" />
@@ -207,6 +212,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:orientation="horizontal"
+            android:onClick="book"
+
             android:padding="8dp">
 
             <TextView
@@ -223,16 +230,15 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shadow_low"
         android:orientation="vertical"
-        android:onClick="book"
         android:paddingLeft="15dp"
         android:paddingTop="5dp">
 
 
         <LinearLayout
-            android:id="@+id/linerBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:onClick="viewProfile"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -261,14 +267,12 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dr Saidur Rahman"
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/tv_epacialist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Eye Spacialist" />
@@ -289,6 +293,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:orientation="horizontal"
+            android:onClick="book"
+
             android:padding="8dp">
 
             <TextView
@@ -305,16 +311,15 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shadow_low"
         android:orientation="vertical"
-        android:onClick="book"
         android:paddingLeft="15dp"
         android:paddingTop="5dp">
 
 
         <LinearLayout
-            android:id="@+id/linerBody"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:onClick="viewProfile"
             android:orientation="horizontal">
 
             <RelativeLayout
@@ -343,14 +348,12 @@
                 android:padding="10dp">
 
                 <TextView
-                    android:id="@+id/tv_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Dr Saidur Rahman"
                     android:textColor="@android:color/black" />
 
                 <TextView
-                    android:id="@+id/tv_epacialist"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Eye Spacialist" />
@@ -371,6 +374,332 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:orientation="horizontal"
+            android:onClick="book"
+
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book Now"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow_low"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:onClick="viewProfile"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+
+                >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/doctor_avatar" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight=".3"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dr Saidur Rahman"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Eye Spacialist" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.25dp"
+            android:layout_marginTop="5dp"
+            android:background="#cccccc" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:onClick="book"
+
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book Now"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow_low"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:onClick="viewProfile"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+
+                >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/doctor_avatar" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight=".3"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dr Saidur Rahman"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Eye Spacialist" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.25dp"
+            android:layout_marginTop="5dp"
+            android:background="#cccccc" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:onClick="book"
+
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book Now"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow_low"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:onClick="viewProfile"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+
+                >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/doctor_avatar" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight=".3"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dr Saidur Rahman"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Eye Spacialist" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.25dp"
+            android:layout_marginTop="5dp"
+            android:background="#cccccc" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:onClick="book"
+
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book Now"
+                android:textColor="@color/colorPrimary" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shadow_low"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:onClick="viewProfile"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+
+
+                >
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/doctor_avatar" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight=".3"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Dr Saidur Rahman"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Eye Spacialist" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.25dp"
+            android:layout_marginTop="5dp"
+            android:background="#cccccc" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:orientation="horizontal"
+            android:onClick="book"
+
             android:padding="8dp">
 
             <TextView
@@ -383,4 +712,6 @@
 
     </LinearLayout>
 
+    </LinearLayout>
+</ScrollView>
 </LinearLayout>

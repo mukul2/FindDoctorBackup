@@ -10,11 +10,11 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.mukul.finddoctor.R;
@@ -28,9 +28,12 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mukul.finddoctor.Data.Data.TYPE_OF_ACTIVITY;
+
 public class SpecialistActivity extends AppCompatActivity implements  ApiListener.departmentsDownloadListener{
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
+
 
     Context context=this;
     @Override
@@ -40,6 +43,7 @@ public class SpecialistActivity extends AppCompatActivity implements  ApiListene
         ButterKnife.bind(this);
         Api.getInstance().downlaodDepartmentsList(this);
         setUpStatusbar();
+
 
     }
     public  void setUpStatusbar(){
@@ -72,6 +76,8 @@ public class SpecialistActivity extends AppCompatActivity implements  ApiListene
 
     @Override
     public void onDepartmentsListDownloadSuccess(List<DepartmentModel> list) {
+        TYPE_OF_ACTIVITY="Chambers";
+
         DepartmentsAdapter mAdapter = new DepartmentsAdapter(list);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         recycler_view.setLayoutManager(mLayoutManager);

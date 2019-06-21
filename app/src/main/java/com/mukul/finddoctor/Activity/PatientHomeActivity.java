@@ -9,7 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mukul.finddoctor.Fragments.AppointmentsFragment;
+import com.mukul.finddoctor.Fragments.BlogFragmentPatient;
 import com.mukul.finddoctor.Fragments.HomeFragment;
 import com.mukul.finddoctor.Fragments.MedicineFragment;
 import com.mukul.finddoctor.Fragments.ProfileFragment;
@@ -33,7 +37,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PatientHomeActivity extends AppCompatActivity implements View.OnClickListener , ApiListener.basicInfoDownloadListener{
+public class PatientHomeActivity extends AppCompatActivity implements View.OnClickListener, ApiListener.basicInfoDownloadListener {
     Context context = this;
     Resources resources;
     int primaryClr, another;
@@ -46,7 +50,7 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
     TextView tv_3;
     @BindView(R.id.tv_4)
     TextView tv_4;
-    int anotherColorText= Color.GRAY;
+    int anotherColorText = Color.GRAY;
 
     @BindView(R.id.img_1)
     ImageView img_1;
@@ -64,10 +68,11 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
     LinearLayout linerAppointmentButton;
     @BindView(R.id.linerProfileButton)
     LinearLayout linerProfileButton;
-    LinearLayout.LayoutParams enable = new LinearLayout.LayoutParams(30, 30);
-    LinearLayout.LayoutParams disbale = new LinearLayout.LayoutParams(25, 25);
+    // LinearLayout.LayoutParams enable = new LinearLayout.LayoutParams(30, 30);
+    //  LinearLayout.LayoutParams disbale = new LinearLayout.LayoutParams(25, 25);
     public static List<String> HOSPITALS = new ArrayList<>();
     public static List<SpecialistNameCount> SPECIALIST = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,14 +84,33 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
         linerAppointmentButton.setOnClickListener(this);
         linerProfileButton.setOnClickListener(this);
 
-        img_1.setLayoutParams(enable);
+   /*     img_1.setLayoutParams(enable);
         img_2.setLayoutParams(disbale);
         img_3.setLayoutParams(disbale);
         img_4.setLayoutParams(disbale);
+        */
         initial_fragment();
         Api.getInstance().downloadBasicInfo(this);
         setUpStatusbar();
+     //   initIconDesnsity();
+
+
+
     }
+
+    private void initIconDesnsity() {
+        final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        // set your height here
+        final ViewGroup.LayoutParams layoutParams = img_1.getLayoutParams();
+        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 19, displayMetrics);
+        // set your width here
+        layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 19, displayMetrics);
+        img_1.setLayoutParams(layoutParams);
+        img_2.setLayoutParams(layoutParams);
+        img_3.setLayoutParams(layoutParams);
+        img_4.setLayoutParams(layoutParams);
+    }
+
     private void setUpStatusbar() {
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -112,6 +136,7 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
         }
         win.setAttributes(winParams);
     }
+
     @Override
     public void onBasicInfoDownloadSuccess(BasicInfoModel data) {
         if (data != null) {
@@ -119,7 +144,7 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
             SPECIALIST = data.getSpacialist();
 
         } else {
-           // onBackPressed();
+            // onBackPressed();
             Toast.makeText(this, "Something is not right.Try again later", Toast.LENGTH_SHORT).show();
         }
 
@@ -157,7 +182,7 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
         img_1.setImageResource(R.drawable.home_gray);
         img_2.setImageResource(R.drawable.profile_primary);
         img_3.setImageResource(R.drawable.calender_gray);
-        img_4.setImageResource(R.drawable.pills_gray);
+        img_4.setImageResource(R.drawable.blog);
 
         tv_1.setTextColor(another);
         tv_2.setTextColor(primaryClr);
@@ -165,60 +190,61 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
         tv_4.setTextColor(another);
 
 
-
-        img_1.setLayoutParams(disbale);
-        img_2.setLayoutParams(enable);
-        img_3.setLayoutParams(disbale);
-        img_4.setLayoutParams(disbale);
-
+//        img_1.setLayoutParams(disbale);
+//        img_2.setLayoutParams(enable);
+//        img_3.setLayoutParams(disbale);
+//        img_4.setLayoutParams(disbale);
 
 
     }
+
     public void do_1_0_0_0() {
 
 
         img_1.setImageResource(R.drawable.home_primary);
         img_2.setImageResource(R.drawable.profile_gray);
         img_3.setImageResource(R.drawable.calender_gray);
-        img_4.setImageResource(R.drawable.pills_gray);
+        img_4.setImageResource(R.drawable.blog);
 
         tv_1.setTextColor(primaryClr);
         tv_2.setTextColor(another);
         tv_3.setTextColor(another);
         tv_4.setTextColor(another);
 
-        img_1.setLayoutParams(enable);
-        img_2.setLayoutParams(disbale);
-        img_3.setLayoutParams(disbale);
-        img_4.setLayoutParams(disbale);
+//        img_1.setLayoutParams(enable);
+//        img_2.setLayoutParams(disbale);
+//        img_3.setLayoutParams(disbale);
+//        img_4.setLayoutParams(disbale);
 
     }
+
     public void do_0_0_1_0() {
 
         img_1.setImageResource(R.drawable.home_gray);
         img_2.setImageResource(R.drawable.profile_gray);
         img_3.setImageResource(R.drawable.calender_primary);
-        img_4.setImageResource(R.drawable.pills_gray);
+        img_4.setImageResource(R.drawable.blog);
 
 
         tv_1.setTextColor(another);
         tv_2.setTextColor(another);
         tv_3.setTextColor(primaryClr);
         tv_4.setTextColor(another);
-
-        img_1.setLayoutParams(disbale);
-        img_2.setLayoutParams(disbale);
-        img_3.setLayoutParams(enable);
-        img_4.setLayoutParams(disbale);
+//
+//        img_1.setLayoutParams(disbale);
+//        img_2.setLayoutParams(disbale);
+//        img_3.setLayoutParams(enable);
+//        img_4.setLayoutParams(disbale);
 
 
     }
+
     public void do_0_0_0_1() {
 
         img_1.setImageResource(R.drawable.home_gray);
         img_2.setImageResource(R.drawable.profile_gray);
         img_3.setImageResource(R.drawable.calender_gray);
-        img_4.setImageResource(R.drawable.pills_primary);
+        img_4.setImageResource(R.drawable.blog_primary);
 
 
         tv_1.setTextColor(another);
@@ -226,13 +252,14 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
         tv_3.setTextColor(another);
         tv_4.setTextColor(primaryClr);
 
-        img_1.setLayoutParams(disbale);
-        img_2.setLayoutParams(disbale);
-        img_3.setLayoutParams(disbale);
-        img_4.setLayoutParams(enable);
+//        img_1.setLayoutParams(disbale);
+//        img_2.setLayoutParams(disbale);
+//        img_3.setLayoutParams(disbale);
+//        img_4.setLayoutParams(enable);
 
 
     }
+
     @Override
     public void onClick(View view) {
         Fragment selectedFragment = null;
@@ -242,7 +269,7 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
                 do_1_0_0_0();
                 break;
             case R.id.linerMedicineButton:
-                selectedFragment = MedicineFragment.newInstance();
+                selectedFragment = BlogFragmentPatient.newInstance();
                 do_0_0_0_1();
                 break;
             case R.id.linerAppointmentButton:
@@ -255,7 +282,7 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
                 break;
 
         }
-      FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, selectedFragment);
         transaction.commit();
 

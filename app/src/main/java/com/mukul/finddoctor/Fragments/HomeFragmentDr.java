@@ -10,8 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.mukul.finddoctor.Activity.DrChatActivity;
+import com.mukul.finddoctor.Activity.DrConfirmedActivity;
 import com.mukul.finddoctor.Activity.DrPendingActivity;
+import com.mukul.finddoctor.Activity.DrPrescriptionListActivity;
 import com.mukul.finddoctor.Activity.OnlineDoctorsActivity;
+import com.mukul.finddoctor.Activity.PrescriptionGivingActivity;
+import com.mukul.finddoctor.Activity.RecheckActivityDr;
 import com.mukul.finddoctor.Activity.SpecialistActivity;
 import com.mukul.finddoctor.R;
 
@@ -25,6 +30,15 @@ public class HomeFragmentDr extends Fragment  {
     Context context;
     @BindView(R.id.linearNew)
     LinearLayout linearNew;
+    @BindView(R.id.linerChat)
+    LinearLayout linerChat;
+    @BindView(R.id.linearPrescription)
+    LinearLayout linearPrescription;
+    @BindView(R.id.linearRecheck)
+    LinearLayout linearRecheck;
+    @BindView(R.id.linearPending)
+    LinearLayout linearPending;
+
 
 
 
@@ -52,11 +66,38 @@ public class HomeFragmentDr extends Fragment  {
         linearNew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               // startActivity(new Intent(context, DrPendingActivity.class));
+               startActivity(new Intent(context, DrConfirmedActivity.class));
             }
         });
+        linerChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, DrChatActivity.class));
+            }
+        });
+//DrPrescriptionListActivity
+        linearPrescription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, DrPrescriptionListActivity.class));
+            }
+        });
+//RecheckActivityDr
 
-
+        linearRecheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, RecheckActivityDr.class));
+            }
+        });
+//DrPendingActivity
+        linearPending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(context, DrPendingActivity.class));
+            }
+        });
+        //DrConfirmedActivity
 
         return v;
     }

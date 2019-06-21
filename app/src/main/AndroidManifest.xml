@@ -23,6 +23,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.RecheckActivityDr" />
+        <activity android:name=".Activity.ChatActivityDr" />
+        <activity android:name=".Activity.PrescriptionGivingActivity" />
+        <activity android:name=".Activity.DrPrescriptionListActivity" />
+        <activity android:name=".Activity.DrChatActivity" />
+        <activity android:name=".Activity.PrescriptionActivityPatient" />
+        <activity android:name=".Activity.AdviceActivityPatient" />
+        <activity android:name=".Activity.PatientDiseaseSumActivity" />
+        <activity android:name=".Activity.TestRecomendationListActivity" />
+        <activity
+            android:name=".Activity.PatientPersonalInfoActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".Activity.SwipeNewActivity" />
         <activity
             android:name=".Activity.CallLogHistoryActivity"
             android:parentActivityName=".Activity.HomeActivity" />
@@ -154,8 +167,12 @@
         <activity
             android:name=".Activity.PatientHomeActivity"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Activity.SpecialistActivity" />
-        <activity android:name=".Activity.OnlineDoctorsActivity" />
+        <activity
+            android:name=".Activity.SpecialistActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Activity.OnlineDoctorsActivity"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Activity.OnlinDoctorsSwipeActivity" />
         <activity android:name=".Activity.HomeActivityDrActivity" />
         <activity
@@ -164,7 +181,10 @@
         <activity
             android:name=".Activity.BookingActivityNew"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Activity.BookingConfirmActivity"></activity>
+        <activity android:name=".Activity.BookingConfirmActivity" />
+        <activity android:name=".Activity.RequestReviewActivityPatient" />
+        <activity android:name=".Activity.DrListGridActivity" />
+        <activity android:name=".Activity.PersonalPhysicianAcrivity" />
     </application>
 
 </manifest>

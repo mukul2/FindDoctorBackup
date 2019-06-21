@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mukul.finddoctor.Activity.DrListActivity;
+import com.mukul.finddoctor.Activity.DrListGridActivity;
 import com.mukul.finddoctor.Data.Data;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.Utils.MyProgressBar;
@@ -24,6 +25,7 @@ import com.mukul.finddoctor.model.SpecialistNameCount;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mukul.finddoctor.Data.Data.TYPE_OF_ACTIVITY;
 import static com.mukul.finddoctor.Data.Data.searchResult;
 import static com.mukul.finddoctor.Data.DataStore.CLICKED_TITLE;
 import static com.mukul.finddoctor.Data.DataStore.downloadedDoctors;
@@ -79,8 +81,15 @@ public class DepartmentsAdapter extends RecyclerView.Adapter<DepartmentsAdapter.
             @Override
             public void onClick(View view) {
                 // MyProgressBar.with(context).show();
-               // CLICKED_TITLE = movie.getName();
-                context.startActivity(new Intent(context, DrListActivity.class));
+                // CLICKED_TITLE = movie.getName();
+                if (TYPE_OF_ACTIVITY.equals("review")) {
+                    context.startActivity(new Intent(context, DrListGridActivity.class));
+
+                } else {
+
+                    context.startActivity(new Intent(context, DrListActivity.class));
+
+                }
 //                Api.getInstance().searchDoctor("", "", movie.getName(), "", "", new ApiListener.doctorSearchListener() {
 //                    @Override
 //                    public void onSearchSuccess(List<DoctorModel> list) {

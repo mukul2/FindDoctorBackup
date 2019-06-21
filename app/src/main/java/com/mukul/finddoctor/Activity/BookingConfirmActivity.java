@@ -1,6 +1,7 @@
 package com.mukul.finddoctor.Activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -45,5 +46,10 @@ public class BookingConfirmActivity extends AppCompatActivity {
 
     public void back(View view) {
         onBackPressed();
+    }
+
+    public void gotoHome(View view) {
+        startActivity(new Intent(this,PatientHomeActivity.class));
+        finishAffinity();
     }
 }

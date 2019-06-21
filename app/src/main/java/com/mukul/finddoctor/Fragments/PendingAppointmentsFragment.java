@@ -6,41 +6,35 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import com.mukul.finddoctor.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
-import static com.mukul.finddoctor.Data.DataStore.EDUCATIONSKILLMODEL;
-
-
-public class SpecialSkillFragment extends Fragment  {
+public class PendingAppointmentsFragment extends Fragment  {
     View v;
     Context context;
 
 
 
-    public static SpecialSkillFragment newInstance() {
-        SpecialSkillFragment fragment = new SpecialSkillFragment();
+    public static PendingAppointmentsFragment newInstance() {
+        PendingAppointmentsFragment fragment = new PendingAppointmentsFragment();
         return fragment;
     }
 
-    public SpecialSkillFragment() {
+    public PendingAppointmentsFragment() {
         // Required empty public constructor
     }
 
-
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.skill_fragment, container, false);
+        v = inflater.inflate(R.layout.appointment_fragment, container, false);
         context=v.getContext();
-        ButterKnife.bind(this,v);
-
 
 
 

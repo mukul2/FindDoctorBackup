@@ -30,6 +30,7 @@ import static com.mukul.finddoctor.Data.Data.singleDrModel;
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyViewHolder> {
 
     Context context;
+    List<Day> list = new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView tv_day, tv_time;
@@ -49,6 +50,12 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
 
     }
 
+    public ScheduleAdapter(List<Day> days) {
+        this.list = days;
+
+
+    }
+
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
@@ -61,9 +68,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
 
-        final Day movie = singleDrModel.getDays().get(position);
+        final Day movie = list.get(position);
 
-        holder.tv_day.setText(DataStore.convertToWeekDay (movie.getDay()));
+        holder.tv_day.setText(DataStore.convertToWeekDay(movie.getDay()));
         holder.tv_time.setText(movie.getTime());
 
 
@@ -71,6 +78,6 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.MyView
 
     @Override
     public int getItemCount() {
-        return singleDrModel.getDays().size();
+        return list.size();
     }
 }

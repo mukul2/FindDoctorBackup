@@ -1,7 +1,10 @@
 package com.mukul.finddoctor.Activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +25,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,11 +34,14 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.adapter.ScheduleAdapter;
+import com.mukul.finddoctor.model.Day;
 import com.mukul.finddoctor.model.DoctorModel;
 
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.mukul.finddoctor.Data.Data.searchResult;
 import static com.mukul.finddoctor.Data.Data.singleDrModel;
@@ -43,6 +51,7 @@ public class DoctorsSwipeActivity extends AppCompatActivity {
     private SectionsPagerAdapter mSectionsPagerAdapter;
     int counter;
     private ViewPager mViewPager;
+    public static   List<DoctorModel>LIST_DOCTORS=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +61,7 @@ public class DoctorsSwipeActivity extends AppCompatActivity {
         //   setSupportActionBar(toolbar);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
+        setDoctors();
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
@@ -62,21 +72,63 @@ public class DoctorsSwipeActivity extends AppCompatActivity {
         if (b != null) {
             String j = (String) b.get("currentIndex");
             counter=Integer.parseInt(j);
-            mViewPager.setCurrentItem(counter);
+            mViewPager.setCurrentItem(0);
             //setTitle((String) b.get("category_name"));
             //  toolbar.setTitle((String) b.get("category_name"));
         }
+        setUpStatusbar();
+    }
+
+    private void setDoctors() {
+        DoctorModel model=new DoctorModel();
+        model.setDrName("Mukul 1");
+        model.setAddress("Fatullah Narayanganj");
+        model.setCity("Dhaka");
+        model.setLastDegree("MBBS");
+        model.setVisitFee("500");
+        model.setSpecialist("Heart");
+        model.setPhoto("https://i.ebayimg.com/images/g/Lc8AAOSw42ta3qor/s-l640.jpg");
+        List<Day>days=new ArrayList<>();
+        days.add(new Day("1","10:40 AM"));
+
+
+        model.setDays(days);
+        LIST_DOCTORS.add(model);
+        LIST_DOCTORS.add(model);
+        LIST_DOCTORS.add(model);
+        LIST_DOCTORS.add(model);
 
     }
 
 
-
-
+    public  void setUpStatusbar(){
+        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
+            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
+        }
+        if (Build.VERSION.SDK_INT >= 19) {
+            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+        }
+        //make fully Android Transparent Status bar
+        if (Build.VERSION.SDK_INT >= 21) {
+            setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+    public static void setWindowFlag(Activity activity, final int bits, boolean on) {
+        Window win = activity.getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
+    }
 
 
     public void next(View view) {
         counter++;
-        if (counter == searchResult.size())
+        if (counter == LIST_DOCTORS.size())
             counter = 0;
         mViewPager.setCurrentItem(counter);
 
@@ -85,7 +137,7 @@ public class DoctorsSwipeActivity extends AppCompatActivity {
     public void prev(View view) {
         counter--;
         if (counter == -1)
-            counter =searchResult.size()-1;
+            counter =LIST_DOCTORS.size()-1;
         mViewPager.setCurrentItem(counter);
     }
 
@@ -119,7 +171,7 @@ public class DoctorsSwipeActivity extends AppCompatActivity {
             Bundle args = new Bundle();
             args.putString(ARG_SECTION_NUMBER, "1");
             args.putString("position", sectionNumber);
-            args.putString("image", sectionNumber);
+            args.putString("image", image);
 
             fragment.setArguments(args);
             return fragment;
@@ -132,9 +184,9 @@ public class DoctorsSwipeActivity extends AppCompatActivity {
             TextView dr_name = (TextView) rootView.findViewById(R.id.dr_name);
             TextView specialist = (TextView) rootView.findViewById(R.id.specialist);
             RecyclerView recycler_view = (RecyclerView) rootView.findViewById(R.id.recycler_view);
-            dr_name.setText(searchResult.get(Integer.parseInt(getArguments().getString("position"))).getDrName());
-            specialist.setText(searchResult.get(Integer.parseInt(getArguments().getString("position"))).getSpecialist());
-            singleDrModel=searchResult.get(Integer.parseInt(getArguments().getString("position")));
+            dr_name.setText(LIST_DOCTORS.get(Integer.parseInt(getArguments().getString("position"))).getDrName());
+            specialist.setText(LIST_DOCTORS.get(Integer.parseInt(getArguments().getString("position"))).getSpecialist());
+            singleDrModel=LIST_DOCTORS.get(Integer.parseInt(getArguments().getString("position")));
             ScheduleAdapter mAdapter = new ScheduleAdapter();
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(rootView.getContext());
             StaggeredGridLayoutManager  _sGridLayoutManager = new StaggeredGridLayoutManager(2,
@@ -142,12 +194,16 @@ public class DoctorsSwipeActivity extends AppCompatActivity {
             recycler_view.setLayoutManager(_sGridLayoutManager);
             recycler_view.setItemAnimator(new DefaultItemAnimator());
             //recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+          //  Toast.makeText(, "", Toast.LENGTH_SHORT).show();
 
             recycler_view.setAdapter(mAdapter);
             //  textView.setText(getArguments().getInt(ARG_SECTION_NUMBER));
             //textView.setText(getArguments().getString(ARG_SECTION_NUMBER));
             //section_title.setText(getArguments().getString("title"));
-           // Glide.with(rootView.getContext()).load(getArguments().getString("image")).into(imageView);
+            //profile
+            CircleImageView profile = (CircleImageView) rootView.findViewById(R.id.profile);
+
+           Glide.with(rootView.getContext()).load(getArguments().getString("image")).into(profile);
 
             return rootView;
         }
@@ -167,13 +223,13 @@ public class DoctorsSwipeActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(""+position,searchResult.get(position).getSpecialist(),"");
+            return PlaceholderFragment.newInstance(""+position,LIST_DOCTORS.get(position).getSpecialist(),LIST_DOCTORS.get(position).getPhoto());
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return searchResult.size();
+            return LIST_DOCTORS.size();
         }
     }
     private void setClipboard(Context context, String text) {

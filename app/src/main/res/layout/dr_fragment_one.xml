@@ -16,12 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/clinic_blur_back" />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="#8339ab99" />
+            android:src="@drawable/gradient_2" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -181,7 +177,7 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:text="New"
+                    android:text="Confirmed"
                     android:textSize="10dp"
                     android:paddingTop="5dp"
 
@@ -191,6 +187,7 @@
                 android:layout_width="match_parent"
                 android:gravity="center"
                 android:layout_weight="0.33"
+                android:id="@+id/linearPending"
                 android:orientation="vertical"
                 android:layout_height="match_parent">
 
@@ -224,6 +221,7 @@
                 android:gravity="center"
                 android:layout_weight="0.33"
                 android:orientation="vertical"
+                android:id="@+id/linearRecheck"
                 android:layout_height="match_parent">
 
                 <RelativeLayout
@@ -262,6 +260,7 @@
                 android:gravity="center"
                 android:layout_weight="0.33"
                 android:orientation="vertical"
+                android:id="@+id/linearPrescription"
                 android:layout_height="match_parent">
 
                 <RelativeLayout
@@ -294,6 +293,7 @@
                 android:gravity="center"
                 android:layout_weight="0.33"
                 android:orientation="vertical"
+                android:id="@+id/linerChat"
                 android:layout_height="match_parent">
 
                 <RelativeLayout

@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.mukul.finddoctor.Activity.OnlineDoctorsActivity;
+import com.mukul.finddoctor.Activity.PersonalPhysicianAcrivity;
+import com.mukul.finddoctor.Activity.RequestReviewActivityPatient;
 import com.mukul.finddoctor.Activity.SpecialistActivity;
 import com.mukul.finddoctor.R;
 
@@ -26,6 +28,10 @@ public class HomeFragment extends Fragment  {
     CardView cardChember;
     @BindView(R.id.cardOnline)
     CardView cardOnline;
+    @BindView(R.id.cardReview)
+    CardView cardReview;
+    @BindView(R.id.cardPhysician)
+    CardView cardPhysician;
 
 
     public static HomeFragment newInstance() {
@@ -60,10 +66,18 @@ public class HomeFragment extends Fragment  {
     }
     @OnClick(R.id.cardOnline)
     public  void  openOnlineDoctors(){
-       // startActivity(new Intent(context, OnlineDoctorsActivity.class));
+       startActivity(new Intent(context, OnlineDoctorsActivity.class));
     }
+    @OnClick(R.id.cardReview)
+    public  void  openReviewReview(){
+      startActivity(new Intent(context, RequestReviewActivityPatient.class));
+    }
+    //PersonalPhysicianAcrivity
 
-
+    @OnClick(R.id.cardPhysician)
+    public  void  openPersonalPhysician(){
+        startActivity(new Intent(context, PersonalPhysicianAcrivity.class));
+    }
 
 
 

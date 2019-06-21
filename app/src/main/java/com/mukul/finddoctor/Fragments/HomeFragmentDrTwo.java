@@ -55,6 +55,10 @@ public class HomeFragmentDrTwo extends Fragment implements ApiListener.doctorEdu
         context=v.getContext();
 
         ButterKnife.bind(this,v);
+        viewPager = (ViewPager)v. findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        tabLayout = (TabLayout)v. findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
 
         Api.getInstance().doctorEduSkillDownload("41",this);
 
@@ -75,10 +79,7 @@ public class HomeFragmentDrTwo extends Fragment implements ApiListener.doctorEdu
     public void ondoctorEduSkillDownloadSuccess(EducationSkillModel data) {
 
         EDUCATIONSKILLMODEL=data;
-        viewPager = (ViewPager)v. findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        tabLayout = (TabLayout)v. findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     @Override

@@ -4,49 +4,223 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="10dp"
     android:layout_height="match_parent">
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:orientation="vertical"
-       android:layout_height="wrap_content">
-       <TextView
-           android:layout_width="wrap_content"
-           android:text="Write/edit your educational information."
-           android:paddingTop="10dp"
-           android:paddingBottom="5dp"
-           android:paddingLeft="5dp"
-           android:layout_height="wrap_content"
-           />
-       <EditText
-           android:layout_width="match_parent"
-           android:lines="5"
-           android:gravity="start"
-           android:padding="10dp"
-           android:id="@+id/ed_educationInfo"
-           android:background="@drawable/ed_selector"
-           android:layout_height="wrap_content"
-           />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/shadow_low"
 
-       <android.support.v7.widget.CardView
-           android:layout_width="200dp"
-           android:layout_gravity="center"
-           android:layout_marginTop="15dp"
-           app:cardBackgroundColor="@color/colorPrimary"
-           app:cardCornerRadius="5dp"
-           android:layout_height="wrap_content">
-           <TextView
-               android:layout_width="wrap_content"
-               android:text="Submit"
-               android:textColor="@android:color/white"
-               android:paddingRight="50dp"
-               android:paddingLeft="50dp"
-               android:paddingTop="10dp"
-               android:paddingBottom="10dp"
-               android:onClick="login"
-               android:layout_gravity="center"
-               android:textAllCaps="false"
-               android:layout_height="wrap_content"
-               />
-       </android.support.v7.widget.CardView>
+            android:layout_height="wrap_content">
 
-   </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="MBBS Institution"
+                android:textSize="12dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="3dp"
+                android:layout_height="wrap_content"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="00dp"
+                    android:layout_marginLeft="3dp"
+
+                    android:layout_height="40dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.1"
+                        android:text="Dhaka Medical College"
+                        android:textSize="12dp"
+                        android:background="@android:color/white"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+
+                        />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:src="@drawable/edit_"
+                        android:padding="5dp"
+                        android:alpha="0.5"
+
+
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/shadow_low"
+
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="MBBS Year"
+                android:textSize="12dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="3dp"
+                android:layout_height="wrap_content"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="00dp"
+                    android:layout_marginLeft="3dp"
+
+                    android:layout_height="40dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.1"
+                        android:text="2011"
+                        android:textSize="12dp"
+                        android:background="@android:color/white"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+
+                        />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:src="@drawable/edit_"
+                        android:padding="5dp"
+                        android:alpha="0.5"
+
+
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/shadow_low"
+
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Field 1"
+                android:textSize="12dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="3dp"
+                android:layout_height="wrap_content"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="00dp"
+                    android:layout_marginLeft="3dp"
+
+                    android:layout_height="40dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.1"
+                        android:text="Answer 1"
+                        android:textSize="12dp"
+                        android:background="@android:color/white"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+
+                        />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:src="@drawable/edit_"
+                        android:padding="5dp"
+                        android:alpha="0.5"
+
+
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:paddingTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/shadow_low"
+
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:text="Field 2"
+                android:textSize="12dp"
+                android:layout_marginBottom="0dp"
+                android:layout_marginLeft="3dp"
+                android:layout_height="wrap_content"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="00dp"
+                    android:layout_marginLeft="3dp"
+
+                    android:layout_height="40dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.1"
+                        android:text="Answer 2"
+                        android:textSize="12dp"
+                        android:background="@android:color/white"
+                        android:layout_height="match_parent"
+                        android:textColor="@android:color/black"
+
+                        />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.9"
+                        android:src="@drawable/edit_"
+                        android:padding="5dp"
+                        android:alpha="0.5"
+
+
+                        android:layout_height="match_parent" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
 </ScrollView>

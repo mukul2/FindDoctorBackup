@@ -17,12 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/clinic_blur_back" />
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="#8339ab99" />
+            android:src="@drawable/gradient_2" />
+
 
         <LinearLayout
             android:layout_width="match_parent"

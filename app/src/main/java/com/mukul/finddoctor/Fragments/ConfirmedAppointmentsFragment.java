@@ -3,32 +3,35 @@ package com.mukul.finddoctor.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TableLayout;
 
 import com.mukul.finddoctor.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.mukul.finddoctor.Data.DataStore.EDUCATIONSKILLMODEL;
 
-
-public class EducationFragment extends Fragment  {
+public class ConfirmedAppointmentsFragment extends Fragment  {
     View v;
     Context context;
 
 
 
-    public static EducationFragment newInstance() {
-        EducationFragment fragment = new EducationFragment();
+    public static ConfirmedAppointmentsFragment newInstance() {
+        ConfirmedAppointmentsFragment fragment = new ConfirmedAppointmentsFragment();
         return fragment;
     }
 
-    public EducationFragment() {
+    public ConfirmedAppointmentsFragment() {
         // Required empty public constructor
     }
 
@@ -40,10 +43,8 @@ public class EducationFragment extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.fragment_education, container, false);
-        ButterKnife.bind(this,v);
+        v = inflater.inflate(R.layout.appointment_fragment, container, false);
         context=v.getContext();
-        ButterKnife.bind(this,v);
 
 
 

@@ -48,6 +48,7 @@ dependencies {
     implementation 'com.fxn769:pix:1.2.5'
     implementation 'com.karumi:dexter:5.0.0'
     compile(name: 'sinch-android-rtc', version: '+', ext: 'aar')
+    implementation 'link.fls:swipestack:0.3.0'
 
 
 }

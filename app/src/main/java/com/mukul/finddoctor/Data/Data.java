@@ -27,6 +27,7 @@ import java.util.List;
 
 public class Data {
 
+    public static String TYPE_OF_ACTIVITY;
     public static String TYPE_DOCTOR="d";
     public static String TYPE_PATIENT="p";
     public static  List<SpacialistModel> spacialist = new ArrayList<>();
