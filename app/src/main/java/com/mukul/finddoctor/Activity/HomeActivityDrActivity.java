@@ -9,7 +9,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -17,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mukul.finddoctor.Fragments.AppointmentsFragment;
+import com.mukul.finddoctor.Fragments.BlogFragmentDoctor;
 import com.mukul.finddoctor.Fragments.HomeFragment;
 import com.mukul.finddoctor.Fragments.HomeFragmentDr;
 import com.mukul.finddoctor.Fragments.HomeFragmentDrTwo;
@@ -41,6 +45,8 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
     TextView tv_two;
     @BindView(R.id.tv_three)
     TextView tv_three;
+    @BindView(R.id.tv_four)
+    TextView tv_four;
     int anotherColorText= Color.GRAY;
 
     @BindView(R.id.img_one)
@@ -49,14 +55,17 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
     ImageView img_two;
     @BindView(R.id.img_three)
     ImageView img_three;
+    @BindView(R.id.img_four)
+    ImageView img_four;
     @BindView(R.id.linerhomebutton)
     LinearLayout linerHomeButton;
-    @BindView(R.id.linerShopButton)
-    LinearLayout linerShopButton;
-    @BindView(R.id.linerAppointmentButton)
-    LinearLayout linerAppointmentButton;
-    LinearLayout.LayoutParams enable = new LinearLayout.LayoutParams(28, 28);
-    LinearLayout.LayoutParams disbale = new LinearLayout.LayoutParams(20, 20);
+    @BindView(R.id.linerProfileButton)
+    LinearLayout linerProfileButton;
+    @BindView(R.id.linerSettingButton)
+    LinearLayout linerSettingButton;
+    @BindView(R.id.linerBlogButton)
+    LinearLayout linerBlogButton;
+
     SessionManager sessionManager;
 
     @Override
@@ -69,14 +78,27 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
         USER_ID = sessionManager.getUserId();
         getColorManagement();
         linerHomeButton.setOnClickListener(this);
-        linerShopButton.setOnClickListener(this);
-        linerAppointmentButton.setOnClickListener(this);
+        linerProfileButton.setOnClickListener(this);
+        linerSettingButton.setOnClickListener(this);
+        linerBlogButton.setOnClickListener(this);
 
-        img_one.setLayoutParams(disbale);
-        img_two.setLayoutParams(enable);
-        img_three.setLayoutParams(disbale);
+    ;
         initial_fragment();
+        initIconDesnsity();
     }
+    private void initIconDesnsity() {
+        final DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        // set your height here
+        final ViewGroup.LayoutParams layoutParams = img_one.getLayoutParams();
+        layoutParams.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 19, displayMetrics);
+        // set your width here
+        layoutParams.width = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 19, displayMetrics);
+        img_two.setLayoutParams(layoutParams);
+        img_three.setLayoutParams(layoutParams);
+        img_four.setLayoutParams(layoutParams);
+        img_one.setLayoutParams(layoutParams);
+    }
+
     private void initial_fragment() {
         Fragment selectedFragment = null;
         selectedFragment = HomeFragmentDr.newInstance();
@@ -92,58 +114,63 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
         another = Color.GRAY;
     }
 
-    public void do_0_1_0() {
+    public void do_0_1_0_0() {
 
 
         //iv.setLayoutParams(layoutParams);
         img_one.setImageResource(R.drawable.medicine_gray);
         img_two.setImageResource(R.drawable.home_primary);
-        img_three.setImageResource(R.drawable.setting_gray);
+        img_three.setImageResource(R.drawable.blog);
+        img_four.setImageResource(R.drawable.setting_gray);
 
         tv_one.setTextColor(another);
         tv_two.setTextColor(primaryClr);
         tv_three.setTextColor(another);
+        tv_four.setTextColor(another);
 
 
-
-        img_one.setLayoutParams(disbale);
-        img_two.setLayoutParams(enable);
-        img_three.setLayoutParams(disbale);
 
 
 
     }
-    public void do_1_0_0() {
+    public void do_1_0_0_0() {
 
 
         img_one.setImageResource(R.drawable.medicine_primary);
         img_two.setImageResource(R.drawable.home_gray);
-        img_three.setImageResource(R.drawable.setting_gray);
+        img_three.setImageResource(R.drawable.blog);
+        img_four.setImageResource(R.drawable.setting_gray);
+
 
         tv_one.setTextColor(primaryClr);
         tv_two.setTextColor(another);
         tv_three.setTextColor(another);
+        tv_four.setTextColor(another);
 
-        img_one.setLayoutParams(enable);
-        img_two.setLayoutParams(disbale);
-        img_three.setLayoutParams(disbale);
 
     }
-    public void do_0_0_1() {
-
+    public void do_0_0_1_0() {
         img_one.setImageResource(R.drawable.medicine_gray);
         img_two.setImageResource(R.drawable.home_gray);
-        img_three.setImageResource(R.drawable.setting_primary);
-
+        img_three.setImageResource(R.drawable.blog_primary);
+        img_four.setImageResource(R.drawable.setting_gray);
 
         tv_one.setTextColor(another);
         tv_two.setTextColor(another);
         tv_three.setTextColor(primaryClr);
+        tv_four.setTextColor(another);
 
-        img_one.setLayoutParams(disbale);
-        img_two.setLayoutParams(disbale);
-        img_three.setLayoutParams(enable);
+    }
+    public void do_0_0_0_1() {
+        img_one.setImageResource(R.drawable.medicine_gray);
+        img_two.setImageResource(R.drawable.home_gray);
+        img_three.setImageResource(R.drawable.blog);
+        img_four.setImageResource(R.drawable.setting_primary);
 
+        tv_one.setTextColor(another);
+        tv_two.setTextColor(another);
+        tv_three.setTextColor(another);
+        tv_four.setTextColor(primaryClr);
 
     }
     @Override
@@ -152,15 +179,19 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
         switch (view.getId()) {
             case R.id.linerhomebutton:
                 selectedFragment = HomeFragmentDr.newInstance();
-                do_0_1_0();
+                do_1_0_0_0();
                 break;
-            case R.id.linerShopButton:
+            case R.id.linerProfileButton:
                 selectedFragment = HomeFragmentDrTwo.newInstance();
-                do_1_0_0();
+                do_0_1_0_0();
                 break;
-            case R.id.linerAppointmentButton:
+            case R.id.linerBlogButton:
+                selectedFragment = BlogFragmentDoctor.newInstance();
+                do_0_0_1_0();
+                break;
+                case R.id.linerSettingButton:
                 selectedFragment = SettingFragmentDr.newInstance();
-                do_0_0_1();
+                do_0_0_0_1();
                 break;
 
         }

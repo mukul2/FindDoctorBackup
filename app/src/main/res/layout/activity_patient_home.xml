@@ -9,66 +9,67 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:background="@drawable/gradient_2"
-        android:layout_height="100dp">
+        android:layout_height="90dp"
+        android:background="@drawable/gradient_2">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <RelativeLayout
                 android:layout_width="match_parent"
 
 
                 android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="25dp"
                 android:background="@android:color/transparent"
                 android:orientation="horizontal"
                 android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginTop="25dp"
-                android:layout_marginBottom="10dp"
-                >
+                android:paddingRight="15dp">
+
                 <com.mukul.finddoctor.Utils.CustomDrawerButton
                     android:layout_width="25dp"
-                    android:src="@drawable/menu_white"
-                    android:layout_centerVertical="true"
                     android:layout_height="25dp"
+                    android:layout_centerVertical="true"
                     android:padding="2dp"
-                    android:tint="@android:color/white"
-                    />
+                    android:src="@drawable/menu_white"
+                    android:tint="@android:color/white" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="45dp"
                     android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
-                    android:src="@drawable/doctor_avatar" />
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:src="@drawable/rafiq_vai" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="vertical"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="60dp"
                     android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="60dp"
+                    android:orientation="vertical"
                     android:paddingLeft="40dp">
 
                     <TextView
                         android:id="@+id/tv_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@android:color/white"
-                        android:text="Md Rafiqul Islam" />
+                        android:text="Md Rafiqul Islam"
+                        android:textColor="@android:color/white" />
 
                     <TextView
                         android:id="@+id/tv_balance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="right"
-                        android:textColor="@android:color/white"
+                        android:text="0.00 TK"
 
-                        android:text="0.00 TK" />
+                        android:textColor="@android:color/white" />
 
                 </LinearLayout>
             </RelativeLayout>
@@ -86,147 +87,150 @@
         android:animateLayoutChanges="true">
 
     </FrameLayout>
+
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
 
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
-        android:layout_height="50dp">
+        android:background="@android:color/white">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:gravity="center"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_height="50dp">
+            android:gravity="center">
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="0.25"
-                android:orientation="vertical"
                 android:id="@+id/linerhomebutton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
                 android:gravity="center"
 
-                android:layout_height="match_parent">
+                android:orientation="vertical">
+
                 <ImageView
-                    android:layout_width="18dp"
-                    android:src="@drawable/home_primary"
-                    android:layout_gravity="center"
-                    android:layout_height="18dp"
                     android:id="@+id/img_1"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/home_primary"
 
                     />
+
                 <TextView
+                    android:id="@+id/tv_1"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Home"
                     android:textColor="@color/colorPrimary"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
-                    android:textSize="10dp"
-                    android:id="@+id/tv_1"
-                    />
-
+                    android:textSize="10dp" />
 
 
             </LinearLayout>
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="0.25"
-                android:orientation="vertical"
                 android:id="@+id/linerProfileButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
 
                 android:gravity="center"
 
-                android:layout_height="match_parent">
+                android:orientation="vertical">
+
                 <ImageView
-                    android:layout_width="18dp"
-                    android:src="@drawable/profile_gray"
-                    android:layout_gravity="center"
-                    android:layout_height="18dp"
                     android:id="@+id/img_2"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/profile_gray"
 
 
                     />
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:text="Account"
                     android:id="@+id/tv_2"
-                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Account"
                     android:textSize="10dp"
 
                     />
 
 
-
             </LinearLayout>
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="0.25"
-                android:orientation="vertical"
                 android:id="@+id/linerAppointmentButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
 
                 android:gravity="center"
 
-                android:layout_height="match_parent">
+                android:orientation="vertical">
+
                 <ImageView
-                    android:layout_width="18dp"
-                    android:src="@drawable/calender_gray"
-                    android:layout_gravity="center"
-                    android:layout_height="18dp"
                     android:id="@+id/img_3"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/calender_gray"
 
 
                     />
+
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:text="Appointments"
                     android:id="@+id/tv_3"
-                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Appointments"
                     android:textSize="10dp"
 
                     />
 
 
-
             </LinearLayout>
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_weight="0.25"
-                android:orientation="vertical"
                 android:id="@+id/linerMedicineButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
 
                 android:gravity="center"
 
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="18dp"
-                    android:src="@drawable/blog"
+                android:orientation="vertical">
 
+                <ImageView
                     android:id="@+id/img_4"
-                    android:layout_gravity="center"
+                    android:layout_width="18dp"
+
                     android:layout_height="18dp"
-                    />
+                    android:layout_gravity="center"
+                    android:src="@drawable/blog" />
+
                 <TextView
+                    android:id="@+id/tv_4"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:text="Blog"
                     android:textSize="10dp"
-                    android:id="@+id/tv_4"
-                    android:layout_gravity="center"
-                    android:layout_height="wrap_content"
 
                     />
 
 
-
             </LinearLayout>
-
-
 
 
         </LinearLayout>
     </android.support.design.widget.BottomNavigationView>
-
-
-
 
 
 </RelativeLayout>

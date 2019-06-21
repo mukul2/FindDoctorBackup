@@ -92,7 +92,7 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
         initial_fragment();
         Api.getInstance().downloadBasicInfo(this);
         setUpStatusbar();
-     //   initIconDesnsity();
+        initIconDesnsity();
 
 
 

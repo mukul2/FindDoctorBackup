@@ -4,128 +4,164 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="#19cccccc"
+
     tools:context=".Activity.HomeActivityDrActivity">
 
+
+
+    <android.support.design.widget.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@android:color/white"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:paddingBottom="00dp"
+            android:paddingTop="00dp">
+
+            <LinearLayout
+                android:id="@+id/linerhomebutton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+                android:gravity="center"
+
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_one"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/home_primary"
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_one"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="0dp"
+                    android:text="Home"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="10dp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linerProfileButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+
+                android:gravity="center"
+
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_two"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/medicine_gray" />
+
+                <TextView
+                    android:id="@+id/tv_two"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="0dp"
+                    android:text="Profile"
+                    android:textSize="10dp"
+
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linerBlogButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+
+                android:gravity="center"
+
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_three"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/blog"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_three"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="0dp"
+                    android:text="Blog"
+                    android:textSize="10dp"
+
+                    />
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linerSettingButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+
+                android:gravity="center"
+
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/img_four"
+                    android:layout_width="19dp"
+                    android:layout_height="19dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/setting_gray"
+
+
+                    />
+
+                <TextView
+                    android:id="@+id/tv_four"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:paddingTop="0dp"
+                    android:text="Setting"
+                    android:textSize="10dp"
+
+                    />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </android.support.design.widget.BottomNavigationView>
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="#19cccccc"
+
         android:animateLayoutChanges="true">
 
     </FrameLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:background="@android:color/darker_gray"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="0.33"
-            android:orientation="vertical"
-            android:id="@+id/linerhomebutton"
-            android:gravity="center"
-
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="23dp"
-                android:src="@drawable/home_primary"
-                android:layout_gravity="center"
-                android:layout_height="23dp"
-                android:id="@+id/img_two"
-
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="Home"
-                android:textColor="@color/colorPrimary"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:paddingTop="0dp"
-                android:textSize="10dp"
-                android:id="@+id/tv_two"
-                />
-
-
-
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="0.33"
-            android:orientation="vertical"
-            android:id="@+id/linerShopButton"
-
-            android:gravity="center"
-
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="20dp"
-                android:src="@drawable/medicine_gray"
-
-                android:id="@+id/img_one"
-                android:layout_gravity="center"
-                android:layout_height="20dp"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="Profile"
-                android:paddingTop="0dp"
-                android:textSize="10dp"
-                android:id="@+id/tv_one"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-
-                />
-
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_weight="0.33"
-            android:orientation="vertical"
-            android:id="@+id/linerAppointmentButton"
-
-            android:gravity="center"
-
-            android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="20dp"
-                android:src="@drawable/setting_gray"
-                android:layout_gravity="center"
-                android:layout_height="20dp"
-                android:id="@+id/img_three"
-
-
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="Setting"
-                android:id="@+id/tv_three"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:paddingTop="0dp"
-                android:textSize="10dp"
-
-                />
-
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-
 
 </RelativeLayout>
