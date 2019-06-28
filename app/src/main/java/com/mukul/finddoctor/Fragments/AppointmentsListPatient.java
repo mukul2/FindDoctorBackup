@@ -125,7 +125,7 @@ public class AppointmentsListPatient extends Fragment implements ApiListener.pat
 
         recycler_view_confirmed.setAdapter(confirmedAdapter);
 
-        pendingAdapter = new PendingAppointmentAdapterPatient(status.getNotConfirmed());
+     //   pendingAdapter = new PendingAppointmentAdapterPatient(status.getNotConfirmed());
         RecyclerView.LayoutManager mLayoutManager1 = new LinearLayoutManager(getContext());
         recycler_view_pending.setLayoutManager(mLayoutManager1);
         recycler_view_pending.setItemAnimator(new DefaultItemAnimator());

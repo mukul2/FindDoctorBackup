@@ -9,10 +9,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.mukul.finddoctor.Data.DataStore;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.model.AppointmentModel;
-import com.mukul.finddoctor.model.AppointmentModelNew;
+import com.mukul.finddoctor.model.DiseasesModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,22 +21,22 @@ import java.util.List;
  */
 
 
-public class ConfirmedAppointmentAdapterDoctor extends RecyclerView.Adapter<ConfirmedAppointmentAdapterDoctor.MyViewHolder> {
-    List<AppointmentModelNew>list=new ArrayList<>();
+public class DiseasesAdapterPatient extends RecyclerView.Adapter<DiseasesAdapterPatient.MyViewHolder> {
+    List<DiseasesModel>list=new ArrayList<>();
 
     Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_problem, tv_date,tv_serial;
+        public TextView tv_diseases, tv_started, tv_status, tv_lastDegree, tv_epacialist,tv_address;
         ImageView circleImageView;
         RelativeLayout relative_container;
 
 
         public MyViewHolder(View view) {
             super(view);
-            tv_name = (TextView) view.findViewById(R.id.tv_name);
-            tv_date = (TextView) view.findViewById(R.id.tv_date);
-            tv_serial = (TextView) view.findViewById(R.id.tv_serial);
+            tv_diseases = (TextView) view.findViewById(R.id.tv_diseases);
+            tv_started = (TextView) view.findViewById(R.id.tv_started);
+            tv_status = (TextView) view.findViewById(R.id.tv_status);
 
 
 
@@ -45,7 +44,7 @@ public class ConfirmedAppointmentAdapterDoctor extends RecyclerView.Adapter<Conf
     }
 
 
-    public ConfirmedAppointmentAdapterDoctor(List<AppointmentModelNew> lists ) {
+    public DiseasesAdapterPatient(List<DiseasesModel> lists ) {
         this.list=lists;
 
     }
@@ -53,19 +52,18 @@ public class ConfirmedAppointmentAdapterDoctor extends RecyclerView.Adapter<Conf
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.confirmed_appointment_item, parent, false);
+                .inflate(R.layout.diseases_item, parent, false);
 
         return new MyViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final AppointmentModelNew movie = list.get(position);
-        context = holder.tv_name.getContext();
-        holder.tv_name.setText(movie.getName());
-        holder.tv_serial.setText(""+movie.getId());
-        holder.tv_date.setText(movie.getDate());
-
+        final DiseasesModel movie = list.get(position);
+        context = holder.tv_diseases.getContext();
+        holder.tv_diseases.setText(movie.getDiseaseName());
+        holder.tv_started.setText(movie.getFirstNoticeDate());
+        holder.tv_status.setText(movie.getStatus());
 
 
     }

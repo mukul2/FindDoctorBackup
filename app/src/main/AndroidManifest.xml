@@ -23,6 +23,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Activity.DoctorsFullProfileView"></activity>
+        <activity android:name=".Activity.DoctorsRegister" />
         <activity android:name=".Activity.RecheckActivityDr" />
         <activity android:name=".Activity.ChatActivityDr" />
         <activity android:name=".Activity.PrescriptionGivingActivity" />
@@ -53,7 +55,8 @@
         <activity
             android:name=".Activity.SignUpActivity"
             android:label="SignUp"
-            android:parentActivityName=".Activity.LoginActivity" />
+            android:parentActivityName=".Activity.LoginActivity"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".Activity.PhoneEnterActivityActivity"
             android:label="SignUp"
@@ -185,6 +188,9 @@
         <activity android:name=".Activity.RequestReviewActivityPatient" />
         <activity android:name=".Activity.DrListGridActivity" />
         <activity android:name=".Activity.PersonalPhysicianAcrivity" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>

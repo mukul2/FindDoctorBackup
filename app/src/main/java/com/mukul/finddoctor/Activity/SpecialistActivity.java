@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -18,10 +19,14 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.mukul.finddoctor.R;
+import com.mukul.finddoctor.Utils.SessionManager;
 import com.mukul.finddoctor.adapter.DepartmentsAdapter;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.DepartmentModel;
+import com.mukul.finddoctor.model.DeptModel;
+import com.mukul.finddoctor.model.MedicineModel;
+import com.sinch.gson.JsonElement;
 
 import java.util.List;
 
@@ -29,24 +34,48 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.mukul.finddoctor.Data.Data.TYPE_OF_ACTIVITY;
+import static com.mukul.finddoctor.Data.DataStore.TOKEN;
 
-public class SpecialistActivity extends AppCompatActivity implements  ApiListener.departmentsDownloadListener{
+public class SpecialistActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
 
 
-    Context context=this;
+    Context context = this;
+    SessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_specialist);
         ButterKnife.bind(this);
-        Api.getInstance().downlaodDepartmentsList(this);
+        sessionManager = new SessionManager(this);
+        //Api.getInstance().getDepartMentsList(TOKEN,this);
         setUpStatusbar();
+        Api.getInstance().getDepList(TOKEN, new ApiListener.DeptDownloadListener() {
+            @Override
+            public void onDepartmentDownloadSuccess(List<DeptModel> list) {
+                Toast.makeText(context, ""+list.size(), Toast.LENGTH_SHORT).show();
+                        TYPE_OF_ACTIVITY="Chambers";
+
+        DepartmentsAdapter mAdapter = new DepartmentsAdapter(list);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+        recycler_view.setLayoutManager(mLayoutManager);
+        recycler_view.setItemAnimator(new DefaultItemAnimator());
+        recycler_view.setAdapter(mAdapter);
+
+            }
+
+            @Override
+            public void onDepartmentDownloadFailed(String msg) {
+
+            }
+        });
 
 
     }
-    public  void setUpStatusbar(){
+
+    public void setUpStatusbar() {
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
         }
@@ -59,6 +88,7 @@ public class SpecialistActivity extends AppCompatActivity implements  ApiListene
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
     }
+
     public static void setWindowFlag(Activity activity, final int bits, boolean on) {
         Window win = activity.getWindow();
         WindowManager.LayoutParams winParams = win.getAttributes();
@@ -74,19 +104,23 @@ public class SpecialistActivity extends AppCompatActivity implements  ApiListene
         onBackPressed();
     }
 
-    @Override
-    public void onDepartmentsListDownloadSuccess(List<DepartmentModel> list) {
-        TYPE_OF_ACTIVITY="Chambers";
 
-        DepartmentsAdapter mAdapter = new DepartmentsAdapter(list);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
-        recycler_view.setLayoutManager(mLayoutManager);
-        recycler_view.setItemAnimator(new DefaultItemAnimator());
-        recycler_view.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onDepartmentsListDownloadFailed(String msg) {
-
-    }
+//
+//    @Override
+//    public void onAppointmentSearchSuccess(List<DepartmentModel> list) {
+//        TYPE_OF_ACTIVITY="Chambers";
+//
+//        DepartmentsAdapter mAdapter = new DepartmentsAdapter(list);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+//        recycler_view.setLayoutManager(mLayoutManager);
+//        recycler_view.setItemAnimator(new DefaultItemAnimator());
+//        recycler_view.setAdapter(mAdapter);
+//
+//    }
+//
+//    @Override
+//    public void onAppointmentSearchFailed(String msg) {
+//        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+//
+//    }
 }

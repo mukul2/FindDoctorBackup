@@ -6,16 +6,16 @@ package com.mukul.finddoctor.model;
 
 public class DaysTimeModel {
     String dayName;
-    String startTime;
-    String endTime;
+    String start_time;
+    String end_time;
 
     public DaysTimeModel() {
     }
 
-    public DaysTimeModel(String dayName, String startTime, String endTime) {
+    public DaysTimeModel(String dayName, String start_time, String end_time) {
         this.dayName = dayName;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.start_time = start_time;
+        this.end_time = end_time;
     }
 
 
@@ -29,18 +29,18 @@ public class DaysTimeModel {
     }
 
     public String getStartTime() {
-        return startTime;
+        return start_time;
     }
 
     public void setStartTime(String startTime) {
-        this.startTime = startTime;
+        this.start_time = startTime;
     }
 
     public String getEndTime() {
-        return endTime;
+        return end_time;
     }
 
     public void setEndTime(String endTime) {
-        this.endTime = endTime;
+        this.end_time = endTime;
     }
 }

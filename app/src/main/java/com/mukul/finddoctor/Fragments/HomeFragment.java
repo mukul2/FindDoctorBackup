@@ -55,15 +55,19 @@ public class HomeFragment extends Fragment  {
         context=v.getContext();
 
         ButterKnife.bind(this,v);
+        cardChember.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                context. startActivity(new Intent(context, SpecialistActivity.class));
+              //  Toast.makeText(context, "ok", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
 
         return v;
     }
-    @OnClick(R.id.cardChember)
-    public  void  open(){
-        startActivity(new Intent(context, SpecialistActivity.class));
-    }
+
     @OnClick(R.id.cardOnline)
     public  void  openOnlineDoctors(){
        startActivity(new Intent(context, OnlineDoctorsActivity.class));

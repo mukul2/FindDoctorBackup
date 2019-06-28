@@ -34,7 +34,7 @@ public class BlogFragmentDoctor extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        v = inflater.inflate(R.layout.blog_fragment_patient, container, false);
+        v = inflater.inflate(R.layout.blog_fragment_doc, container, false);
         context=v.getContext();
 
         ButterKnife.bind(this,v);

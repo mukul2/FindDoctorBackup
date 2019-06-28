@@ -45,12 +45,12 @@ public class PatientTestRecomActivity extends AppCompatActivity implements ApiLi
 
     @Override
     public void onRecomendationDownloadSuccess(List<RecomentationModel> list) {
-        RecomendedTestAppointmentAdapterPatient mAdapter = new RecomendedTestAppointmentAdapterPatient(list);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
-        recycler_view.setLayoutManager(mLayoutManager);
-        recycler_view.setItemAnimator(new DefaultItemAnimator());
-        recycler_view.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
-        recycler_view.setAdapter(mAdapter);
+//        RecomendedTestAppointmentAdapterPatient mAdapter = new RecomendedTestAppointmentAdapterPatient(list);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+//        recycler_view.setLayoutManager(mLayoutManager);
+//        recycler_view.setItemAnimator(new DefaultItemAnimator());
+//        recycler_view.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+//        recycler_view.setAdapter(mAdapter);
 
     }
 

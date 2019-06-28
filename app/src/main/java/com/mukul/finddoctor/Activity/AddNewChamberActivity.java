@@ -31,23 +31,28 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mukul.finddoctor.Data.DataStore.TOKEN;
 import static com.mukul.finddoctor.Data.DataStore.USER_ID;
 
-public class AddNewChamberActivity extends AppCompatActivity implements ApiListener.drSchedulePostListener{
+public class AddNewChamberActivity extends BaseActivity implements ApiListener.drSchedulePostListener {
     @BindView(R.id.tv_add)
     TextView tv_add;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
-    Context context=this;
-    List<DaysTimeModel> list=new ArrayList<>();
-    List<DaysTimeModel>listReserved=new ArrayList<>();
-    List<String>days=new ArrayList<>();
-    List<String>startTime=new ArrayList<>();
-    List<String>endTime=new ArrayList<>();
+    Context context = this;
+    List<DaysTimeModel> list = new ArrayList<>();
+    List<DaysTimeModel> listReserved = new ArrayList<>();
+    List<String> days = new ArrayList<>();
+    List<String> startTime = new ArrayList<>();
+    List<String> endTime = new ArrayList<>();
     @BindView(R.id.ed_address)
     EditText ed_address;
     @BindView(R.id.ed_fees)
     EditText ed_fees;
+    @BindView(R.id.ed_followupfees)
+    EditText ed_followupfees;
+    @BindView(R.id.ed_chamberName)
+    EditText ed_chamberName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,7 @@ public class AddNewChamberActivity extends AppCompatActivity implements ApiListe
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
-        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context,DividerItemDecoration.VERTICAL,false);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL, false);
         recycler_view.setAdapter(mAdapter);
         recycler_view.addItemDecoration(dividerItemDecoration);
         tv_add.setOnClickListener(new View.OnClickListener() {
@@ -68,14 +73,13 @@ public class AddNewChamberActivity extends AppCompatActivity implements ApiListe
                     @Override
                     public void onDaysSelected(DaysTimeModel day) {
                         //Toast.makeText(context, day.getDayName(), Toast.LENGTH_SHORT).show();
-                        list.add(list.size(),day);
-                        mAdapter.notifyItemInserted(list.size()-1);
+                        list.add(list.size(), day);
+                        mAdapter.notifyItemInserted(list.size() - 1);
 
                         days.add(day.getDayName());
                         startTime.add(day.getStartTime());
                         endTime.add(day.getStartTime());
                         //List<Day>list=new ArrayList<>();
-
 
 
                     }
@@ -94,13 +98,15 @@ public class AddNewChamberActivity extends AppCompatActivity implements ApiListe
     }
 
     public void save(View view) {
-        String address=ed_address.getText().toString().trim();
-        String fees=ed_fees.getText().toString().trim();
-        List<ChamberDaysPostModel>data=new ArrayList<>();
+        String address = ed_address.getText().toString().trim();
+        String fees = ed_fees.getText().toString().trim();
+        String followup = ed_followupfees.getText().toString().trim();
+        String chamberName = ed_chamberName.getText().toString().trim();
+        List<ChamberDaysPostModel> data = new ArrayList<>();
 
-        for (int i=0;i<days.size();i++){
-           // data.add(new ChamberDaysPostModel(days.get(i),startTime.get(i),endTime.get(i)));
-            ChamberDaysPostModel model=new ChamberDaysPostModel();
+        for (int i = 0; i < days.size(); i++) {
+            // data.add(new ChamberDaysPostModel(days.get(i),startTime.get(i),endTime.get(i)));
+            ChamberDaysPostModel model = new ChamberDaysPostModel();
             model.setDay(days.get(i));
             model.setStartTime(startTime.get(i));
             model.setEndTime(endTime.get(i));
@@ -108,19 +114,19 @@ public class AddNewChamberActivity extends AppCompatActivity implements ApiListe
 
         }
         MyProgressBar.with(context).show();
-        Gson gson=new Gson();
-     //  Toast.makeText(context, gson.toJson(data), Toast.LENGTH_LONG).show();
-        Api.getInstance().setDrSchedule(USER_ID,address,fees,"no data",gson.toJson(data),this);
+        Gson gson = new Gson();
+        //  Toast.makeText(context, gson.toJson(data), Toast.LENGTH_LONG).show();
+        Api.getInstance().setDrSchedule(TOKEN, USER_ID, chamberName, address, fees, followup, gson.toJson(data), this);
 
     }
 
     @Override
     public void ondrSchedulePostSuccess(StatusMessage data) {
         MyProgressBar.dismiss();
-        if (data!=null && data.getStatus()!=null && data.getStatus()==true){
-           Toast.makeText(context, data.getMessage(), Toast.LENGTH_LONG).show();
-           onBackPressed();
-        }else {
+        if (data != null && data.getStatus() != null && data.getStatus() == true) {
+            Toast.makeText(context, data.getMessage(), Toast.LENGTH_LONG).show();
+            onBackPressed();
+        } else {
             Toast.makeText(context, "Error occured", Toast.LENGTH_SHORT).show();
         }
 
@@ -132,5 +138,9 @@ public class AddNewChamberActivity extends AppCompatActivity implements ApiListe
 
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
+    }
+
+    public void Back(View view) {
+        onBackPressed();
     }
 }

@@ -1,236 +1,287 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#19cccccc"
+    android:background="@android:color/white"
     tools:context=".Activity.PatientHomeActivity">
 
-    <android.support.design.widget.AppBarLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="@drawable/gradient_2">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+
+        <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="90dp"
+            android:background="@drawable/gradient_2">
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
 
 
-                android:layout_height="50dp"
+                    android:layout_height="60dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="00dp"
+                    android:background="@android:color/transparent"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+
+                    <com.mukul.finddoctor.Utils.CustomDrawerButton
+                        android:id="@+id/customDrawer"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_centerVertical="true"
+                        android:padding="2dp"
+                        android:src="@drawable/menu_white"
+                        android:tint="@android:color/white" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:id="@+id/profilePic"
+                        android:src="@drawable/doctor_avatar" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="60dp"
+                        android:layout_marginBottom="10dp"
+                        android:orientation="vertical"
+
+                        android:paddingLeft="40dp">
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Md Aminul Islam"
+                            android:textColor="@android:color/white" />
+
+                        <TextView
+                            android:id="@+id/tv_balance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:text="0.00 TK"
+
+                            android:textColor="@android:color/white" />
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+        </android.support.design.widget.AppBarLayout>
+
+
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="88dp"
+            android:layout_marginBottom="55dp"
+            android:animateLayoutChanges="true">
+
+        </FrameLayout>
+
+        <android.support.design.widget.BottomNavigationView
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="25dp"
-                android:background="@android:color/transparent"
-                android:orientation="horizontal"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp">
-
-                <com.mukul.finddoctor.Utils.CustomDrawerButton
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_centerVertical="true"
-                    android:padding="2dp"
-                    android:src="@drawable/menu_white"
-                    android:tint="@android:color/white" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:src="@drawable/rafiq_vai" />
+                android:gravity="center">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="60dp"
-                    android:orientation="vertical"
-                    android:paddingLeft="40dp">
+                    android:id="@+id/linerhomebutton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+                    android:gravity="center"
+
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/img_1"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/home_primary"
+
+                        />
 
                     <TextView
-                        android:id="@+id/tv_name"
+                        android:id="@+id/tv_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Md Rafiqul Islam"
-                        android:textColor="@android:color/white" />
+                        android:layout_gravity="center"
+                        android:text="Home"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="10dp" />
 
-                    <TextView
-                        android:id="@+id/tv_balance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:text="0.00 TK"
-
-                        android:textColor="@android:color/white" />
 
                 </LinearLayout>
-            </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/linerProfileButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+
+                    android:gravity="center"
+
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/img_2"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/profile_gray"
+
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Account"
+                        android:textSize="10dp"
+
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linerAppointmentButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+
+                    android:gravity="center"
+
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/img_3"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/calender_gray"
+
+
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Appointments"
+                        android:textSize="10dp"
+
+                        />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linerMedicineButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.25"
+
+                    android:gravity="center"
+
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/img_4"
+                        android:layout_width="18dp"
+
+                        android:layout_height="18dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/blog" />
+
+                    <TextView
+                        android:id="@+id/tv_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Blog"
+                        android:textSize="10dp"
+
+                        />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </android.support.design.widget.BottomNavigationView>
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="65dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@color/colorPrimary" />
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/search_white" />
         </RelativeLayout>
+    </RelativeLayout>
 
-
-    </android.support.design.widget.AppBarLayout>
-
-
-    <FrameLayout
-        android:id="@+id/frame_layout"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:animateLayoutChanges="true">
-
-    </FrameLayout>
-
-    <android.support.design.widget.BottomNavigationView
-        android:layout_width="match_parent"
-
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/white">
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_alignParentBottom="true"
-            android:gravity="center">
-
-            <LinearLayout
-                android:id="@+id/linerhomebutton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-                android:gravity="center"
-
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/img_1"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/home_primary"
-
-                    />
-
-                <TextView
-                    android:id="@+id/tv_1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Home"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="10dp" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linerProfileButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-
-                android:gravity="center"
-
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/img_2"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/profile_gray"
-
-
-                    />
-
-                <TextView
-                    android:id="@+id/tv_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Account"
-                    android:textSize="10dp"
-
-                    />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linerAppointmentButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-
-                android:gravity="center"
-
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/img_3"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/calender_gray"
-
-
-                    />
-
-                <TextView
-                    android:id="@+id/tv_3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Appointments"
-                    android:textSize="10dp"
-
-                    />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linerMedicineButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="0.25"
-
-                android:gravity="center"
-
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/img_4"
-                    android:layout_width="18dp"
-
-                    android:layout_height="18dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/blog" />
-
-                <TextView
-                    android:id="@+id/tv_4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Blog"
-                    android:textSize="10dp"
-
-                    />
-
-
-            </LinearLayout>
-
+            android:layout_height="match_parent"
+            android:background="@android:color/white">
 
         </LinearLayout>
-    </android.support.design.widget.BottomNavigationView>
 
 
-</RelativeLayout>
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>

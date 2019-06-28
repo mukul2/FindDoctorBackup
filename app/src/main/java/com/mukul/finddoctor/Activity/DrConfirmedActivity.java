@@ -12,22 +12,30 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.mukul.finddoctor.Data.DataStore;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.adapter.ConfirmedAppointmentAdapterDoctor;
+import com.mukul.finddoctor.adapter.PendingAppointmentAdapterDoctor;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.AppointmentModel;
+import com.mukul.finddoctor.model.AppointmentModelNew;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mukul.finddoctor.Data.DataStore.TOKEN;
+import static com.mukul.finddoctor.Data.DataStore.USER_ID;
 
-public class DrConfirmedActivity extends AppCompatActivity {
+
+public class DrConfirmedActivity extends AppCompatActivity implements ApiListener.appoinetmentsDownloadListener{
     Context context=this;
+    @BindView(R.id.recycler_view)
+    RecyclerView recycler_view;
 
 
     @Override
@@ -36,6 +44,8 @@ public class DrConfirmedActivity extends AppCompatActivity {
         setContentView(R.layout.activity_dr_confirmed);
         ButterKnife.bind(this);
         setUpStatusbar();
+        Api.getInstance().getAppointments(TOKEN,"doctor",USER_ID,"1",this);
+
 
 
     }
@@ -68,4 +78,19 @@ public class DrConfirmedActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onAppointmentDownloadSuccess(List<AppointmentModelNew> status) {
+        ConfirmedAppointmentAdapterDoctor mAdapter = new ConfirmedAppointmentAdapterDoctor(status);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+        recycler_view.setLayoutManager(mLayoutManager);
+        recycler_view.setItemAnimator(new DefaultItemAnimator());
+        recycler_view.setAdapter(mAdapter);
+
+    }
+
+    @Override
+    public void onAppointmentDownloadFailed(String msg) {
+        Toast.makeText(context, "Error occured", Toast.LENGTH_SHORT).show();
+
+    }
 }

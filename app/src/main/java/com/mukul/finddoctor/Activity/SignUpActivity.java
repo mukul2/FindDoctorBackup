@@ -1,8 +1,10 @@
 package com.mukul.finddoctor.Activity;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,69 +16,51 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.mukul.finddoctor.Data.DataStore;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.Utils.MyDialog;
+import com.mukul.finddoctor.Utils.MyProgressBar;
 import com.mukul.finddoctor.Utils.SessionManager;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.DepartmentModel;
 import com.mukul.finddoctor.model.StatusId;
+import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestModel;
 import com.mukul.finddoctor.model.testSelectedModel;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.File;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
-public class SignUpActivity extends AppCompatActivity implements ApiListener.drBasicInfoPostListener,
-ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener,ApiListener.departmentsDownloadListener{
+public class SignUpActivity extends AppCompatActivity {
     @BindView(R.id.ed_name)
     EditText ed_name;
-    @BindView(R.id.ed_currentlyworking)
-    EditText ed_currentlyworking;
-    @BindView(R.id.ed_degree)
-    EditText ed_degree;
-    @BindView(R.id.ed_mobile)
-    EditText ed_mobile;
+    @BindView(R.id.imageView)
+    ImageView imageView;
+    @BindView(R.id.ed_phone)
+    EditText ed_phone;
     @BindView(R.id.ed_email)
     EditText ed_email;
     @BindView(R.id.ed_password)
     EditText ed_password;
-    ProgressDialog progressDialog;
-    String name,email,mobile,password;
-    @BindView(R.id.linearDoctor)
-    LinearLayout linearDoctor;
-    @BindView(R.id.linearPaitent)
-    LinearLayout linearPaitent;
-
-    @BindView(R.id.img_doctor)
-    ImageView img_doctor;
-    @BindView(R.id.img_patient)
-    ImageView img_patient;
-
-    @BindView(R.id.tv_patient)
-    TextView tv_patient;
-    @BindView(R.id.tv_doctor)
-    TextView tv_doctor;
-    @BindView(R.id.spinnerDepartment)
-    Spinner spinnerDepartment;
-
-    @BindView(R.id.linearDepartment)
-    LinearLayout linearDepartment;
-
-
-    int DOCTOR=0;
-    int PATIENT=1;
-    int selctedUserType=PATIENT;
+    Uri resultUri;
     Context context=this;
     SessionManager sessionManager;
-
-    String DOCTOR_="d";
-    String PATIENT_="p";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,196 +68,129 @@ ApiListener.CheckMobileListener,ApiListener.testNamesDownloadListener,ApiListene
         setContentView(R.layout.activity_sign_up);
         ButterKnife.bind(this);
         sessionManager=new SessionManager(this);
-        progressDialog=new ProgressDialog(this);
-        progressDialog.setMessage("Please wait");
-        updateTypeUI();
-        linearDoctor.setOnClickListener((View v)->moveToDoctor());
-        linearPaitent.setOnClickListener((View v)->moveToPatient());
-        Api.getInstance().downlaodDepartmentsList(this);
-    }
-
-    private void moveToPatient() {
-        selctedUserType=PATIENT;
-        updateTypeUI();
-        ed_degree.setVisibility(View.GONE);
-        ed_degree.setText("Not Applicable");
-        ed_currentlyworking.setVisibility(View.GONE);
-        ed_currentlyworking.setText("Not Applicable");
 
     }
 
-    private void moveToDoctor() {
-        selctedUserType=DOCTOR;
-        updateTypeUI();
-        ed_degree.setText("");
-        ed_currentlyworking.setText("");
-        ed_degree.setVisibility(View.VISIBLE);
-        ed_currentlyworking.setVisibility(View.VISIBLE);
+    private void askPermission() {
+        Dexter.withActivity(this)
+                .withPermissions(
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.CAMERA)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            // do you work now
+                            openCamera();
+                        }
 
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // permission is denied permenantly, navigate user to app settings
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                })
+                .onSameThread()
+                .check();
     }
 
-    private void updateTypeUI() {
-        if (selctedUserType==DOCTOR){
-           setDoctorUI();
-        }else if (selctedUserType==PATIENT){
-            setPatientUI();
-        }
+    private void openCamera() {
+        CropImage.activity()
+                .setGuidelines(CropImageView.Guidelines.ON)
+
+                .start(this);
     }
 
-    private void setPatientUI() {
-        linearDepartment.setVisibility(View.GONE);
+    public void PickImage(View view) {
+        askPermission();
 
-
-        tv_patient.setTextColor(context.getResources().getColor(R.color.colorPrimary));
-        tv_doctor.setTextColor(context.getResources().getColor(R.color.textColor));
-
-
-        int sdk = android.os.Build.VERSION.SDK_INT;
-
-        img_doctor.setImageResource(R.drawable.doctor);
-        img_patient.setImageResource(R.drawable.patient);
-
-        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            linearPaitent.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.bg_selected) );
-            linearDoctor.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.bg_unselected) );
-        } else {
-            linearPaitent.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_selected));
-            linearDoctor.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_unselected));
-
-        }
-    }
-
-    private void setDoctorUI() {
-        linearDepartment.setVisibility(View.VISIBLE);
-
-        img_doctor.setImageResource(R.drawable.doctor_color);
-        img_patient.setImageResource(R.drawable.patient_grey);
-        tv_doctor.setTextColor(context.getResources().getColor(R.color.colorPrimary));
-        tv_patient.setTextColor(context.getResources().getColor(R.color.textColor));
-
-
-        int sdk = android.os.Build.VERSION.SDK_INT;
-        if(sdk < android.os.Build.VERSION_CODES.JELLY_BEAN) {
-            linearDoctor.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.bg_selected) );
-            linearPaitent.setBackgroundDrawable(ContextCompat.getDrawable(context, R.drawable.bg_unselected) );
-        } else {
-            linearDoctor.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_selected));
-            linearPaitent.setBackground(ContextCompat.getDrawable(context, R.drawable.bg_unselected));
-        }
-    }
-
-    public void OpenHomeActivity(View view) {
-        startActivity(new Intent(this,HomeActivity.class));
-    }
-
-    public void onSubmit(View view) {
-         name=ed_name.getText().toString().trim();
-         mobile=ed_mobile.getText().toString().trim();
-         email=ed_email.getText().toString().trim();
-         password=ed_password.getText().toString().trim();
-        if (name.length()>0 && mobile.length()>0 && email.length()>0 && password.length()>0){
-            progressDialog.show();
-
-            Api.getInstance().checkMobile(mobile,this);
-
-        }
     }
 
     @Override
-    public void onBasicInfoPostSuccess(StatusId data) {
-        progressDialog.dismiss();
-        if (data.getStatus()){
-            sessionManager.setuserName(name);
-            sessionManager.setuserId(""+data.getId());
-            sessionManager.setLoggedIn(true);
-            String type="";
-            if (selctedUserType==DOCTOR){
-                type=DOCTOR_;
-            }else type=PATIENT_;
-            sessionManager.setuserType(type);
-
-            if (type.equals(DOCTOR_)) {
-                startDownloadTestNames();
-                startActivity(new Intent(SignUpActivity.this, DrNewHomeActivity.class));
-                finishAffinity();
-            }else {
-                startActivity(new Intent(SignUpActivity.this, PatientNewHome.class));
-                finishAffinity();
-
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                resultUri = result.getUri();
+                imageView.setImageURI(resultUri);
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
             }
-
-            //MyDialog.getInstance().with(this).autoBack(false).autoDismiss(false).message("Your account is successfully created").moveToLogin();
-
-        }else {
-            MyDialog.getInstance().with(this).autoBack(false).autoDismiss(false).message("Error ocured.Try again").showMsgOnly();
-
         }
-    }
-    private void startDownloadTestNames() {
-        Api.getInstance().downloadTestNames(this);
-    }
-    @Override
-    public void onBasicInfoPostFailed(String msg) {
-        progressDialog.dismiss();
-        MyDialog.getInstance().with(this).autoBack(false).autoDismiss(false).message(msg).showMsgOnly();
-
-
-    }
-
-    @Override
-    public void onMobileCheckSuccess(StatusResponse status) {
-        if (status.getStatus()){
-            //Toast.makeText(this, "This Mobile Exists", Toast.LENGTH_SHORT).show();
-            progressDialog.dismiss();
-
-            MyDialog.getInstance().with(SignUpActivity.this)
-                    .message("This Mobile number is allready registered")
-                    .autoBack(false)
-                    .autoDismiss(false)
-                    .show();
-        }else {
-            String type="";
-            if (selctedUserType==DOCTOR){
-                type=DOCTOR_;
-            }else type=PATIENT_;
-            String currentHospital=ed_currentlyworking.getText().toString().trim();
-            String last_degree=ed_degree.getText().toString().trim();
-               Api.getInstance().entryGeneralInfoDoctor(name,email,mobile,password,type,last_degree,currentHospital,this);
-        }
-    }
-
-    @Override
-    public void onMobileCheckFailed(String msg) {
-
-    }
-    @Override
-    public void ontestNamesDownloadSuccess(BasicByDrResponse data) {
-        DataStore.testModelList.clear();
-        //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
-        for (int i=0;i<data.getTestNames().size();i++){
-            DataStore.testModelList.add(new testSelectedModel(false,data.getTestNames().get(i)));
-        }
-    }
-
-    @Override
-    public void ontestNamesDownloadFailed(String msg) {
-
     }
 
     public void back(View view) {
         onBackPressed();
     }
 
-    @Override
-    public void onDepartmentsListDownloadSuccess(List<DepartmentModel> list) {
-        if (list!=null){
-            Toast.makeText(context, ""+list.size(), Toast.LENGTH_SHORT).show();
+    public void openDoctorRegister(View view) {
+        startActivity(new Intent(this, DoctorsRegister.class));
+    }
+
+    public void Register(View view) {
+        if (resultUri != null) {
+
+            File f = new File(resultUri.getPath());
+            MultipartBody.Part photo = null;
+            RequestBody requestFile =
+                    RequestBody.create(MediaType.parse("multipart/form-data"), f);
+            photo = MultipartBody.Part.createFormData("photo", f.getName(), requestFile);
+            String name = ed_name.getText().toString().trim();
+            String phone = ed_phone.getText().toString().trim();
+            String email = ed_email.getText().toString().trim();
+            String password = ed_password.getText().toString().trim();
+            if (name.length() > 0) {
+                if (phone.length() > 0) {
+                    if (email.length() > 0) {
+                        if (password.length() > 0) {
+                            MyProgressBar.with(context);
+                            Api.getInstance().patientSignUp(c_m_b(name),
+                                    c_m_b("0"),
+                                    c_m_b("p"),
+                                    c_m_b(password),
+                                    c_m_b(email),
+                                    c_m_b(phone),
+                                    photo, new ApiListener.PatientSignUPListener() {
+                                        @Override
+                                        public void onPatientSignUPSuccess(StatusMessage list) {
+                                            MyProgressBar.dismiss();
+                                            Toast.makeText(context, list.getMessage(), Toast.LENGTH_SHORT).show();
+                                            onBackPressed();
+                                            finish();
+
+                                        }
+
+                                        @Override
+                                        public void onPatientSignUPSuccessFailed(String msg) {
+                                            MyProgressBar.dismiss();
+                                            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    });
+
+                        }
+                    }
+                }
+            }
+        } else {
+            Toast.makeText(this, "Add Photo first", Toast.LENGTH_SHORT).show();
         }
-    }
 
-    @Override
-    public void onDepartmentsListDownloadFailed(String msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
     }
+
+    private RequestBody c_m_b(String aThis) {
+        return
+                RequestBody.create(
+                        MediaType.parse("multipart/form-data"), aThis);
+    }
+
 }

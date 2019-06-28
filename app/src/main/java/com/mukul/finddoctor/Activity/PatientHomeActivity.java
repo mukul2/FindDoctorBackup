@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -20,12 +21,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.mukul.finddoctor.Fragments.AppointmentsFragment;
 import com.mukul.finddoctor.Fragments.BlogFragmentPatient;
 import com.mukul.finddoctor.Fragments.HomeFragment;
 import com.mukul.finddoctor.Fragments.MedicineFragment;
 import com.mukul.finddoctor.Fragments.ProfileFragment;
 import com.mukul.finddoctor.R;
+import com.mukul.finddoctor.Utils.CustomDrawerButton;
+import com.mukul.finddoctor.Utils.SessionManager;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.BasicInfoModel;
@@ -36,14 +40,23 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
+
+import static com.mukul.finddoctor.Data.Data.PHOTO_BASE;
+import static com.mukul.finddoctor.Data.DataStore.TOKEN;
+import static com.mukul.finddoctor.Data.DataStore.USER_ID;
 
 public class PatientHomeActivity extends AppCompatActivity implements View.OnClickListener, ApiListener.basicInfoDownloadListener {
     Context context = this;
     Resources resources;
     int primaryClr, another;
 
+    @BindView(R.id.profilePic)
+    CircleImageView profilePic;
     @BindView(R.id.tv_1)
     TextView tv_1;
+    @BindView(R.id.tv_name)
+    TextView tv_name;
     @BindView(R.id.tv_2)
     TextView tv_2;
     @BindView(R.id.tv_3)
@@ -72,29 +85,48 @@ public class PatientHomeActivity extends AppCompatActivity implements View.OnCli
     //  LinearLayout.LayoutParams disbale = new LinearLayout.LayoutParams(25, 25);
     public static List<String> HOSPITALS = new ArrayList<>();
     public static List<SpecialistNameCount> SPECIALIST = new ArrayList<>();
+    SessionManager sessionManager;
+
+    @BindView(R.id.customDrawer)
+    CustomDrawerButton customDrawerButton;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_home);
         ButterKnife.bind(this);
+        sessionManager = new SessionManager(this);
+
+        TOKEN = sessionManager.getToken();
+        USER_ID = sessionManager.getUserId();
+
+
         getColorManagement();
         linerHomeButton.setOnClickListener(this);
         linerMedicineButton.setOnClickListener(this);
         linerAppointmentButton.setOnClickListener(this);
         linerProfileButton.setOnClickListener(this);
 
-   /*     img_1.setLayoutParams(enable);
-        img_2.setLayoutParams(disbale);
-        img_3.setLayoutParams(disbale);
-        img_4.setLayoutParams(disbale);
-        */
+
         initial_fragment();
         Api.getInstance().downloadBasicInfo(this);
         setUpStatusbar();
         initIconDesnsity();
 
-
+        customDrawerButton.setDrawerLayout(drawer_layout);
+        customDrawerButton.getDrawerLayout().addDrawerListener(customDrawerButton);
+        customDrawerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                customDrawerButton.changeState();
+            }
+        });
+        Glide.with(PatientHomeActivity.this).load(PHOTO_BASE+ sessionManager.get_userPhoto()).into(profilePic);
+        Toast.makeText(context, sessionManager.get_userPhoto(), Toast.LENGTH_SHORT).show();
+        //Glide.with(PatientHomeActivity.this).load("https://appointmentbd.com/frontend/user/1561548940.jpg").into(profilePic);
+        tv_name.setText(sessionManager.getUserName());
 
     }
 

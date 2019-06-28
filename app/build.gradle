@@ -50,6 +50,7 @@ dependencies {
     implementation 'com.karumi:dexter:5.0.0'
     compile(name: 'sinch-android-rtc', version: '+', ext: 'aar')
     implementation 'link.fls:swipestack:0.3.0'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
 
 
 }

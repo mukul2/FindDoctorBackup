@@ -10,7 +10,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class ApiClient {
 
-    private static final String BASE_URL = "http://barakahshop.com/android/apis/appointmentbd/";
+    private static final String BASE_URL = "https://appointmentbd.com/api/";
     private static Retrofit retrofit = null;
 
     private static Retrofit getClient() {

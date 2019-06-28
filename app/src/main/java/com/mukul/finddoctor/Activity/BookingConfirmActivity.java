@@ -9,16 +9,57 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.mukul.finddoctor.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+import static com.mukul.finddoctor.Data.Data.CHAMBER_TO_BOOK;
+import static com.mukul.finddoctor.Data.Data.PHOTO_BASE;
+import static com.mukul.finddoctor.Data.DataStore.NOW_SHOWING_DOC;
+
 public class BookingConfirmActivity extends AppCompatActivity {
+    @BindView(R.id.tv_refID)
+    TextView tv_refID;
+    @BindView(R.id.tv_namePatient)
+    TextView tv_namePatient;
+    @BindView(R.id.tv_date)
+    TextView tv_date;
+    @BindView(R.id.tv_name)
+    TextView tv_name;
+    @BindView(R.id.tv_department)
+    TextView tv_department;
+    @BindView(R.id.tv_fees)
+    TextView tv_fees;
+    @BindView(R.id.image)
+    ImageView image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_confirm);
         setUpStatusbar();
+        ButterKnife.bind(this);
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+        //CHAMBER_TO_BOOK
+       /// NOW_SHOWING_DOC
+        if(b!=null)
+        {
+
+            String j2 =(String) b.get("refID");
+            String name =(String) b.get("name");
+            tv_namePatient.setText(name);
+            String date =(String) b.get("date");
+            tv_date.setText(date);
+            tv_refID.setText("Booking ID : "+j2);
+
+        }
+        Glide.with(BookingConfirmActivity.this).load(PHOTO_BASE+NOW_SHOWING_DOC.getPhoto()).into(image);
     }
     public  void setUpStatusbar(){
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {

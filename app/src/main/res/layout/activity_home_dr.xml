@@ -4,25 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#19cccccc"
+    android:background="@drawable/gradient_2"
 
     tools:context=".Activity.HomeActivityDrActivity">
+
 
 
 
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@android:color/white"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/white">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
             android:gravity="center"
-            android:paddingBottom="00dp"
-            android:paddingTop="00dp">
+            android:paddingTop="00dp"
+            android:paddingBottom="00dp">
 
             <LinearLayout
                 android:id="@+id/linerhomebutton"
@@ -85,6 +86,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/linerBlogButton"
                 android:layout_width="match_parent"
@@ -118,6 +120,7 @@
 
 
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/linerSettingButton"
                 android:layout_width="match_parent"
@@ -154,14 +157,16 @@
 
         </LinearLayout>
     </android.support.design.widget.BottomNavigationView>
+
+
     <FrameLayout
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#19cccccc"
+        android:layout_marginTop="40dp"
+        android:animateLayoutChanges="true"
 
-        android:animateLayoutChanges="true">
+        android:background="@android:color/transparent">
 
     </FrameLayout>
-
 </RelativeLayout>

@@ -35,9 +35,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.mukul.finddoctor.Data.DataStore.USER_ID;
+import static com.mukul.finddoctor.Fragments.HomeFragmentDrTwo.CHAMBERLIST;
 
 
-public class ChamberFragment extends Fragment implements ApiListener.chamberListDownloadListener{
+public class ChamberFragment extends Fragment {
     View v;
     Context context;
     @BindView(R.id.tv_add)
@@ -80,27 +81,15 @@ public class ChamberFragment extends Fragment implements ApiListener.chamberList
                 startActivity(new Intent(context, AddNewChamberActivity.class));
             }
         });
-        Api.getInstance().getMyChambersList(USER_ID,this);
-
-
+       //CHAMBERLIST
+        ChambersListAdapterDr mAdapter=new  ChambersListAdapterDr(CHAMBERLIST);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+        recycler_view.setLayoutManager(mLayoutManager);
+        recycler_view.setItemAnimator(new DefaultItemAnimator());
+        recycler_view.setAdapter(mAdapter);
 
         return v;
     }
 
 
-    @Override
-    public void onChamberListDownloadSuccess(List<DrChamberResponse> list) {
-        if (list!=null){
-            ChambersListAdapterDr mAdapter=new  ChambersListAdapterDr(list);
-            RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
-            recycler_view.setLayoutManager(mLayoutManager);
-            recycler_view.setItemAnimator(new DefaultItemAnimator());
-            recycler_view.setAdapter(mAdapter);
-        }
-    }
-
-    @Override
-    public void onChamberListDownloadFailed(String msg) {
-
-    }
 }

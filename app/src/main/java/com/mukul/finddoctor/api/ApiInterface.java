@@ -1,29 +1,41 @@
 package com.mukul.finddoctor.api;
 
 
+import com.mukul.finddoctor.model.AppointmentAddResponse;
 import com.mukul.finddoctor.model.AppointmentModel;
 import com.mukul.finddoctor.model.AppointmentModel2;
+import com.mukul.finddoctor.model.AppointmentModelNew;
 import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
+import com.mukul.finddoctor.model.BlogModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
 import com.mukul.finddoctor.model.DepartmentModel;
+import com.mukul.finddoctor.model.DeptModel;
+import com.mukul.finddoctor.model.DiseasesModel;
 import com.mukul.finddoctor.model.DoctorModel;
 import com.mukul.finddoctor.model.DrChamberResponse;
+import com.mukul.finddoctor.model.DrEduChInfoModel;
 import com.mukul.finddoctor.model.DrServiceModel;
 import com.mukul.finddoctor.model.EducationSkillModel;
 import com.mukul.finddoctor.model.LoginResponse;
+import com.mukul.finddoctor.model.MedicineModel;
 import com.mukul.finddoctor.model.OnlineDoctorModel;
+import com.mukul.finddoctor.model.PrescriptionModel;
+import com.mukul.finddoctor.model.PrescriptionRequestModel;
 import com.mukul.finddoctor.model.RecomentationModel;
+import com.mukul.finddoctor.model.SearchDoctorModel;
 import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestList;
 import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.TestRecomendationModel;
 import com.mukul.finddoctor.model.TreatmentHistoryModel;
 import com.mukul.finddoctor.model.UserProfileResponse;
 import com.mukul.finddoctor.model.VideoCallModel;
+import com.sinch.gson.JsonElement;
 
 import java.util.List;
 
@@ -55,6 +67,21 @@ public interface ApiInterface {
     @POST("patient_all_confirmed.php")
     Call<List<AppointmentModel>> getPatientAllConfirmed(@Field("patient_id") String patient_id);
 
+    @GET("all-blog-info")
+    Call<List<BlogModel>> getAllBlog(@Header("Authorization") String token);
+
+    @FormUrlEncoded
+    @POST("patient-disease-record")
+    Call<List<DiseasesModel>> getDiseasesRecord(@Header("Authorization") String token, @Field("patient_id") String patient_id);
+
+    @FormUrlEncoded
+    @POST("add-disease-record")
+    Call<List<DiseasesModel>> addDiseases(@Header("Authorization") String token,
+                                          @Field("patient_id") String patient_id,
+                                          @Field("disease_name") String disease_name,
+                                          @Field("first_notice_date") String first_notice_date,
+                                          @Field("status") String status);
+
     @FormUrlEncoded
     @POST("delete_service_by_dr.php")
     Call<StatusMessage> delete_service_by_dr(@Field("id") String id);
@@ -65,24 +92,26 @@ public interface ApiInterface {
 
     @FormUrlEncoded
     @POST("post_dr_service_list.php")
-    Call<StatusMessage> post_dr_service_list(@Field("dr_id") String dr_id,@Field("service_list_string") String service_list_string);
+    Call<StatusMessage> post_dr_service_list(@Field("dr_id") String dr_id, @Field("service_list_string") String service_list_string);
 
     @FormUrlEncoded
     @POST("patient_all_pending.php")
     Call<List<AppointmentModel>> getPatientAllPending(@Field("patient_id") String patient_id);
+
     @FormUrlEncoded
     @POST("patient_recomendation_list.php")
     Call<List<RecomentationModel>> getpatientRecomentation(@Field("patient_id") String patient_id);
+
     @FormUrlEncoded
     @POST("post_serve.php")
     Call<StatusMessage> postServeInfo(@Field("appointment_id") String appointment_id,
-                                          @Field("dr_id") String dr_id,
-                                          @Field("p_id") String p_id,
-                                          @Field("dr_name") String dr_name,
-                                          @Field("p_name") String p_name,
-                                          @Field("comment") String comment,
-                                          @Field("fees") String fees,
-                                          @Field("chamber_id") String chamber_id);
+                                      @Field("dr_id") String dr_id,
+                                      @Field("p_id") String p_id,
+                                      @Field("dr_name") String dr_name,
+                                      @Field("p_name") String p_name,
+                                      @Field("comment") String comment,
+                                      @Field("fees") String fees,
+                                      @Field("chamber_id") String chamber_id);
 
     @GET("getOnlineDoctors.php")
     Call<List<VideoCallModel>> getOnlineDoctors();
@@ -96,6 +125,7 @@ public interface ApiInterface {
                                            @Field("hospital_name") String hospital_name,
                                            @Field("last_education_degree") String last_education_degree,
                                            @Field("dr_name") String dr_name);
+
     @FormUrlEncoded
     @POST("getPatientTreatmentHistory.php")
     Call<List<TreatmentHistoryModel>> treatmentHistoryByPatient(@Field("patient_id") String patient_id);
@@ -138,6 +168,7 @@ public interface ApiInterface {
     @FormUrlEncoded
     @POST("getMyAppointmentsDoctor.php")
     Call<AppointmentResponse> myAppointmentsbyDoctor(@Field("dr_id") String dr_id);
+
     @FormUrlEncoded
     @POST("dr_all_pending.php")
     Call<List<AppointmentModel>> dr_pending(@Field("dr_id") String dr_id);
@@ -170,8 +201,49 @@ public interface ApiInterface {
     Call<List<DrChamberResponse>> getMyChambers(@Field("id") String id);
 
     @FormUrlEncoded
+    @POST("doctor-education-chamber-info")
+    Call<DrEduChInfoModel> getSkillChamberEdu(@Header("Authorization") String token,
+                                              @Field("dr_id") String dr_id);
+
+    @FormUrlEncoded
+    @POST("add-appointment-info")
+    Call<AppointmentAddResponse> addAppointmentInfo(@Header("Authorization") String token,
+                                                    @Field("patient_id") String patient_id,
+                                                    @Field("dr_id") String dr_id,
+                                                    @Field("problems") String problems,
+                                                    @Field("phone") String phone,
+                                                    @Field("name") String name,
+                                                    @Field("chamber_id") String chamber_id,
+                                                    @Field("date") String date,
+                                                    @Field("status") String status);
+
+    @FormUrlEncoded
+    @POST("get-appointment-list")
+    Call<List<AppointmentModelNew>> getAppointmentsList(@Header("Authorization") String token,
+                                                        @Field("user_type") String user_type,
+                                                        @Field("id") String id,
+                                                        @Field("status") String status);
+
+    @FormUrlEncoded
+    @POST("test-recommendation-list")
+    Call<List<TestRecomendationModel>> getMyTestRecomendation(@Header("Authorization") String token,
+                                                              @Field("patient_id") String patient_id);
+
+    @FormUrlEncoded
+    @POST("view-prescription-request")
+    Call<List<PrescriptionRequestModel>> getmyPrescriptionRequest(@Header("Authorization") String token,
+                                                                  @Field("id") String id,
+                                                                  @Field("user_type") String user_type);
+
+    @FormUrlEncoded
     @POST("get_dr_personal_info.php")
     Call<EducationSkillModel> getMyEducationSkill(@Field("dr_id") String dr_id);
+
+    @FormUrlEncoded
+    @POST("get-prescription-info")
+    Call<List<PrescriptionModel>> getMyPrescriptionsPatient(@Header("Authorization") String token,
+                                                            @Field("id") String id,
+                                                            @Field("user_type") String user_type);
 
     @FormUrlEncoded
     @POST("GeneralEntry.php")
@@ -184,12 +256,29 @@ public interface ApiInterface {
                                   @Field("hospital_name") String hospital_name);
 
     @FormUrlEncoded
-    @POST("addSchedule.php")
-    Call<StatusMessage> setDrSchedule(@Field("id") String id,
+    @POST("chamber-add")
+    Call<StatusMessage> setDrSchedule(@Header("Authorization") String token,
+                                      @Field("dr_id") String dr_id,
+                                      @Field("chamber_name") String chamber_name,
                                       @Field("address") String address,
-                                      @Field("visit_fee") String visit_fee,
-                                      @Field("city") String city,
-                                      @Field("data") String data);
+                                      @Field("fee") String fee,
+                                      @Field("follow_up_fee") String follow_up_fee,
+                                      @Field("days") String days);
+
+    @FormUrlEncoded
+    @POST("update_profile.php")
+    Call<StatusMessage> getDrInfo(@Header("Authorization") String token,
+                                  @Field("dr_id") String dr_id);
+
+
+    @GET("department-list")
+    Call<List<DepartmentModel>> getDepartmentsList(@Header("Authorization") String token);
+
+    @FormUrlEncoded
+    @POST("change-appointment-status")
+    Call<StatusMessage> changeAppointmentStatus(@Header("Authorization") String token,
+                                                @Field("appointment_id") String appointment_id,
+                                                @Field("status") String status);
 
     @FormUrlEncoded
     @POST("update_profile.php")
@@ -212,14 +301,47 @@ public interface ApiInterface {
     Call<StatusResponse> checkMobile(@Field("mobile") String mobile);
 
     @FormUrlEncoded
-    @POST("login.php")
-    Call<LoginResponse> login(@Field("mobile") String mobile,
+    @POST("login")
+    Call<LoginResponse> login(@Field("email") String mobile,
                               @Field("password") String password);
 
+
     @FormUrlEncoded
-    @POST("changeAppointmentStatus.php")
-    Call<StatusResponse> changeAppointmentStatus(@Field("id") String id,
-                                                 @Field("status") String status);
+    @POST("add-education-info")
+    Call<StatusMessage> postEducationInfo(@Header("Authorization") String token,
+                                          @Field("dr_id") String dr_id,
+                                          @Field("title") String title,
+                                          @Field("body") String body);
+
+    @FormUrlEncoded
+    @POST("add-skill-info")
+    Call<StatusMessage> postSkillInfo(@Header("Authorization") String token,
+                                      @Field("dr_id") String dr_id,
+                                      @Field("body") String body);
+
+
+    @GET("all-medicine-list")
+    Call<List<MedicineModel>> getMedicine(@Header("Authorization") String token);
+
+    @POST("department-list")
+    Call<List<DeptModel>> getDepartments(@Header("Authorization") String token);
+
+    @FormUrlEncoded
+    @POST("doctor-search")
+    Call<List<SearchDoctorModel>> searchDoctors(@Header("Authorization") String token,
+                                                @Field("doctor_name") String doctor_name,
+                                                @Field("department_id") String department_id);
+
+
+    @Multipart
+    @POST("sign-up")
+    Call<StatusMessage> signUpPatient(@Part("name") RequestBody name,
+                                      @Part("department") RequestBody department,
+                                      @Part("user_type") RequestBody user_type,
+                                      @Part("password") RequestBody password,
+                                      @Part("email") RequestBody email,
+                                      @Part("phone") RequestBody phone,
+                                      @Part MultipartBody.Part image);
 /*
     @POST("saveFile")
     Call<FileUploadResponse> sendFileToServer(@Header("Authorization") String auth, @Query("type") String type, @Query("directoryPath") String directoryPath, @Body RequestBody multipartFile);

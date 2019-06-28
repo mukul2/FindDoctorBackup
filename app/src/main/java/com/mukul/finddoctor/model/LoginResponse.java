@@ -1,86 +1,54 @@
 package com.mukul.finddoctor.model;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
 
-@SerializedName("status")
-@Expose
-private Boolean status;
-@SerializedName("id")
-@Expose
-private String id;
-@SerializedName("name")
-@Expose
-private String name;
-@SerializedName("photo")
-@Expose
-private Object photo;
-@SerializedName("mobile")
-@Expose
-private String mobile;
-@SerializedName("email")
-@Expose
-private String email;
-@SerializedName("type")
-@Expose
-private String type;
+    @SerializedName("status")
+    @Expose
+    private Boolean status;
+    @SerializedName("message")
+    @Expose
+    private String message;
+    @SerializedName("access_token")
+    @Expose
+    private String accessToken;
+    @SerializedName("user_info")
+    @Expose
+    private UserInfo userInfo;
 
-public Boolean getStatus() {
-return status;
-}
+    public Boolean getStatus() {
+        return status;
+    }
 
-public void setStatus(Boolean status) {
-this.status = status;
-}
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
-public String getId() {
-return id;
-}
+    public String getMessage() {
+        return message;
+    }
 
-public void setId(String id) {
-this.id = id;
-}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-public String getName() {
-return name;
-}
+    public String getAccessToken() {
+        return accessToken;
+    }
 
-public void setName(String name) {
-this.name = name;
-}
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
+    }
 
-public Object getPhoto() {
-return photo;
-}
+    public UserInfo getUserInfo() {
+        return userInfo;
+    }
 
-public void setPhoto(Object photo) {
-this.photo = photo;
-}
-
-public String getMobile() {
-return mobile;
-}
-
-public void setMobile(String mobile) {
-this.mobile = mobile;
-}
-
-public String getEmail() {
-return email;
-}
-
-public void setEmail(String email) {
-this.email = email;
-}
-
-public String getType() {
-return type;
-}
-
-public void setType(String type) {
-this.type = type;
-}
+    public void setUserInfo(UserInfo userInfo) {
+        this.userInfo = userInfo;
+    }
 
 }

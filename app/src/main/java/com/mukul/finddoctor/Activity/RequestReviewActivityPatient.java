@@ -43,12 +43,12 @@ public class RequestReviewActivityPatient extends AppCompatActivity implements A
     }
     @Override
     public void onDepartmentsListDownloadSuccess(List<DepartmentModel> list) {
-        TYPE_OF_ACTIVITY="review";
-        DepartmentsAdapter mAdapter = new DepartmentsAdapter(list);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
-        recycler_view.setLayoutManager(mLayoutManager);
-        recycler_view.setItemAnimator(new DefaultItemAnimator());
-        recycler_view.setAdapter(mAdapter);
+//        TYPE_OF_ACTIVITY="review";
+//        DepartmentsAdapter mAdapter = new DepartmentsAdapter(list);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+//        recycler_view.setLayoutManager(mLayoutManager);
+//        recycler_view.setItemAnimator(new DefaultItemAnimator());
+//        recycler_view.setAdapter(mAdapter);
     }
 
     @Override

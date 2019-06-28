@@ -17,7 +17,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:text="How can we take care of yourself?"
-                android:layout_gravity="center"
                 android:paddingLeft="10dp"
                 android:textSize="16dp"
                 android:textColor="@color/colorPrimary"
@@ -77,7 +76,7 @@
                                 android:textColor="@android:color/white"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
-                                android:textSize="15dp"
+                                android:textSize="@dimen/menu_text_sixe"
                                 />
                         </LinearLayout>
 
@@ -98,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_weight="0.5"
                     android:layout_marginLeft="5dp"
-                    app:cardBackgroundColor="#8E44AD"
+                    app:cardBackgroundColor="#F4D03F"
                     android:layout_marginRight="10dp"
                     app:cardCornerRadius="@dimen/card_rad"
                     android:id="@+id/cardChember"
@@ -137,7 +136,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
-                                android:textSize="15dp"
+                                android:textSize="@dimen/menu_text_sixe"
                                 />
                         </LinearLayout>
 
@@ -165,7 +164,151 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="00dp"
+                android:layout_marginBottom="10dp"
+                android:layout_height="100dp">
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_weight="0.5"
+                    app:cardBackgroundColor="#8E44AD"
+                    app:cardCornerRadius="@dimen/card_rad"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:id="@+id/cardPregnengy"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.5"
+
+                        android:layout_height="150dp">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="30dp"
+                            android:background="@android:color/white"/>
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:src="@drawable/fetus"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="100dp"
+                            android:alpha="0.1"
+                            android:layout_alignParentRight="true"
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="10dp"
+
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="17dp"
+                                android:src="@drawable/fetus"
+                                android:layout_marginLeft="10dp"
+                                android:layout_height="17dp"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:text="Enjoy Pregnency"
+                                android:textColor="@android:color/white"
+                                android:layout_centerVertical="true"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:textSize="@dimen/menu_text_sixe"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:text="Prescription Conult"
+                            android:textSize="12dp"
+                            android:textColor="@android:color/white"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:layout_height="wrap_content"
+                         />
+
+
+
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+                <android.support.v7.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_weight="0.5"
+                    android:layout_marginLeft="5dp"
+                    app:cardBackgroundColor="#cccccc"
+                    android:layout_marginRight="10dp"
+                    app:cardCornerRadius="@dimen/card_rad"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_weight="0.5"
+
+                        android:layout_height="150dp">
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="30dp"
+                            android:background="@android:color/white"/>
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:tint="@android:color/white"
+                            android:layout_marginTop="15dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_height="100dp"
+                            android:alpha="0.1"
+                            android:layout_alignParentRight="true"
+                            />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:orientation="vertical"
+                            android:layout_marginTop="10dp"
+
+                            android:layout_height="match_parent">
+                            <ImageView
+                                android:layout_width="17dp"
+                                android:src="@drawable/physician"
+                                android:tint="@android:color/white"
+                                android:layout_marginLeft="10dp"
+                                android:layout_height="17dp"
+                                />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:textColor="@android:color/white"
+                                android:layout_centerVertical="true"
+                                android:layout_height="wrap_content"
+                                android:padding="10dp"
+                                android:textSize="15dp"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:text="Physician"
+                            android:textSize="12dp"
+                            android:textColor="@android:color/white"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:layout_height="wrap_content"
+                            />
+
+
+
+                    </RelativeLayout>
+                </android.support.v7.widget.CardView>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="00dp"
                 android:layout_marginBottom="10dp"
                 android:layout_height="100dp">
                 <android.support.v7.widget.CardView
@@ -217,7 +360,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
-                                android:textSize="15dp"
+                                android:textSize="@dimen/menu_text_sixe"
                                 />
                         </LinearLayout>
 
@@ -287,7 +430,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
-                                android:textSize="15dp"
+                                android:textSize="@dimen/menu_text_sixe"
                                 />
                         </LinearLayout>
 
@@ -312,7 +455,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="00dp"
                 android:layout_marginBottom="10dp"
                 android:layout_height="100dp">
                 <android.support.v7.widget.CardView
@@ -366,7 +509,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
-                                android:textSize="15dp"
+                                android:textSize="@dimen/menu_text_sixe"
                                 />
                         </LinearLayout>
 
@@ -426,7 +569,7 @@
                                 android:layout_centerVertical="true"
                                 android:layout_height="wrap_content"
                                 android:padding="10dp"
-                                android:textSize="15dp"
+                                android:textSize="@dimen/menu_text_sixe"
                                 />
                         </LinearLayout>
 

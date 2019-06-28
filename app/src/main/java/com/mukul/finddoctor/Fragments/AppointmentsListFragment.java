@@ -30,13 +30,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class AppointmentsListFragment extends Fragment implements ApiListener.dataDownloadListener{
+public class AppointmentsListFragment extends Fragment implements ApiListener.dataDownloadListener {
     View v;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
     @BindView(R.id.tv_no_item)
     TextView tv_no_item;
     ConfirmedAppointmentAdapterDoctor mAdapter;
+
     public AppointmentsListFragment() {
         // Required empty public constructor
     }
@@ -51,8 +52,8 @@ public class AppointmentsListFragment extends Fragment implements ApiListener.da
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.fragment_appointments_list, container, false);
 
-        ButterKnife.bind(this,v);
-        lis. setConfirmedlistener(this);
+        ButterKnife.bind(this, v);
+        lis.setConfirmedlistener(this);
 
         return v;
     }
@@ -60,20 +61,20 @@ public class AppointmentsListFragment extends Fragment implements ApiListener.da
 
     @Override
     public void onDownloaded(List<AppointmentModel> status) {
-        if (status.size()>0){
+        if (status.size() > 0) {
             tv_no_item.setVisibility(View.GONE);
 
         }
-        mAdapter = new ConfirmedAppointmentAdapterDoctor(status);
+        //  mAdapter = new ConfirmedAppointmentAdapterDoctor(status);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
         //recycler_view.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
 
         recycler_view.setAdapter(mAdapter);
-        if (status.size()>0){
+        if (status.size() > 0) {
             tv_no_item.setVisibility(View.GONE);
-        }else {
+        } else {
             tv_no_item.setVisibility(View.VISIBLE);
 
         }

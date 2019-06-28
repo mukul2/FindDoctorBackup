@@ -4,29 +4,41 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 
+import com.mukul.finddoctor.model.AppointmentAddResponse;
 import com.mukul.finddoctor.model.AppointmentModel;
 import com.mukul.finddoctor.model.AppointmentModel2;
+import com.mukul.finddoctor.model.AppointmentModelNew;
 import com.mukul.finddoctor.model.AppointmentResponse;
 import com.mukul.finddoctor.model.BasicByDrResponse;
 import com.mukul.finddoctor.model.BasicInfoModel;
+import com.mukul.finddoctor.model.BlogModel;
 import com.mukul.finddoctor.model.CallHistoryPatient;
 import com.mukul.finddoctor.model.Chamber;
 import com.mukul.finddoctor.model.DepartmentModel;
+import com.mukul.finddoctor.model.DeptModel;
+import com.mukul.finddoctor.model.DiseasesModel;
 import com.mukul.finddoctor.model.DoctorModel;
 import com.mukul.finddoctor.model.DrChamberResponse;
+import com.mukul.finddoctor.model.DrEduChInfoModel;
 import com.mukul.finddoctor.model.DrServiceModel;
 import com.mukul.finddoctor.model.EducationSkillModel;
 import com.mukul.finddoctor.model.LoginResponse;
+import com.mukul.finddoctor.model.MedicineModel;
 import com.mukul.finddoctor.model.OnlineDoctorModel;
+import com.mukul.finddoctor.model.PrescriptionModel;
+import com.mukul.finddoctor.model.PrescriptionRequestModel;
 import com.mukul.finddoctor.model.RecomentationModel;
+import com.mukul.finddoctor.model.SearchDoctorModel;
 import com.mukul.finddoctor.model.StatusId;
 import com.mukul.finddoctor.model.StatusMessage;
 import com.mukul.finddoctor.model.StatusResponse;
 import com.mukul.finddoctor.model.TestList;
 import com.mukul.finddoctor.model.TestModel;
+import com.mukul.finddoctor.model.TestRecomendationModel;
 import com.mukul.finddoctor.model.TreatmentHistoryModel;
 import com.mukul.finddoctor.model.UserProfileResponse;
 import com.mukul.finddoctor.model.VideoCallModel;
+import com.sinch.gson.JsonElement;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -74,6 +86,156 @@ public class Api {
         });
     }
 
+    public void postEducationInfo(String KEY, String dr_id, String title, String body, final ApiListener.PostEducationInfoListener listener) {
+
+        ApiClient.getApiInterface().postEducationInfo(KEY, dr_id, title, body).enqueue(new Callback<StatusMessage>() {
+            @Override
+            public void onResponse(@NonNull Call<StatusMessage> call, @NonNull Response<StatusMessage> response) {
+                if (response != null) {
+                    listener.onPostEducationInfoSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<StatusMessage> call, @NonNull Throwable t) {
+                listener.onPostEducationInfoFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void getMedicinesList(String KEY, final ApiListener.DownloadMedicinesListInfoListener listener) {
+
+        ApiClient.getApiInterface().getMedicine(KEY).enqueue(new Callback<List<MedicineModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<MedicineModel>> call, @NonNull Response<List<MedicineModel>> response) {
+                if (response != null) {
+                    listener.onDownloadMedicinesListInfoSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<MedicineModel>> call, @NonNull Throwable t) {
+                listener.onDownloadMedicinesListFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void blogsDownload(String KEY, final ApiListener.BlogDownloadListener listener) {
+
+        ApiClient.getApiInterface().getAllBlog(KEY).enqueue(new Callback<List<BlogModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<BlogModel>> call, @NonNull Response<List<BlogModel>> response) {
+                if (response != null) {
+                    listener.onBlogDownloaSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<BlogModel>> call, @NonNull Throwable t) {
+                listener.onBlogDownloaSuccessFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void DiseasesDownload(String KEY, String user_ID, final ApiListener.DiseasesDownloadListener listener) {
+
+        ApiClient.getApiInterface().getDiseasesRecord(KEY,user_ID).enqueue(new Callback<List<DiseasesModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<DiseasesModel>> call, @NonNull Response<List<DiseasesModel>> response) {
+                if (response != null) {
+                    listener.onDiseasesDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<DiseasesModel>> call, @NonNull Throwable t) {
+                listener.onDiseasesDownloadSuccessFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void getDepList(String KEY, final ApiListener.DeptDownloadListener listener) {
+
+        ApiClient.getApiInterface().getDepartments(KEY).enqueue(new Callback<List<DeptModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<DeptModel>> call, @NonNull Response<List<DeptModel>> response) {
+                if (response != null) {
+                    listener.onDepartmentDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<DeptModel>> call, @NonNull Throwable t) {
+                listener.onDepartmentDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void searchDoctors(String KEY, String name, String id, final ApiListener.DocSearchListener listener) {
+
+        ApiClient.getApiInterface().searchDoctors(KEY, name, id).enqueue(new Callback<List<SearchDoctorModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<SearchDoctorModel>> call, @NonNull Response<List<SearchDoctorModel>> response) {
+                if (response != null) {
+                    listener.onDocSearchSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<SearchDoctorModel>> call, @NonNull Throwable t) {
+                listener.onDocSearchFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void patientSignUp(RequestBody name, RequestBody department, RequestBody user_type, RequestBody password, RequestBody email, RequestBody phone, MultipartBody.Part photo, final ApiListener.PatientSignUPListener listener) {
+
+        ApiClient.getApiInterface().signUpPatient(name, department, user_type, password, email, phone, photo).enqueue(new Callback<StatusMessage>() {
+            @Override
+            public void onResponse(@NonNull Call<StatusMessage> call, @NonNull Response<StatusMessage> response) {
+                if (response != null) {
+                    listener.onPatientSignUPSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<StatusMessage> call, @NonNull Throwable t) {
+                listener.onPatientSignUPSuccessFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void postSkillInfo(String KEY, String dr_id, String body, final ApiListener.PostSkillInfoListener listener) {
+
+        ApiClient.getApiInterface().postSkillInfo(KEY, dr_id, body).enqueue(new Callback<StatusMessage>() {
+            @Override
+            public void onResponse(@NonNull Call<StatusMessage> call, @NonNull Response<StatusMessage> response) {
+                if (response != null) {
+                    listener.onPostSkillInfoSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<StatusMessage> call, @NonNull Throwable t) {
+                listener.onPostSkillInfoFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
     public void downlaodRecomendedLits(String id, final ApiListener.TestDownloadListener listener) {
 
         ApiClient.getApiInterface().getTestList(id).enqueue(new Callback<List<TestList>>() {
@@ -92,6 +254,7 @@ public class Api {
             }
         });
     }
+
     public void doctorEduSkillDownload(String id, final ApiListener.doctorEduSkillDownloadListener listener) {
 
         ApiClient.getApiInterface().getMyEducationSkill(id).enqueue(new Callback<EducationSkillModel>() {
@@ -110,7 +273,8 @@ public class Api {
             }
         });
     }
-    public void downlaodOnlineDoctorsLits( final ApiListener.OnlineDoctorsDownloadListener listener) {
+
+    public void downlaodOnlineDoctorsLits(final ApiListener.OnlineDoctorsDownloadListener listener) {
 
         ApiClient.getApiInterface().getOnlineServiceDoctors().enqueue(new Callback<List<OnlineDoctorModel>>() {
             @Override
@@ -147,6 +311,7 @@ public class Api {
             }
         });
     }
+
     public void downlaodDepartmentsList(final ApiListener.departmentsDownloadListener listener) {
 
         ApiClient.getApiInterface().getAllDepartments().enqueue(new Callback<List<DepartmentModel>>() {
@@ -371,8 +536,8 @@ public class Api {
 
     }
 
-    public void setDrSchedule(String id,  String address, String visit_fee, String city, String data,  final ApiListener.drSchedulePostListener listener) {
-        ApiClient.getApiInterface().setDrSchedule(id,  address, visit_fee, city, data).enqueue(new Callback<StatusMessage>() {
+    public void setDrSchedule(String token, String id, String chamberName, String address, String visit_fee, String followUpfees, String days, final ApiListener.drSchedulePostListener listener) {
+        ApiClient.getApiInterface().setDrSchedule(token, id, chamberName, address, visit_fee, followUpfees, days).enqueue(new Callback<StatusMessage>() {
             @Override
             public void onResponse(Call<StatusMessage> call, Response<StatusMessage> response) {
                 listener.ondrSchedulePostSuccess(response.body());
@@ -405,17 +570,51 @@ public class Api {
 
     }
 
-    public void getMyChambersList(String id, final ApiListener.chamberListDownloadListener listener) {
-        ApiClient.getApiInterface().getMyChambers(id).enqueue(new Callback<List<DrChamberResponse >>() {
+    public void addAppointmentInfo(String token, String p_id, String dr_id, String problems, String phone, String name, String chamber_id, String date, String status, final ApiListener.AppointmentPOstListener listener) {
+        ApiClient.getApiInterface().addAppointmentInfo(token, p_id, dr_id, problems, phone, name, chamber_id, date, status).enqueue(new Callback<AppointmentAddResponse>() {
             @Override
-            public void onResponse(Call<List<DrChamberResponse >> call, Response<List<DrChamberResponse>> response) {
+            public void onResponse(Call<AppointmentAddResponse> call, Response<AppointmentAddResponse> response) {
+                listener.onAppointmentPOStSuccess(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<AppointmentAddResponse> call, Throwable t) {
+                listener.onAppointmentPOStFailed(t.getLocalizedMessage());
+
+            }
+        });
+
+    }
+
+    public void getMyChambersList(String id, final ApiListener.chamberListDownloadListener listener) {
+        ApiClient.getApiInterface().getMyChambers(id).enqueue(new Callback<List<DrChamberResponse>>() {
+            @Override
+            public void onResponse(Call<List<DrChamberResponse>> call, Response<List<DrChamberResponse>> response) {
                 listener.onChamberListDownloadSuccess(response.body());
 
             }
 
             @Override
-            public void onFailure(Call<List<DrChamberResponse >> call, Throwable t) {
+            public void onFailure(Call<List<DrChamberResponse>> call, Throwable t) {
                 listener.onChamberListDownloadFailed(t.getLocalizedMessage());
+
+            }
+        });
+
+    }
+
+    public void getEduSKillChamber(String key, String id, final ApiListener.drChamberEduSkillDownloadListener listener) {
+        ApiClient.getApiInterface().getSkillChamberEdu(key, id).enqueue(new Callback<DrEduChInfoModel>() {
+            @Override
+            public void onResponse(Call<DrEduChInfoModel> call, Response<DrEduChInfoModel> response) {
+                listener.onChamberEduSkillDownloadSuccess(response.body());
+
+            }
+
+            @Override
+            public void onFailure(Call<DrEduChInfoModel> call, Throwable t) {
+                listener.onChamberEduSkillDownloadFailed(t.getLocalizedMessage());
 
             }
         });
@@ -498,11 +697,17 @@ public class Api {
         });
     }
 
+
     public void getAppointmentsByDoctor(String dr_id, final ApiListener.appoinetmentsDownloadListener listener) {
 
-        ApiClient.getApiInterface().myAppointmentsbyDoctor(dr_id).enqueue(new Callback<AppointmentResponse>() {
+
+    }
+
+    public void getAppointments(String token, String type, String userID, String status, final ApiListener.appoinetmentsDownloadListener listener) {
+
+        ApiClient.getApiInterface().getAppointmentsList(token, type, userID, status).enqueue(new Callback<List<AppointmentModelNew>>() {
             @Override
-            public void onResponse(@NonNull Call<AppointmentResponse> call, @NonNull Response<AppointmentResponse> response) {
+            public void onResponse(@NonNull Call<List<AppointmentModelNew>> call, @NonNull Response<List<AppointmentModelNew>> response) {
                 if (response != null) {
                     listener.onAppointmentDownloadSuccess(response.body());
 
@@ -511,45 +716,84 @@ public class Api {
             }
 
             @Override
-            public void onFailure(@NonNull Call<AppointmentResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<AppointmentModelNew>> call, @NonNull Throwable t) {
                 listener.onAppointmentDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void getMyTestRecomendations(String token,  String userID,  final ApiListener.TestRecomDownloadListener listener) {
+
+        ApiClient.getApiInterface().getMyTestRecomendation(token,  userID).enqueue(new Callback<List<TestRecomendationModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<TestRecomendationModel>> call, @NonNull Response<List<TestRecomendationModel>> response) {
+                if (response != null) {
+                    listener.onTestRecomDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<TestRecomendationModel>> call, @NonNull Throwable t) {
+                listener.onTestRecomDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+    public void getMyPrescriptionRequest(String token,  String userID, String userType, final ApiListener.MyPrescriptionRequestDownloadListener listener) {
+
+        ApiClient.getApiInterface().getmyPrescriptionRequest(token,  userID,userType).enqueue(new Callback<List<PrescriptionRequestModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<PrescriptionRequestModel>> call, @NonNull Response<List<PrescriptionRequestModel>> response) {
+                if (response != null) {
+                    listener.onMyPrescriptionRequestDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<PrescriptionRequestModel>> call, @NonNull Throwable t) {
+                listener.onMyPrescriptionRequestDownloadFailed(t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void getPresCriptionsByPatient(String token, String pa_id, String userType, final ApiListener.PresCriptionDownloadListenerPatient listener) {
+
+        ApiClient.getApiInterface().getMyPrescriptionsPatient(token, pa_id, userType).enqueue(new Callback<List<PrescriptionModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<PrescriptionModel>> call, @NonNull Response<List<PrescriptionModel>> response) {
+                if (response != null) {
+                    listener.onPrescriptionDownloadSuccess(response.body());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<List<PrescriptionModel>> call, @NonNull Throwable t) {
+                listener.onPrescriptionDownloadFailed(t.getLocalizedMessage());
             }
         });
     }
 
     public void getAppointmentsBypatient(String id, final ApiListener.appoinetmentsDownloadListener listener) {
 
-        ApiClient.getApiInterface().myAppointmentsbyPatient(id).enqueue(new Callback<AppointmentResponse>() {
-            @Override
-            public void onResponse(@NonNull Call<AppointmentResponse> call, @NonNull Response<AppointmentResponse> response) {
-                if (response != null) {
-                    listener.onAppointmentDownloadSuccess(response.body());
 
-                }
-
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<AppointmentResponse> call, @NonNull Throwable t) {
-                listener.onAppointmentDownloadFailed(t.getLocalizedMessage());
-            }
-        });
     }
 
-    public void changeStatus(String id, String status, final ApiListener.appointmentStateChangeListener listener) {
+    public void changeStatus(String token, String id, String status, final ApiListener.appointmentStateChangeListener listener) {
 
-        ApiClient.getApiInterface().changeAppointmentStatus(id, status).enqueue(new Callback<StatusResponse>() {
+        ApiClient.getApiInterface().changeAppointmentStatus(token, id, status).enqueue(new Callback<StatusMessage>() {
             @Override
-            public void onResponse(@NonNull Call<StatusResponse> call, @NonNull Response<StatusResponse> response) {
+            public void onResponse(@NonNull Call<StatusMessage> call, @NonNull Response<StatusMessage> response) {
                 if (response != null) {
                     listener.onAppointmentChangeSuccess(response.body());
-
                 }
-
             }
 
             @Override
-            public void onFailure(@NonNull Call<StatusResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<StatusMessage> call, @NonNull Throwable t) {
                 listener.onPppointmentChangeFailed(t.getLocalizedMessage());
             }
         });

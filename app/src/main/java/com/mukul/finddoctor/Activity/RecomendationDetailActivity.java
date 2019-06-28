@@ -9,9 +9,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.mukul.finddoctor.Data.Data;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.Utils.MyProgressBar;
@@ -25,19 +27,24 @@ import com.mukul.finddoctor.model.StatusResponse;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mukul.finddoctor.Data.Data.PHOTO_BASE;
 import static com.mukul.finddoctor.Data.Data.testList;
 import static com.mukul.finddoctor.Data.ListenerPatientsData.PatientALLDataDownloadListener;
 import static com.mukul.finddoctor.Data.ListenerPatientsData.PatientNotificationDataDownloadListener;
 
-public class RecomendationDetailActivity extends AppCompatActivity implements ApiListener.appointmentStateChangeListener,
-        ApiListener.appoinetmentsDownloadListener {
+public class RecomendationDetailActivity extends BaseActivity  {
     TestListTypeAdapter mAdapter;
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
-    @BindView(R.id.tv_serial)
-    TextView tv_serial;
+    @BindView(R.id.tv_problem)
+    TextView tv_problem;
+    @BindView(R.id.tv_image)
+    ImageView image;
     @BindView(R.id.tv_name)
     TextView tv_name;
+    @BindView(R.id.tv_department)
+    TextView tv_department;
+
     Context context = this;
     SessionManager sessionManager;
 
@@ -48,7 +55,11 @@ public class RecomendationDetailActivity extends AppCompatActivity implements Ap
         ButterKnife.bind(this);
         sessionManager = new SessionManager(this);
 
-        mAdapter = new TestListTypeAdapter(testList.getTestList());
+        mAdapter = new TestListTypeAdapter(testList.getTestRecommendationInfo());
+        tv_problem.setText(testList.getProblems());
+        tv_name.setText(testList.getDr_info().getName());
+      //  tv_department.setText(testList.getDr_info().getDepartment_info().getName());
+        Glide.with(context).load(PHOTO_BASE+testList.getDr_info().getPhoto()).into(image);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.setItemAnimator(new DefaultItemAnimator());
@@ -57,8 +68,8 @@ public class RecomendationDetailActivity extends AppCompatActivity implements Ap
 
         Resources res = context.getResources();
         String text = res.getString(R.string.text);
-        tv_name.setText(testList.getDrName() + " " + text);
-        tv_serial.setText("Serial No : "+testList.getAppointmentId());
+       // tv_name.setText(testList.getDrName() + " " + text);
+      //  tv_serial.setText("Serial No : "+testList.getAppointmentId());
     }
 
     @Override
@@ -74,34 +85,14 @@ public class RecomendationDetailActivity extends AppCompatActivity implements Ap
 
     public void cancel(View view) {
         MyProgressBar.with(context);
-        Api.getInstance().changeStatus(testList.getAppointmentId(), "" + Data.STATUS_CANCEL, this);
+       // Api.getInstance().changeStatus(testList.getAppointmentId(), "" + Data.STATUS_CANCEL, this);
     }
 
-    @Override
-    public void onAppointmentChangeSuccess(StatusResponse list) {
-        Api.getInstance().getAppointmentsBypatient(sessionManager.getUserId(), this);
 
 
-    }
-
-    @Override
-    public void onPppointmentChangeFailed(String msg) {
-        onBackPressed();
 
 
-    }
 
-    @Override
-    public void onAppointmentDownloadSuccess(AppointmentResponse status) {
-        PatientALLDataDownloadListener.onDownloaded(status);
-        PatientNotificationDataDownloadListener.onNotificationDownloaded(status.getNotification());
-    }
-
-    @Override
-    public void onAppointmentDownloadFailed(String msg) {
-        onBackPressed();
-
-    }
 
     public void back(View view) {
         onBackPressed();

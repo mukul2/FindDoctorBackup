@@ -21,6 +21,7 @@ import com.mukul.finddoctor.adapter.SearchResultAdapter;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.DepartmentModel;
+import com.mukul.finddoctor.model.DeptModel;
 import com.mukul.finddoctor.model.OnlineDoctorModel;
 import com.mukul.finddoctor.model.VideoCallModel;
 
@@ -31,8 +32,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 import static com.mukul.finddoctor.Data.Data.TYPE_OF_ACTIVITY;
+import static com.mukul.finddoctor.Data.DataStore.TOKEN;
 
-public class OnlineDoctorsActivity extends AppCompatActivity implements ApiListener.departmentsDownloadListener {
+public class OnlineDoctorsActivity extends AppCompatActivity  {
     @BindView(R.id.recycler_view)
     RecyclerView recycler_view;
     Context context=this;
@@ -44,7 +46,26 @@ public class OnlineDoctorsActivity extends AppCompatActivity implements ApiListe
         setContentView(R.layout.activity_online_doctors);
         setUpStatusbar();
         ButterKnife.bind(this);
-        Api.getInstance().downlaodDepartmentsList(this);
+        Api.getInstance().getDepList(TOKEN, new ApiListener.DeptDownloadListener() {
+            @Override
+            public void onDepartmentDownloadSuccess(List<DeptModel> list) {
+                Toast.makeText(context, ""+list.size(), Toast.LENGTH_SHORT).show();
+                TYPE_OF_ACTIVITY="OnlineDoc";
+
+                DepartmentsAdapter mAdapter = new DepartmentsAdapter(list);
+                RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
+                recycler_view.setLayoutManager(mLayoutManager);
+                recycler_view.setItemAnimator(new DefaultItemAnimator());
+                recycler_view.setAdapter(mAdapter);
+
+            }
+
+            @Override
+            public void onDepartmentDownloadFailed(String msg) {
+
+            }
+        });
+
     }
     public  void setUpStatusbar(){
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
@@ -74,19 +95,4 @@ public class OnlineDoctorsActivity extends AppCompatActivity implements ApiListe
     }
 
 
-    @Override
-    public void onDepartmentsListDownloadSuccess(List<DepartmentModel> list) {
-        TYPE_OF_ACTIVITY="OnlineDoc";
-
-        DepartmentsAdapter mAdapter = new DepartmentsAdapter(list);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(context);
-        recycler_view.setLayoutManager(mLayoutManager);
-        recycler_view.setItemAnimator(new DefaultItemAnimator());
-        recycler_view.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onDepartmentsListDownloadFailed(String msg) {
-
-    }
 }

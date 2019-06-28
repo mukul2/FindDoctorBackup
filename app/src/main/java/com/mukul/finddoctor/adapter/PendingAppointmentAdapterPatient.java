@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.mukul.finddoctor.Activity.ConfirmedAppointmentDetailActivity;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.model.AppointmentModel;
+import com.mukul.finddoctor.model.AppointmentModelNew;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,12 +24,12 @@ import static com.mukul.finddoctor.Data.Data.appointmentModel;
 
 
 public class PendingAppointmentAdapterPatient extends RecyclerView.Adapter<PendingAppointmentAdapterPatient.MyViewHolder> {
-    List<AppointmentModel>list=new ArrayList<>();
+    List<AppointmentModelNew> list = new ArrayList<>();
 
     Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_address, tv_appointmentfor, tv_date,tv_viewDetails,tv_serial;
+        public TextView tv_name, tv_address, tv_appointmentfor, tv_date, tv_viewDetails, tv_serial;
 
 
         public MyViewHolder(View view) {
@@ -44,8 +45,8 @@ public class PendingAppointmentAdapterPatient extends RecyclerView.Adapter<Pendi
     }
 
 
-    public PendingAppointmentAdapterPatient(List<AppointmentModel> lists ) {
-        this.list=lists;
+    public PendingAppointmentAdapterPatient(List<AppointmentModelNew> lists) {
+        this.list = lists;
 
     }
 
@@ -59,22 +60,21 @@ public class PendingAppointmentAdapterPatient extends RecyclerView.Adapter<Pendi
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final AppointmentModel movie = list.get(position);
+        final AppointmentModelNew movie = list.get(position);
         context = holder.tv_name.getContext();
-        holder.tv_name.setText(movie.getDrName());
-        holder.tv_address.setText(movie.getAddress());
-        holder.tv_appointmentfor.setText(movie.getAppointmentFor());
+        holder.tv_name.setText("" + movie.getDrId());
+        //  holder.tv_address.setText(movie.get());
+        holder.tv_appointmentfor.setText(movie.getName());
         holder.tv_date.setText(movie.getDate());
         holder.tv_viewDetails.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                appointmentModel=movie;
+                // appointmentModel=movie;
                 context.startActivity(new Intent(context, ConfirmedAppointmentDetailActivity.class));
             }
         });
 
     }
-
 
 
     @Override

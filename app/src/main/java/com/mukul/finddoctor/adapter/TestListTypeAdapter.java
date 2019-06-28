@@ -13,6 +13,7 @@ import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.model.Day;
 import com.mukul.finddoctor.model.TestList;
 import com.mukul.finddoctor.model.TestName;
+import com.mukul.finddoctor.model.TestRecommendationInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +28,15 @@ import static com.mukul.finddoctor.Data.Data.singleDrModel;
 public class TestListTypeAdapter extends RecyclerView.Adapter<TestListTypeAdapter.MyViewHolder> {
 
     Context context;
-    List<TestName>testLists=new ArrayList<>();
+    List<TestRecommendationInfo>testLists=new ArrayList<>();
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_day, tv_time,tv_sl;
+        public TextView tv_name, tv_type,tv_sl;
 
         public MyViewHolder(View view) {
             super(view);
-            tv_day = (TextView) view.findViewById(R.id.tv_day);
-            tv_time = (TextView) view.findViewById(R.id.tv_time);
+            tv_name = (TextView) view.findViewById(R.id.tv_name);
+            tv_type = (TextView) view.findViewById(R.id.tv_type);
             tv_sl = (TextView) view.findViewById(R.id.tv_sl);
 
 
@@ -43,7 +44,7 @@ public class TestListTypeAdapter extends RecyclerView.Adapter<TestListTypeAdapte
     }
 
 
-    public TestListTypeAdapter(List<TestName> testLists_ ) {
+    public TestListTypeAdapter(List<TestRecommendationInfo> testLists_ ) {
         this.testLists=testLists_;
 
 
@@ -61,11 +62,12 @@ public class TestListTypeAdapter extends RecyclerView.Adapter<TestListTypeAdapte
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
 
-        final TestName movie = testLists.get(position);
+        final TestRecommendationInfo movie = testLists.get(position);
+        holder.tv_type.setText(movie.getTestInfo().getType());
+        holder.tv_name.setText(movie.getTestInfo().getName());
+        holder.tv_sl.setText(""+(position+1));
 
-        holder.tv_day.setText(movie.getName());
-        holder.tv_sl.setText(""+(position+1)+".");
-        holder.tv_time.setText(movie.getType());
+
 
 
     }

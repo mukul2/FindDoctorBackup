@@ -3,6 +3,7 @@ package com.mukul.finddoctor.Data;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.model.DoctorModel;
 import com.mukul.finddoctor.model.EducationSkillModel;
+import com.mukul.finddoctor.model.SearchDoctorModel;
 import com.mukul.finddoctor.model.ServiceName;
 import com.mukul.finddoctor.model.SpacialistModel;
 import com.mukul.finddoctor.model.TestModel;
@@ -23,6 +24,8 @@ import java.util.Map;
 public class DataStore {
     public static EducationSkillModel EDUCATIONSKILLMODEL;
     public static String USER_ID;
+    public static String TOKEN;
+    public static SearchDoctorModel NOW_SHOWING_DOC;
     public static String CLICKED_TITLE;
     public static List<DoctorModel> downloadedDoctors;
 
@@ -38,6 +41,7 @@ public class DataStore {
 
         return days.get(day);
     }
+
     public static List<String> sevenDays() {
         List<String> days = new ArrayList<>();
         days.add("Sat");
@@ -63,6 +67,7 @@ public class DataStore {
 
         return days;
     }
+
     public static String convertDayToNmber(String day) {
         Map<String, String> days = new HashMap<>();
         days.put("Sat", "6");
@@ -75,6 +80,7 @@ public class DataStore {
 
         return days.get(day);
     }
+
     public static String changeDateformate(String time) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date sourceDate = null;
@@ -84,11 +90,12 @@ public class DataStore {
             e.printStackTrace();
         }
 
-        SimpleDateFormat targetFormat = new SimpleDateFormat("MMM dd");
+        SimpleDateFormat targetFormat = new SimpleDateFormat("hh:mm aa MMM dd ");
         return targetFormat.format(sourceDate);
     }
+
     public static String tweentyfourtotwelve(String time) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:MM");
         Date sourceDate = null;
         try {
             sourceDate = dateFormat.parse(time);
@@ -99,7 +106,6 @@ public class DataStore {
         SimpleDateFormat targetFormat = new SimpleDateFormat("hh:mm a");
         return targetFormat.format(sourceDate);
     }
-
 
 
     public static String convertToMonth(int day) {
@@ -118,6 +124,23 @@ public class DataStore {
         days.put(11, "Dec");
 
         return days.get(day);
+    }
+
+    public static List<String> monthArray() {
+        List<String> array = new ArrayList<>();
+        array.add("Jan");
+        array.add("Feb");
+        array.add("March");
+        array.add("Appril");
+        array.add("May");
+        array.add("June");
+        array.add("Jully");
+        array.add("August");
+        array.add("Sept");
+        array.add("Oct");
+        array.add("Nov");
+        array.add("Dec");
+        return array;
     }
 
     public static List<testSelectedModel> testModelList = new ArrayList<>();

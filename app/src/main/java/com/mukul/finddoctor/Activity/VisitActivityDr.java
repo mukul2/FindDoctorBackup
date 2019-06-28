@@ -114,12 +114,12 @@ public class VisitActivityDr extends AppCompatActivity implements ApiListener.Te
             testName.setType(list.get(i).getTestType());
             listNew.add(testName);
         }
-        TestListTypeAdapter mAdapter = new TestListTypeAdapter(listNew);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
-        recycler_view.setLayoutManager(mLayoutManager);
-        recycler_view.setItemAnimator(new DefaultItemAnimator());
-        //holder.recycler_view.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
-        recycler_view.setAdapter(mAdapter);
+//        TestListTypeAdapter mAdapter = new TestListTypeAdapter(listNew);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
+//        recycler_view.setLayoutManager(mLayoutManager);
+//        recycler_view.setItemAnimator(new DefaultItemAnimator());
+//        //holder.recycler_view.addItemDecoration(new DividerItemDecoration(context, LinearLayoutManager.VERTICAL));
+//        recycler_view.setAdapter(mAdapter);
 
     }
 

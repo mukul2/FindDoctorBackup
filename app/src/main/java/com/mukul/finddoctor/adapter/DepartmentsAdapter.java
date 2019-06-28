@@ -19,6 +19,7 @@ import com.mukul.finddoctor.Utils.MyProgressBar;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
 import com.mukul.finddoctor.model.DepartmentModel;
+import com.mukul.finddoctor.model.DeptModel;
 import com.mukul.finddoctor.model.DoctorModel;
 import com.mukul.finddoctor.model.SpecialistNameCount;
 
@@ -36,19 +37,18 @@ import static com.mukul.finddoctor.Data.DataStore.downloadedDoctors;
 
 
 public class DepartmentsAdapter extends RecyclerView.Adapter<DepartmentsAdapter.MyViewHolder> {
-    List<DepartmentModel> list = new ArrayList<>();
+    List<DeptModel> list = new ArrayList<>();
 
     Context context;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView tv_name, tv_count;
+        public TextView tv_name;
         CardView card;
 
 
         public MyViewHolder(View view) {
             super(view);
             tv_name = (TextView) view.findViewById(R.id.tv_name);
-            tv_count = (TextView) view.findViewById(R.id.tv_count);
             card = (CardView) view.findViewById(R.id.card);
 
 
@@ -56,7 +56,7 @@ public class DepartmentsAdapter extends RecyclerView.Adapter<DepartmentsAdapter.
     }
 
 
-    public DepartmentsAdapter(List<DepartmentModel> lists) {
+    public DepartmentsAdapter(List<DeptModel> lists) {
         this.list = lists;
 
     }
@@ -71,10 +71,9 @@ public class DepartmentsAdapter extends RecyclerView.Adapter<DepartmentsAdapter.
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        final DepartmentModel movie = list.get(position);
+        final DeptModel movie = list.get(position);
         context = holder.tv_name.getContext();
         holder.tv_name.setText(movie.getName());
-        holder.tv_count.setText("0");
         holder.card.setCardBackgroundColor(Color.parseColor(Data.getColorCode(position)));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -85,9 +84,12 @@ public class DepartmentsAdapter extends RecyclerView.Adapter<DepartmentsAdapter.
                 if (TYPE_OF_ACTIVITY.equals("review")) {
                     context.startActivity(new Intent(context, DrListGridActivity.class));
 
-                } else {
+                } else if (TYPE_OF_ACTIVITY.equals("OnlineDoc")) {
 
-                    context.startActivity(new Intent(context, DrListActivity.class));
+                } else {
+                    Intent intent = new Intent(context, DrListActivity.class);
+                    intent.putExtra("depID", movie.getId());
+                    context.startActivity(intent);
 
                 }
 //                Api.getInstance().searchDoctor("", "", movie.getName(), "", "", new ApiListener.doctorSearchListener() {

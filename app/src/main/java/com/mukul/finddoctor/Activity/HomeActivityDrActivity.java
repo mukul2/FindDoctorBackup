@@ -32,6 +32,7 @@ import com.mukul.finddoctor.Utils.SessionManager;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.mukul.finddoctor.Data.DataStore.TOKEN;
 import static com.mukul.finddoctor.Data.DataStore.USER_ID;
 
 public class HomeActivityDrActivity extends AppCompatActivity implements View.OnClickListener {
@@ -76,6 +77,7 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
         ButterKnife.bind(this);
         sessionManager=new SessionManager(this);
         USER_ID = sessionManager.getUserId();
+        TOKEN=sessionManager.getToken();
         getColorManagement();
         linerHomeButton.setOnClickListener(this);
         linerProfileButton.setOnClickListener(this);
@@ -106,6 +108,8 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_layout, selectedFragment);
         transaction.commit();
+
+        do_1_0_0_0();
     }
 
     private void getColorManagement() {
@@ -118,8 +122,8 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
 
 
         //iv.setLayoutParams(layoutParams);
-        img_one.setImageResource(R.drawable.medicine_gray);
-        img_two.setImageResource(R.drawable.home_primary);
+        img_one.setImageResource(R.drawable.home_gray);
+        img_two.setImageResource(R.drawable.profile_primary);
         img_three.setImageResource(R.drawable.blog);
         img_four.setImageResource(R.drawable.setting_gray);
 
@@ -136,8 +140,8 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
     public void do_1_0_0_0() {
 
 
-        img_one.setImageResource(R.drawable.medicine_primary);
-        img_two.setImageResource(R.drawable.home_gray);
+        img_one.setImageResource(R.drawable.home_primary);
+        img_two.setImageResource(R.drawable.profile_gray);
         img_three.setImageResource(R.drawable.blog);
         img_four.setImageResource(R.drawable.setting_gray);
 
@@ -150,8 +154,8 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
 
     }
     public void do_0_0_1_0() {
-        img_one.setImageResource(R.drawable.medicine_gray);
-        img_two.setImageResource(R.drawable.home_gray);
+        img_one.setImageResource(R.drawable.home_gray);
+        img_two.setImageResource(R.drawable.profile_gray);
         img_three.setImageResource(R.drawable.blog_primary);
         img_four.setImageResource(R.drawable.setting_gray);
 
@@ -162,8 +166,8 @@ public class HomeActivityDrActivity extends AppCompatActivity implements View.On
 
     }
     public void do_0_0_0_1() {
-        img_one.setImageResource(R.drawable.medicine_gray);
-        img_two.setImageResource(R.drawable.home_gray);
+        img_one.setImageResource(R.drawable.home_gray);
+        img_two.setImageResource(R.drawable.profile_gray);
         img_three.setImageResource(R.drawable.blog);
         img_four.setImageResource(R.drawable.setting_primary);
 

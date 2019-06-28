@@ -19,7 +19,7 @@ import com.mukul.finddoctor.model.RecomentationModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AppointmentsActivityPatient extends AppCompatActivity implements ApiListener.appoinetmentsDownloadListener {
+public class AppointmentsActivityPatient extends AppCompatActivity  {
     SessionManager sessionManager;
     Context context = this;
     public static List<AppointmentModel> PENDING_LIST=new ArrayList<>();
@@ -57,18 +57,5 @@ public class AppointmentsActivityPatient extends AppCompatActivity implements Ap
         onBackPressed();
     }
 
-    @Override
-    public void onAppointmentDownloadSuccess(AppointmentResponse data) {
-        progressDialog.dismiss();
-        PENDING_LIST=data.getNotConfirmed();
-        CONFIRMED_LIST=data.getNotConfirmed();
-        RECOMENDED_LIST=data.getNotification();
-    }
 
-    @Override
-    public void onAppointmentDownloadFailed(String msg) {
-        progressDialog.dismiss();
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-
-    }
 }

@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+
 import com.mukul.finddoctor.Data.DataStore;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.Utils.MyDialog;
@@ -29,27 +30,33 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LoginActivity extends AppCompatActivity implements ApiListener.LoginUserListener,ApiListener.testNamesDownloadListener{
+public class LoginActivity extends AppCompatActivity implements ApiListener.LoginUserListener, ApiListener.testNamesDownloadListener {
     @BindView(R.id.ed_phone)
     EditText ed_phone;
     @BindView(R.id.ed_password)
     EditText ed_password;
-    String phone,password;
+    String phone, password;
     ProgressDialog progressDialog;
     SessionManager sessionManager;
-    String DOCTOR="d";
-    String PATIENT="p";
+    String DOCTOR = "d";
+    String PATIENT = "p";
+
+    //changes by 15:50 secondsdad
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_login);
-        sessionManager=new SessionManager(this);
+        sessionManager = new SessionManager(this);
         ButterKnife.bind(this);
-        progressDialog=new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Please wait");
-        setUpStatusbar();
+        // setUpStatusbar();
+
     }
+
     private void setUpStatusbar() {
         if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
             setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
@@ -71,21 +78,24 @@ public class LoginActivity extends AppCompatActivity implements ApiListener.Logi
         if (on) {
             winParams.flags |= bits;
         } else {
+
+
             winParams.flags &= ~bits;
         }
         win.setAttributes(winParams);
     }
+
     public void openSignUpActivity(View view) {
-        startActivity(new Intent(this,SignUpActivity.class));
+        startActivity(new Intent(this, SignUpActivity.class));
     }
 
     public void login(View view) {
-        phone=ed_phone.getText().toString().trim();
-        password=ed_password.getText().toString().trim();
+        phone = ed_phone.getText().toString().trim();
+        password = ed_password.getText().toString().trim();
 
-        if (phone.length()>0 && password.length()>0){
+        if (phone.length() > 0 && password.length() > 0) {
             progressDialog.show();
-            Api.getInstance().loginUser(phone,password,this);
+            Api.getInstance().loginUser(phone, password, this);
 
         }
 
@@ -95,25 +105,28 @@ public class LoginActivity extends AppCompatActivity implements ApiListener.Logi
     @Override
     public void onUserLoginSuccess(LoginResponse status) {
         progressDialog.dismiss();
-        if (status.getStatus()){
-            sessionManager.setuserId(status.getId());
+        if (status.getStatus()) {
+            sessionManager.setuserId("" + status.getUserInfo().getId());
             sessionManager.setLoggedIn(true);
-            sessionManager.setuserName(status.getName());
-            sessionManager.setuserType(status.getType());
-            sessionManager.setuserId(status.getId());
-          //  Toast.makeText(this, status.getId(), Toast.LENGTH_SHORT).show();
-            if (status.getType().equals(DOCTOR)) {
-                startDownloadTestNames();
+            sessionManager.setuserName(status.getUserInfo().getName());
+            sessionManager.setuserType(status.getUserInfo().getUserType());
+            sessionManager.setToken("Bearer " + status.getAccessToken());
+            sessionManager.set_userPhoto(status.getUserInfo().getPhoto());
+            Toast.makeText(this, status.getMessage(), Toast.LENGTH_LONG).show();
+
+            if (status.getUserInfo().getUserType().equals(DOCTOR)) {
                 startActivity(new Intent(LoginActivity.this, HomeActivityDrActivity.class));
                 finishAffinity();
-            }else {
+            } else if (status.getUserInfo().getUserType().equals(PATIENT)) {
                 startActivity(new Intent(LoginActivity.this, PatientHomeActivity.class));
                 finishAffinity();
 
+            } else {
+                Toast.makeText(this, "Unknown usertype", Toast.LENGTH_SHORT).show();
             }
 
 
-        }else {
+        } else {
             MyDialog.getInstance().with(LoginActivity.this)
                     .message("Wrong mobile or password")
                     .autoBack(false)
@@ -140,9 +153,9 @@ public class LoginActivity extends AppCompatActivity implements ApiListener.Logi
     @Override
     public void ontestNamesDownloadSuccess(BasicByDrResponse data) {
         DataStore.testModelList.clear();
-     //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
-        for (int i=0;i<data.getTestNames().size();i++){
-            DataStore.testModelList.add(new testSelectedModel(false,data.getTestNames().get(i)));
+        //   Toast.makeText(this, ""+data.size(), Toast.LENGTH_SHORT).show();
+        for (int i = 0; i < data.getTestNames().size(); i++) {
+            DataStore.testModelList.add(new testSelectedModel(false, data.getTestNames().get(i)));
         }
     }
 
@@ -150,4 +163,6 @@ public class LoginActivity extends AppCompatActivity implements ApiListener.Logi
     public void ontestNamesDownloadFailed(String msg) {
 
     }
+
+
 }

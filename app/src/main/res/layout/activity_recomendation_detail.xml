@@ -6,67 +6,94 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.mukul.finddoctor.Activity.RecomendationDetailActivity">
-    <LinearLayout
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content">
-        <RelativeLayout
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_2">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@android:color/white">
+            android:layout_height="25dp">
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="00dp"
+                android:onClick="back"
+                android:padding="17dp"
+
+                android:src="@drawable/left_white_" />
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:text="Test Recomendation" />
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:orientation="horizontal"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:onClick="back"
-                android:layout_height="match_parent">
-                <ImageView
-                    android:layout_width="10dp"
-                    android:src="@drawable/left"
-                    android:layout_gravity="center"
-                    android:alpha="0.4"
-                    android:layout_height="10dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:text="Back"
-                    android:textSize="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="0dp"
+                android:layout_gravity="center_vertical"
+                android:text="Recommened Tests"
+                android:textColor="@android:color/white"
+                android:textStyle="bold" />
 
 
-                    android:layout_height="wrap_content"
-                    />
-
-            </LinearLayout>
-
-
-        </RelativeLayout>
-        <View
+        </LinearLayout>
+    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="Your Problems"
+        android:padding="10dp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:id="@+id/tv_problem"
+        android:layout_height="wrap_content"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="60dp"
+            android:src="#cccccc"
+            android:id="@+id/tv_image"
+            android:layout_marginLeft="15dp"
+            android:layout_height="60dp" />
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="#cccccc" />
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Dr Name"
+                android:textStyle="bold"
+                android:id="@+id/tv_name"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Dr Name"
+                android:id="@+id/tv_department"
+                android:layout_height="wrap_content"
+                />
 
+        </LinearLayout>
     </LinearLayout>
-    <TextView
-        android:id="@+id/tv_serial"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" />
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" />
+
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
@@ -75,37 +102,5 @@
 
     </android.support.v7.widget.RecyclerView>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_weight="0.5"
-            android:background="@drawable/rectangle_border_primary"
-            android:gravity="center"
-            android:padding="10dp"
-            android:text="Ask Appointment again"
-
-            android:textColor="@color/colorPrimary" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-
-            android:layout_weight="0.5"
-            android:background="@drawable/rectangle_border_primary"
-            android:gravity="center"
-            android:onClick="cancel"
-            android:padding="10dp"
-            android:text="Remove"
-            android:textColor="@color/colorPrimary" />
-    </LinearLayout>
 </LinearLayout>

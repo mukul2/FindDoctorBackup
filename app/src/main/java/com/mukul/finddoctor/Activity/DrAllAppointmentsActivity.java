@@ -18,7 +18,7 @@ import com.mukul.finddoctor.model.AppointmentResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DrAllAppointmentsActivity extends AppCompatActivity implements ApiListener.appoinetmentsDownloadListener{
+public class DrAllAppointmentsActivity extends AppCompatActivity {
     SessionManager sessionManager;
     public  static List<AppointmentModel> PENDING=new ArrayList<>();
     public  static List<AppointmentModel> CONFIRMED=new ArrayList<>();
@@ -50,19 +50,5 @@ public class DrAllAppointmentsActivity extends AppCompatActivity implements ApiL
         onBackPressed();
     }
 
-    @Override
-    public void onAppointmentDownloadSuccess(AppointmentResponse data) {
-        progressDialog.dismiss();
-        PENDING=data.getNotConfirmed();
-        CONFIRMED=data.getConfirmed();
 
-
-    }
-
-    @Override
-    public void onAppointmentDownloadFailed(String msg) {
-        progressDialog.dismiss();
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-
-    }
 }

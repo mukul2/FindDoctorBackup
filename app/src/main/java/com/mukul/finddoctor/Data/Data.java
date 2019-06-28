@@ -11,11 +11,15 @@ import android.view.WindowManager;
 
 import com.mukul.finddoctor.model.AppointmentModel;
 import com.mukul.finddoctor.model.AppointmentModel2;
+import com.mukul.finddoctor.model.ChamberInfo;
 import com.mukul.finddoctor.model.Day;
 import com.mukul.finddoctor.model.DoctorModel;
+import com.mukul.finddoctor.model.PrescriptionRequestModel;
 import com.mukul.finddoctor.model.RecomentationModel;
 import com.mukul.finddoctor.model.SpacialistModel;
 import com.mukul.finddoctor.model.TestList;
+import com.mukul.finddoctor.model.TestRecomendationModel;
+import com.mukul.finddoctor.model.TestRecommendationInfo;
 import com.mukul.finddoctor.model.VideoCallModel;
 
 import java.util.ArrayList;
@@ -27,23 +31,25 @@ import java.util.List;
 
 public class Data {
 
+    public static String PHOTO_BASE="https://appointmentbd.com/";
     public static String TYPE_OF_ACTIVITY;
+    public static PrescriptionRequestModel REQUEST_TO_PRESCRIBE;
     public static String TYPE_DOCTOR="d";
     public static String TYPE_PATIENT="p";
     public static  List<SpacialistModel> spacialist = new ArrayList<>();
     public static  List<DoctorModel> searchResult = new ArrayList<>();
     public static  DoctorModel singleDrModel;
-    public static RecomentationModel testList ;
+    public static TestRecomendationModel testList ;
     public static AppointmentModel appointmentModel ;
     public static AppointmentModel2 drServingModel ;
     public static VideoCallModel CurentCallDr ;
+    public static ChamberInfo CHAMBER_TO_BOOK ;
 
     public static  List<Day> days = new ArrayList<>();
     public static String USER_NAME;
     public static String TEMP_LINK;
 
     public static String BaseUrl="";
-    public static String PHOTO_BASE="";
     public static String FACEBOOK_LINK="";
     public static int STATUS_PENDING=0;
     public static int STATUS_APPROVED=1;

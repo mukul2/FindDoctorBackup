@@ -35,7 +35,7 @@ import static com.mukul.finddoctor.Data.Data.appointmentModel;
  */
 
 
-public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<ConfirmedAppointmentAdapterPatient.MyViewHolder>  implements ApiListener.appointmentStateChangeListener{
+public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<ConfirmedAppointmentAdapterPatient.MyViewHolder>  {
     List<AppointmentModel>list=new ArrayList<>();
 
     Context context;
@@ -101,33 +101,33 @@ public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<Con
     public void changeState(String appointment_id, int pos) {
         MyProgressBar.with(context);
         triggeredItem = pos;
-        Api.getInstance().changeStatus(appointment_id, ""+Data.STATUS_CANCEL, this);
+     //   Api.getInstance().changeStatus(appointment_id, ""+Data.STATUS_CANCEL, this);
 
     }
-    @Override
-    public void onAppointmentChangeSuccess(StatusResponse status) {
-        MyProgressBar.dismiss();
-        if (status.getStatus()) {
-            MyDialog.getInstance().with((Activity) context)
-                    .message("This appointment has been canceled")
-                    .autoBack(false)
-                    .autoDismiss(false)
-                    .show();
-            // list.remove(triggeredItem);
-            if (removeItem(triggeredItem)) {
-                notifyItemRemoved(triggeredItem);
-                notifyItemRangeChanged(triggeredItem, getItemCount());
-            }
-
-        } else {
-            MyDialog.getInstance().with((Activity) context)
-                    .message("Failed")
-                    .autoBack(false)
-                    .autoDismiss(false)
-                    .show();
-        }
-
-    }
+//    @Override
+//    public void onAppointmentChangeSuccess(StatusResponse status) {
+//        MyProgressBar.dismiss();
+//        if (status.getStatus()) {
+//            MyDialog.getInstance().with((Activity) context)
+//                    .message("This appointment has been canceled")
+//                    .autoBack(false)
+//                    .autoDismiss(false)
+//                    .show();
+//            // list.remove(triggeredItem);
+//            if (removeItem(triggeredItem)) {
+//                notifyItemRemoved(triggeredItem);
+//                notifyItemRangeChanged(triggeredItem, getItemCount());
+//            }
+//
+//        } else {
+//            MyDialog.getInstance().with((Activity) context)
+//                    .message("Failed")
+//                    .autoBack(false)
+//                    .autoDismiss(false)
+//                    .show();
+//        }
+//
+//    }
 
     public boolean removeItem(int position) {
         if (list.size() >= position + 1) {
@@ -137,16 +137,16 @@ public class ConfirmedAppointmentAdapterPatient extends RecyclerView.Adapter<Con
         return false;
     }
 
-    @Override
-    public void onPppointmentChangeFailed(String msg) {
-        MyProgressBar.dismiss();
-        MyDialog.getInstance().with((Activity) context)
-                .message("Failed")
-                .autoBack(false)
-                .autoDismiss(false)
-                .showMsgOnly();
-
-    }
+//    @Override
+//    public void onPppointmentChangeFailed(String msg) {
+//        MyProgressBar.dismiss();
+//        MyDialog.getInstance().with((Activity) context)
+//                .message("Failed")
+//                .autoBack(false)
+//                .autoDismiss(false)
+//                .showMsgOnly();
+//
+//    }
 
 
     private String changeDateformate(String time) {

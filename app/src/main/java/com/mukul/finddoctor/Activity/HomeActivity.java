@@ -42,7 +42,7 @@ import butterknife.ButterKnife;
 import static com.mukul.finddoctor.Data.ListenerPatientsData.PatientALLDataDownloadListener;
 import static com.mukul.finddoctor.Data.ListenerPatientsData.PatientNotificationDataDownloadListener;
 
-public class HomeActivity extends AppCompatActivity implements ApiListener.appoinetmentsDownloadListener,
+public class HomeActivity extends AppCompatActivity implements
 SwipeRefreshLayout.OnRefreshListener{
     SessionManager sessionManager;
     TabLayout tabLayout;
@@ -95,29 +95,16 @@ SwipeRefreshLayout.OnRefreshListener{
         startActivity(new Intent(this, FindDoctorActivity.class));
     }
 
-    @Override
-    public void onAppointmentDownloadSuccess(AppointmentResponse status) {
-        swiperefresh.setRefreshing(false);
-        PatientALLDataDownloadListener.onDownloaded(status);
-        PatientNotificationDataDownloadListener.onNotificationDownloaded(status.getNotification());
-      //  Toast.makeText(this, ""+status.getNotification().size(), Toast.LENGTH_SHORT).show();
 
-
-
-    }
     public void logout(View view) {
         sessionManager.setLoggedIn(false);
         startActivity(new Intent(this,LoginActivity.class));
         finishAffinity();
     }
-    @Override
-    public void onAppointmentDownloadFailed(String msg) {
 
-    }
 
     @Override
     public void onRefresh() {
-        Api.getInstance().getAppointmentsBypatient(sessionManager.getUserId(),this);
 
     }
 

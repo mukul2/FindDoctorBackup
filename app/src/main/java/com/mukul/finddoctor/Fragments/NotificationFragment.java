@@ -55,17 +55,17 @@ public class NotificationFragment extends Fragment implements ApiListener.patien
 
     @Override
     public void onNotificationDownloaded(List<RecomentationModel> status) {
-        mAdapter = new RecomendedTestAppointmentAdapterPatient(status);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        recycler_view.setLayoutManager(mLayoutManager);
-        recycler_view.setItemAnimator(new DefaultItemAnimator());
-        recycler_view.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
-        recycler_view.setAdapter(mAdapter);
-        if (status.size()>0){
-            tv_no_item.setVisibility(View.GONE);
-        }else {
-            tv_no_item.setVisibility(View.VISIBLE);
-
-        }
+//        mAdapter = new RecomendedTestAppointmentAdapterPatient(status);
+//        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+//        recycler_view.setLayoutManager(mLayoutManager);
+//        recycler_view.setItemAnimator(new DefaultItemAnimator());
+//        recycler_view.addItemDecoration(new DividerItemDecoration(getContext(), LinearLayoutManager.VERTICAL));
+//        recycler_view.setAdapter(mAdapter);
+//        if (status.size()>0){
+//            tv_no_item.setVisibility(View.GONE);
+//        }else {
+//            tv_no_item.setVisibility(View.VISIBLE);
+//
+//        }
     }
 }

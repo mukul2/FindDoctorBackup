@@ -12,10 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.mukul.finddoctor.R;
 import com.mukul.finddoctor.api.Api;
 import com.mukul.finddoctor.api.ApiListener;
+import com.mukul.finddoctor.model.ChamberInfo;
+import com.mukul.finddoctor.model.DrEduChInfoModel;
+import com.mukul.finddoctor.model.EducationInfo;
 import com.mukul.finddoctor.model.EducationSkillModel;
+import com.mukul.finddoctor.model.SkillInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,15 +28,18 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 import static com.mukul.finddoctor.Data.DataStore.EDUCATIONSKILLMODEL;
+import static com.mukul.finddoctor.Data.DataStore.TOKEN;
 import static com.mukul.finddoctor.Data.DataStore.USER_ID;
 
 
-public class HomeFragmentDrTwo extends Fragment implements ApiListener.doctorEduSkillDownloadListener  {
+public class HomeFragmentDrTwo extends Fragment implements ApiListener.drChamberEduSkillDownloadListener {
     View v;
     Context context;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
+    public static List<SkillInfo> SKILLS = new ArrayList<>();
+    public static List<EducationInfo> EDUCATION = new ArrayList<>();
+    public static List<ChamberInfo> CHAMBERLIST = new ArrayList<>();
 
 
     public static HomeFragmentDrTwo newInstance() {
@@ -52,20 +60,20 @@ public class HomeFragmentDrTwo extends Fragment implements ApiListener.doctorEdu
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.dr_fragment_two, container, false);
-        context=v.getContext();
+        context = v.getContext();
 
-        ButterKnife.bind(this,v);
-        viewPager = (ViewPager)v. findViewById(R.id.viewpager);
-        setupViewPager(viewPager);
-        tabLayout = (TabLayout)v. findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        ButterKnife.bind(this, v);
+        viewPager = (ViewPager) v.findViewById(R.id.viewpager);
 
-        Api.getInstance().doctorEduSkillDownload("41",this);
+        tabLayout = (TabLayout) v.findViewById(R.id.tabs);
 
+
+        Api.getInstance().getEduSKillChamber(TOKEN, USER_ID, this);
 
 
         return v;
     }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new EducationFragment(), "Education");
@@ -75,15 +83,21 @@ public class HomeFragmentDrTwo extends Fragment implements ApiListener.doctorEdu
         viewPager.setAdapter(adapter);
     }
 
-    @Override
-    public void ondoctorEduSkillDownloadSuccess(EducationSkillModel data) {
 
-        EDUCATIONSKILLMODEL=data;
+    @Override
+    public void onChamberEduSkillDownloadSuccess(DrEduChInfoModel list) {
+        Gson gson = new Gson();
+        SKILLS=list.getSkillInfo();
+        EDUCATION=list.getEducationInfo();
+        CHAMBERLIST=list.getChamberInfo();
+        setupViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager);
+
 
     }
 
     @Override
-    public void ondoctorEduSkillDownloadSuccessFailed(String msg) {
+    public void onChamberEduSkillDownloadFailed(String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
 
     }
@@ -116,11 +130,6 @@ public class HomeFragmentDrTwo extends Fragment implements ApiListener.doctorEdu
             return mFragmentTitleList.get(position);
         }
     }
-
-
-
-
-
 
 
 }

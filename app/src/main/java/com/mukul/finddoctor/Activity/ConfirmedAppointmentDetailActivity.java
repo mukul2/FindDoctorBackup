@@ -1,5 +1,6 @@
 package com.mukul.finddoctor.Activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -36,6 +37,16 @@ public class ConfirmedAppointmentDetailActivity extends AppCompatActivity {
         tv_appointmentfor.setText(appointmentModel.getAppointmentFor());
         tv_date.setText(appointmentModel.getDate());
         tv_spacialist.setText(appointmentModel.getSpacialist()+" specialist");
+
+        Intent iin= getIntent();
+        Bundle b = iin.getExtras();
+
+        if(b!=null)
+        {
+
+            String j2 =(String) b.get("refID");
+
+        }
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
